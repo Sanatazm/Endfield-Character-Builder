@@ -33,6 +33,8 @@
     .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     .grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .form-section { border:1px solid var(--line); border-radius:8px; background:#14181c; padding:12px; margin:12px 0; }
+    .form-section legend { padding:0 6px; color:var(--cyan); font-weight:700; }
     .list { max-height:62vh; overflow:auto; border:1px solid var(--line); border-radius:8px; background:#101316; }
     .item { display:flex; justify-content:space-between; gap:10px; padding:10px 11px; border-bottom:1px solid #252b30; cursor:pointer; }
     .item:hover { background:#1a2025; }
@@ -147,22 +149,30 @@
           </div>
           <form class="card" id="gearForm">
             <div class="toolbar"><button class="btn primary" type="button" id="newGear">新建装备</button><button class="btn primary" type="submit">保存装备</button></div>
-            <div class="grid-2">
-              <div class="field"><label>装备名</label><input id="gearName" required placeholder="涉渊短刃"></div>
-              <div class="field"><label>套装</label><input id="gearSet" required list="gearSetOptions" placeholder="涉渊"><datalist id="gearSetOptions"></datalist></div>
-              <div class="field"><label>部位</label><select id="gearPart"><option>护甲</option><option>护手</option><option>配件</option></select></div>
-            </div>
-            <div class="grid-2">
-              <div class="field"><label>防御力</label><input id="gearDefense" placeholder="+56"></div>
-              <div class="field"><label>最后词条</label><input id="gearBonusName" placeholder="终结技充能效率"></div>
-            </div>
-            <div class="grid-4">
-              <div class="field"><label>词条 1 名称</label><input id="gearStat1Name" placeholder="力量"></div>
-              <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
-              <div class="field"><label>词条 2 名称</label><input id="gearStat2Name" placeholder="敏捷"></div>
-              <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
-            </div>
-            <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
+            <fieldset class="form-section">
+              <legend>装备信息</legend>
+              <div class="grid-2">
+                <div class="field"><label>装备名</label><input id="gearName" required placeholder="涉渊短刃"></div>
+                <div class="field"><label>套装</label><input id="gearSet" required list="gearSetOptions" placeholder="涉渊"><datalist id="gearSetOptions"></datalist></div>
+                <div class="field"><label>部位</label><select id="gearPart"><option>护甲</option><option>护手</option><option>配件</option></select></div>
+              </div>
+            </fieldset>
+            <fieldset class="form-section">
+              <legend>套装效果</legend>
+              <div class="field"><label>当前套装的效果，保存装备时会同步保存到该套装</label><textarea id="gearSetEffect" placeholder="装备者攻击力+15%。&#10;当装备者施放连携技时，所有技能伤害+20%。"></textarea></div>
+            </fieldset>
+            <fieldset class="form-section">
+              <legend>装备词条</legend>
+              <div class="grid-2">
+                <div class="field"><label>防御力</label><input id="gearDefense" placeholder="+56"></div>
+                <div class="field"><label>词条 1 名称</label><input id="gearStat1Name" placeholder="力量"></div>
+                <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
+                <div class="field"><label>词条 2 名称</label><input id="gearStat2Name" placeholder="敏捷"></div>
+                <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
+                <div class="field"><label>最后词条</label><input id="gearBonusName" placeholder="终结技充能效率"></div>
+                <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
+              </div>
+            </fieldset>
             <label class="upload-box"><strong>装备图片</strong><span id="gearImageText">点击选择，自动保存为 装备名.png</span><input id="gearImageFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
             <details>
               <summary>高级：ID / 原始属性文本 / 备用图片地址</summary>
@@ -360,6 +370,7 @@
       $('gearName').value = g.name || '';
       $('gearPart').value = g.part || '护甲';
       $('gearSet').value = g.set || '';
+      $('gearSetEffect').value = effectToTextarea(state.setEffects?.[g.set] || '');
       $('gearImg').value = g.img || '';
       $('gearStats').value = (g.stats || []).join('\n');
       const stats = g.stats || [];
@@ -373,6 +384,13 @@
       $('gearStat2Value').value = s2.value;
       $('gearBonusName').value = s3.name;
       $('gearBonusValue').value = s3.value;
+    }
+    function effectToTextarea(value) {
+      return String(value || '').replace(/<br\s*\/?>/gi, '\n');
+    }
+    function updateGearSetEffect() {
+      const setName = $('gearSet').value.trim();
+      $('gearSetEffect').value = effectToTextarea(state.setEffects?.[setName] || '');
     }
     function gearStatsFromForm() {
       const rows = [];
@@ -436,6 +454,7 @@
     $('charSearch').addEventListener('input', renderCharList);
     $('weaponSearch').addEventListener('input', renderWeaponList);
     $('gearSearch').addEventListener('input', renderGearList);
+    $('gearSet').addEventListener('change', updateGearSetEffect);
     $('axisSearch').addEventListener('input', renderAxisList);
     $('charList').addEventListener('click', e => fillChar(state.characters.find(c => c.id === e.target.closest('.item')?.dataset.id)));
     $('weaponList').addEventListener('click', e => fillWeapon(state.weapons.find(w => w.id === e.target.closest('.item')?.dataset.id)));
@@ -483,7 +502,7 @@
       try {
         const saved = await api('/api/gear', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({
           id:$('gearId').value, name:$('gearName').value, part:$('gearPart').value, set:$('gearSet').value, img:$('gearImg').value,
-          stats:gearStatsFromForm(), image: await filePayload($('gearImageFile')).then(v => v?.base64),
+          stats:gearStatsFromForm(), setEffect:$('gearSetEffect').value, image: await filePayload($('gearImageFile')).then(v => v?.base64),
         })});
         await loadData();
         setStatus(`装备已${saved.mode === 'created' ? '新增' : '更新'}：${saved.gear.name}\n${saved.build.output}${saved.validate.output}`);

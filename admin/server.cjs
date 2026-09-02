@@ -355,6 +355,14 @@ function validateGear(gear) {
   if (!Array.isArray(gear.stats) || gear.stats.length === 0) throw new Error('至少填写一条属性');
 }
 
+function normalizeSetEffect(value) {
+  return String(value || '')
+    .split(/\r?\n|<br\s*\/?>/i)
+    .map(line => line.trim())
+    .filter(Boolean)
+    .join('<br>');
+}
+
 function validateWeapon(weapon) {
   if (!weapon.id) throw new Error('武器 id 必填');
   if (!weapon.name) throw new Error('武器名称必填');
@@ -465,9 +473,20 @@ async function handleApi(req, res, pathname, query) {
     const index = gears.findIndex(item => item.id === gear.id);
     if (index >= 0) gears[index] = gear;
     else gears.push(gear);
-    const backup = writeJsonFile(project, 'gears', gears);
+    const backups = { gears: writeJsonFile(project, 'gears', gears) };
+    if (input.setEffect !== undefined) {
+      const setEffects = readJsonFile(project, 'setEffects');
+      const effect = normalizeSetEffect(input.setEffect);
+      if (effect) {
+        setEffects[gear.set] = effect;
+        backups.setEffects = writeJsonFile(project, 'setEffects', setEffects);
+      } else if (!Object.prototype.hasOwnProperty.call(setEffects, gear.set)) {
+        setEffects[gear.set] = '3件套效果待补充。';
+        backups.setEffects = writeJsonFile(project, 'setEffects', setEffects);
+      }
+    }
     const result = buildAndValidate(project);
-    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup, ...result });
+    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup: backups.gears, backups, ...result });
     return;
   }
 
