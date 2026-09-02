@@ -577,7 +577,13 @@
     $('axisList').addEventListener('click', e => fillAxis(e.target.closest('.item')?.dataset.name || ''));
     $('newChar').addEventListener('click', () => fillChar());
     $('newWeapon').addEventListener('click', () => fillWeapon());
-    $('newGear').addEventListener('click', () => fillGear());
+    $('newGear').addEventListener('click', () => {
+      fillGear();
+      $('gearImageFile').value = '';
+      $('gearImageText').textContent = '点击选择或拖入图片';
+      $('gearName').focus();
+      setStatus('已准备新增装备，请填写后点击“保存装备”');
+    });
     $('newSetEffect').addEventListener('click', () => fillSetEffect());
     $('newAxisChar').addEventListener('click', () => fillAxis());
     async function deleteItem(entity, key, label, reset) {
