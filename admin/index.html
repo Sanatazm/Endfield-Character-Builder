@@ -183,10 +183,12 @@
           <form class="card" id="axisForm">
             <div class="toolbar"><button class="btn primary" type="button" id="newAxisChar">新建角色</button><button class="btn primary" type="submit">保存排轴角色</button></div>
             <div class="field"><label>角色名</label><input id="axisName" required placeholder="弭弗"></div>
+            <label class="upload-box" style="margin-bottom:12px"><strong>头像</strong><span id="axisAvatarFileText">点击选择图片</span><input id="axisAvatarFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
             <div class="grid-4" id="axisSkillFields"></div>
             <details>
               <summary>高级：手动路径</summary>
               <div class="field" style="margin-top:12px"><label>头像路径</label><input id="axisAvatar"></div>
+              <div class="grid-4" id="axisManualSkillPaths"></div>
             </details>
           </form>
         </div>
@@ -387,9 +389,19 @@
       const skillTypes = state.axis?.skillTypes || ['重击', '战技', '连携技', '终结技'];
       $('axisSkillFields').innerHTML = skillTypes.map(type => `
         <div>
-          <div class="field"><label>${escapeHtml(type)}图标路径</label><input data-skill-path="${escapeHtml(type)}"></div>
+          <label class="upload-box"><strong>${escapeHtml(type)}图标</strong><span data-axis-upload-text="${escapeHtml(type)}">点击选择图片</span><input data-axis-skill-file="${escapeHtml(type)}" type="file" accept="image/png,image/jpeg,image/webp"></label>
           <div class="field"><label>${escapeHtml(type)}属性</label><select data-skill-attr="${escapeHtml(type)}">${optionHtml(attrChoices)}</select></div>
         </div>`).join('');
+      $('axisManualSkillPaths').innerHTML = skillTypes.map(type => `
+        <div class="field"><label>${escapeHtml(type)}路径</label><input data-skill-path="${escapeHtml(type)}"></div>
+      `).join('');
+      document.querySelectorAll('[data-axis-skill-file]').forEach(input => {
+        input.addEventListener('change', () => {
+          const type = input.dataset.axisSkillFile;
+          const text = document.querySelector(`[data-axis-upload-text="${CSS.escape(type)}"]`);
+          if (text) text.textContent = input.files?.[0]?.name || '点击选择图片';
+        });
+      });
     }
     function renderAxisList() {
       renderAxisSkillFields();
@@ -402,9 +414,22 @@
       const data = state.axis;
       $('axisName').value = name;
       $('axisAvatar').value = data.charAssets?.[name]?.avatar || '';
+      $('axisAvatarFileText').textContent = fileNameFromPath(data.charAssets?.[name]?.avatar) || '点击选择图片';
       for (const skillType of data.skillTypes || []) {
-        document.querySelector(`[data-skill-path="${CSS.escape(skillType)}"]`).value = data.charAssets?.[name]?.skills?.[skillType] || '';
+        const skillPath = data.charAssets?.[name]?.skills?.[skillType] || '';
+        document.querySelector(`[data-skill-path="${CSS.escape(skillType)}"]`).value = skillPath;
+        const text = document.querySelector(`[data-axis-upload-text="${CSS.escape(skillType)}"]`);
+        if (text) text.textContent = fileNameFromPath(skillPath) || '点击选择图片';
         document.querySelector(`[data-skill-attr="${CSS.escape(skillType)}"]`).value = data.skillAttrMap?.[name]?.[skillType] || '物理';
+      }
+    }
+    function fileNameFromPath(value) {
+      if (!value) return '';
+      try {
+        const path = /^https?:\/\//i.test(value) ? new URL(value).pathname : value;
+        return decodeURIComponent(path.split(/[\\/]/).filter(Boolean).pop() || '');
+      } catch {
+        return String(value).split(/[\\/]/).filter(Boolean).pop() || '';
       }
     }
 
@@ -423,7 +448,7 @@
     document.querySelectorAll('.project-btn').forEach(btn => btn.addEventListener('click', () => switchProject(btn.dataset.project)));
     document.querySelectorAll('nav button').forEach(btn => btn.addEventListener('click', () => switchPanel(btn.dataset.panel)));
     $('jsonType').addEventListener('change', () => $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2));
-    [['charAvatarFile','charAvatarText'], ['charPortraitFile','charPortraitText'], ['charPreviewFile','charPreviewText'], ['charLandscapeFile','charLandscapeText'], ['weaponImageFile','weaponImageText'], ['gearImageFile','gearImageText']].forEach(pair => bindFileText(...pair));
+    [['charAvatarFile','charAvatarText'], ['charPortraitFile','charPortraitText'], ['charPreviewFile','charPreviewText'], ['charLandscapeFile','charLandscapeText'], ['weaponImageFile','weaponImageText'], ['gearImageFile','gearImageText'], ['axisAvatarFile','axisAvatarFileText']].forEach(pair => bindFileText(...pair));
 
     $('charForm').addEventListener('submit', async e => {
       e.preventDefault();
@@ -469,11 +494,16 @@
       try {
         const skills = {};
         const attrs = {};
+        const images = { skills: {} };
+        const avatarPayload = await filePayload($('axisAvatarFile'));
+        if (avatarPayload) images.avatar = avatarPayload;
         for (const skillType of state.axis.skillTypes || []) {
           skills[skillType] = document.querySelector(`[data-skill-path="${CSS.escape(skillType)}"]`).value;
           attrs[skillType] = document.querySelector(`[data-skill-attr="${CSS.escape(skillType)}"]`).value;
+          const skillPayload = await filePayload(document.querySelector(`[data-axis-skill-file="${CSS.escape(skillType)}"]`));
+          if (skillPayload) images.skills[skillType] = skillPayload;
         }
-        const saved = await api('/api/axis/character', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ name:$('axisName').value, avatar:$('axisAvatar').value, skills, attrs })});
+        const saved = await api('/api/axis/character', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ name:$('axisName').value, avatar:$('axisAvatar').value, skills, attrs, images })});
         await loadData();
         setStatus(`排轴角色已保存：${$('axisName').value}\n${saved.build.output}${saved.validate.output}`);
       } catch (error) { setStatus(error.message, false); }

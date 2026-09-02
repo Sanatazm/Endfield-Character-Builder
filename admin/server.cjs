@@ -226,6 +226,20 @@ function writeBase64Asset(project, assetType, fileName, base64) {
   return { file: path.relative(project.root, target), backup };
 }
 
+function fileNameFromAssetRef(ref) {
+  if (!ref || typeof ref !== 'string') return '';
+  try {
+    const pathname = /^https?:\/\//i.test(ref) ? new URL(ref).pathname : ref;
+    return decodeURIComponent(path.basename(pathname));
+  } catch {
+    return path.basename(ref);
+  }
+}
+
+function axisAssetRef(fileName) {
+  return `Sanatazm/endfield-axis-tool/${fileName}`;
+}
+
 function runScript(project, script) {
   try {
     const output = childProcess.execFileSync(process.execPath, [path.join(project.root, 'scripts', script)], {
@@ -362,14 +376,31 @@ function saveAxisCharacter(input) {
   const data = readJsonFile(projects.axis, 'axis');
   const name = String(input.name || '').trim();
   if (!name) throw new Error('角色名必填');
+  const existing = data.charAssets[name] || { avatar: '', skills: {} };
+  const images = input.images || {};
+  let avatar = String(input.avatar || existing.avatar || '').trim();
   const skills = {};
   const attrs = {};
+
+  if (images.avatar) {
+    const fileName = fileNameFromAssetRef(existing.avatar) || images.avatar.fileName;
+    const upload = writeBase64Asset(projects.axis, 'axisImage', fileName, images.avatar.base64);
+    avatar = axisAssetRef(path.basename(upload.file));
+  }
+
   for (const skillType of data.skillTypes || []) {
-    skills[skillType] = String((input.skills || {})[skillType] || '').trim();
+    const oldPath = existing.skills?.[skillType] || '';
+    let nextPath = String((input.skills || {})[skillType] || oldPath || '').trim();
+    if (images.skills?.[skillType]) {
+      const fileName = fileNameFromAssetRef(oldPath) || images.skills[skillType].fileName;
+      const upload = writeBase64Asset(projects.axis, 'axisImage', fileName, images.skills[skillType].base64);
+      nextPath = axisAssetRef(path.basename(upload.file));
+    }
+    skills[skillType] = nextPath;
     attrs[skillType] = String((input.attrs || {})[skillType] || '').trim();
   }
   data.charAssets[name] = {
-    avatar: String(input.avatar || '').trim(),
+    avatar,
     skills,
   };
   data.skillAttrMap[name] = attrs;
