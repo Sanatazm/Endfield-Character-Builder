@@ -1680,6 +1680,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="./src/generated/game-database.js"></script>
+<script src="https://sanatazm.github.io/endfield-axis-tool/src/generated/axis-data.js"></script>
 <script>
     const gameDatabase = window.gameDatabase
 
@@ -1782,6 +1783,13 @@
 
     function getSkillPriorityIconUrl(character, skillName) {
         if (!character || !skillName) return "";
+        const axisSkillName = skillName === "普攻" ? "重击" : skillName;
+        const axisRef = window.axisData?.charAssets?.[character.name]?.skills?.[axisSkillName];
+        if (axisRef) {
+            if (/^https?:\/\//i.test(axisRef)) return axisRef;
+            const ref = axisRef.replace(/^Sanatazm\/endfield-axis-tool\//, "");
+            return `${SKILL_ICON_BASE_URL}${ref}`;
+        }
         if (skillName === "普攻") {
             const file = SKILL_NORMAL_ATTACK_ICON_BY_WEAPON_TYPE[character.weaponType];
             return file ? `${SKILL_ICON_BASE_URL}${file}` : "";
@@ -1794,6 +1802,9 @@
 
     function getSkillPriorityAttr(character, skillName) {
         if (!character || !skillName) return "";
+        const axisSkillName = skillName === "普攻" ? "重击" : skillName;
+        const axisAttr = window.axisData?.skillAttrMap?.[character.name]?.[axisSkillName];
+        if (axisAttr) return axisAttr;
         return SKILL_ATTR_BY_CHARACTER[character.name]?.[skillName] || character.attr || "";
     }
 
