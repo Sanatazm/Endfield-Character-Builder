@@ -1776,9 +1776,16 @@
         char_ys: "yingshi.png"
     };
 
+    function getPreferredDataImage(item) {
+        const value = String(item?.img || '').trim();
+        return value && !/via\.placeholder\.com/i.test(value) ? value : '';
+    }
+
     function getCharacterAvatarUrl(character) {
+        const uploaded = getPreferredDataImage(character);
+        if (uploaded) return uploaded;
         const file = CHARACTER_AVATAR_BY_ID[character.id];
-        return file ? `${AVATAR_BASE_URL}${file}` : character.img;
+        return file ? `${AVATAR_BASE_URL}${file}` : '';
     }
 
     function getSkillPriorityIconUrl(character, skillName) {
@@ -1884,8 +1891,10 @@
     };
 
     function getCharacterPortraitUrl(character) {
+        const uploaded = getPreferredDataImage(character);
+        if (uploaded) return uploaded;
         const file = CHARACTER_PORTRAIT_BY_ID[character.id];
-        return file ? `${CHARACTER_PORTRAIT_BASE_URL}${file}` : character.img;
+        return file ? `${CHARACTER_PORTRAIT_BASE_URL}${file}` : '';
     }
 
     const LANDSCAPE_AVATAR_BASE_URL = "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-Landscape%20Avatar/";
@@ -2220,13 +2229,15 @@
     const GEAR_IMAGE_BASE = "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/";
     function getGearImageCandidates(item) {
         if (!item) return [];
+        const uploaded = getPreferredDataImage(item);
         const names = [
             item.name,
             item.name.replace(/[\s·.]/g, ''),
             item.id,
             item.id.replace(/^g_/, '')
         ].filter(Boolean);
-        return [...new Set(names)].map(name => `${GEAR_IMAGE_BASE}${encodeURIComponent(name)}.png`);
+        const mapped = [...new Set(names)].map(name => `${GEAR_IMAGE_BASE}${encodeURIComponent(name)}.png`);
+        return uploaded ? [uploaded, ...mapped.filter(url => url !== uploaded)] : mapped;
     }
     function getGearImageUrl(item) {
         return getGearImageCandidates(item)[0] || '';
@@ -2257,6 +2268,7 @@
     };
     function getWeaponImageCandidates(item) {
         if (!item) return [];
+        const uploaded = getPreferredDataImage(item);
         const mapped = WEAPON_IMAGE_NAME_MAP[item.name];
         const rawNames = [
             mapped ? mapped.replace(/\.png$/i, '') : '',
@@ -2268,7 +2280,7 @@
             item.id && item.id.replace(/^w_/, '')
         ].filter(Boolean);
         const urls = rawNames.map(name => `${WEAPON_IMAGE_BASE}${encodeURIComponent(name)}.png`);
-        if (item.img) urls.push(item.img);
+        if (uploaded) urls.unshift(uploaded);
         return [...new Set(urls)];
     }
     function handleWeaponImageError(img) {
