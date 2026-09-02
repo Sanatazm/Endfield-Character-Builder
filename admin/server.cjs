@@ -492,7 +492,7 @@ async function handleApi(req, res, pathname, query) {
     const gears = readJsonFile(project, 'gears');
     const index = gears.findIndex(item => item.id === gear.id);
     if (index >= 0) gears[index] = gear;
-    else gears.push(gear);
+    else gears.unshift(gear);
     const backups = { gears: writeJsonFile(project, 'gears', gears) };
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup: backups.gears, backups, ...result });
@@ -512,7 +512,7 @@ async function handleApi(req, res, pathname, query) {
     validateWeapon(weapon);
     const index = weapons.findIndex(item => item.id === weapon.id);
     if (index >= 0) weapons[index] = weapon;
-    else weapons.push(weapon);
+    else weapons.unshift(weapon);
     const backup = writeJsonFile(project, 'weapons', weapons);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', weapon, backup, ...result });
@@ -537,7 +537,7 @@ async function handleApi(req, res, pathname, query) {
 
     const index = characters.findIndex(item => item.id === character.id);
     if (index >= 0) characters[index] = character;
-    else characters.push(character);
+    else characters.unshift(character);
     const backup = writeJsonFile(project, 'characters', characters);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', character, backup, ...result });
