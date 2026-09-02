@@ -346,6 +346,16 @@ function normalizeGear(input, existing = []) {
   };
 }
 
+function upsertFirst(items, next, name) {
+  const index = items.findIndex(item => item.name === name || (next.id && item.id === next.id));
+  if (index >= 0) {
+    next.id = items[index].id;
+    items.splice(index, 1);
+  }
+  items.unshift(next);
+  return index;
+}
+
 function normalizeWeapon(input, existing = []) {
   const stats = Array.isArray(input.stats)
     ? input.stats
@@ -417,7 +427,6 @@ function saveAxisCharacter(input) {
   const data = readJsonFile(projects.axis, 'axis');
   const name = String(input.name || '').trim();
   if (!name) throw new Error('角色名必填');
-  const isNew = !Object.prototype.hasOwnProperty.call(data.charAssets, name);
   const existing = data.charAssets[name] || { avatar: '', skills: {} };
   const images = input.images || {};
   let avatar = String(input.avatar || existing.avatar || '').trim();
@@ -446,9 +455,9 @@ function saveAxisCharacter(input) {
     skills,
   };
   data.skillAttrMap[name] = attrs;
-  if (input.includeInOrder !== false && !data.orderedChars.includes(name)) {
-    if (isNew) data.orderedChars.unshift(name);
-    else data.orderedChars.push(name);
+  if (input.includeInOrder !== false) {
+    data.orderedChars = data.orderedChars.filter(item => item !== name);
+    data.orderedChars.unshift(name);
   }
   const backup = writeJsonFile(projects.axis, 'axis', data);
   const result = buildAndValidate(projects.axis);
@@ -505,8 +514,11 @@ async function handleApi(req, res, pathname, query) {
     if (!effect) throw new Error('请输入套装效果');
     const setEffects = readJsonFile(project, 'setEffects');
     const existed = Object.prototype.hasOwnProperty.call(setEffects, name);
-    setEffects[name] = effect;
-    const backup = writeJsonFile(project, 'setEffects', setEffects);
+    const reordered = { [name]: effect };
+    for (const [setName, setEffect] of Object.entries(setEffects)) {
+      if (setName !== name) reordered[setName] = setEffect;
+    }
+    const backup = writeJsonFile(project, 'setEffects', reordered);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: existed ? 'updated' : 'created', name, effect, backup, ...result });
     return;
@@ -558,9 +570,7 @@ async function handleApi(req, res, pathname, query) {
     const gears = readJsonFile(project, 'gears');
     const gear = normalizeGear(input, gears);
     validateGear(gear);
-    const index = gears.findIndex(item => item.id === gear.id);
-    if (index >= 0) gears[index] = gear;
-    else gears.unshift(gear);
+    const index = upsertFirst(gears, gear, gear.name);
     const backups = { gears: writeJsonFile(project, 'gears', gears) };
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup: backups.gears, backups, ...result });
@@ -578,9 +588,7 @@ async function handleApi(req, res, pathname, query) {
     }
     const weapon = normalizeWeapon(input, weapons);
     validateWeapon(weapon);
-    const index = weapons.findIndex(item => item.id === weapon.id);
-    if (index >= 0) weapons[index] = weapon;
-    else weapons.unshift(weapon);
+    const index = upsertFirst(weapons, weapon, weapon.name);
     const backup = writeJsonFile(project, 'weapons', weapons);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', weapon, backup, ...result });
@@ -603,9 +611,7 @@ async function handleApi(req, res, pathname, query) {
       if (!character.img && assetType === 'avatar') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
     }
 
-    const index = characters.findIndex(item => item.id === character.id);
-    if (index >= 0) characters[index] = character;
-    else characters.unshift(character);
+    const index = upsertFirst(characters, character, character.name);
     const backup = writeJsonFile(project, 'characters', characters);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', character, backup, ...result });
