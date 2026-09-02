@@ -32,7 +32,14 @@ window.gameDatabase = {
       "mainPower": "敏捷",
       "subPower": "意志",
       "weaponType": "施术单元",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_1.png"
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_1.png",
+      "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_1.png",
+      "assetNames": {
+        "avatar": "typhoea.c68596a8.png",
+        "portrait": "tifeng.png",
+        "preview": "tifeng.png",
+        "landscape": "tifeng.png"
+      }
     },
     {
       "id": "char_ln",
