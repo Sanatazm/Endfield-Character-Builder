@@ -346,11 +346,13 @@ function normalizeGear(input, existing = []) {
   };
 }
 
-function upsertFirst(items, next, name) {
-  const index = items.findIndex(item => item.name === name || (next.id && item.id === next.id));
+function upsertFirst(items, next, name, prefix) {
+  const index = items.findIndex(item => item.name === name);
   if (index >= 0) {
     next.id = items[index].id;
     items.splice(index, 1);
+  } else if (items.some(item => item.id === next.id)) {
+    next.id = makeId(prefix, items);
   }
   items.unshift(next);
   return index;
@@ -570,7 +572,7 @@ async function handleApi(req, res, pathname, query) {
     const gears = readJsonFile(project, 'gears');
     const gear = normalizeGear(input, gears);
     validateGear(gear);
-    const index = upsertFirst(gears, gear, gear.name);
+    const index = upsertFirst(gears, gear, gear.name, 'g');
     const backups = { gears: writeJsonFile(project, 'gears', gears) };
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup: backups.gears, backups, ...result });
@@ -588,7 +590,7 @@ async function handleApi(req, res, pathname, query) {
     }
     const weapon = normalizeWeapon(input, weapons);
     validateWeapon(weapon);
-    const index = upsertFirst(weapons, weapon, weapon.name);
+    const index = upsertFirst(weapons, weapon, weapon.name, 'w');
     const backup = writeJsonFile(project, 'weapons', weapons);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', weapon, backup, ...result });
@@ -611,7 +613,7 @@ async function handleApi(req, res, pathname, query) {
       if (!character.img && assetType === 'avatar') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
     }
 
-    const index = upsertFirst(characters, character, character.name);
+    const index = upsertFirst(characters, character, character.name, 'char');
     const backup = writeJsonFile(project, 'characters', characters);
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', character, backup, ...result });
