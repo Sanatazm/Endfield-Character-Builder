@@ -16,6 +16,8 @@
     nav button, .btn, .project-btn { border:1px solid var(--line); border-radius:6px; background:#15191d; color:var(--text); padding:10px 12px; font-weight:700; cursor:pointer; }
     nav button { width:100%; text-align:left; margin-bottom:8px; }
     nav button.active, .btn.primary, .project-btn.active { background:var(--cyan); border-color:var(--cyan); color:#061013; }
+    .btn.danger { color:var(--danger); border-color:#70403d; }
+    .btn.danger:hover { background:#321b1a; }
     nav .advanced-toggle { margin-top:16px; color:var(--muted); font-size:13px; }
     .project-switch { display:flex; gap:8px; flex-wrap:wrap; }
     .project-btn { min-width:116px; text-align:center; }
@@ -33,6 +35,7 @@
     .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .field-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .full-row { grid-column:1 / -1; }
+    .value-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     .grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .form-section { border:1px solid var(--line); border-radius:8px; background:#14181c; padding:12px; margin:12px 0; }
@@ -56,7 +59,7 @@
     details { border:1px solid var(--line); border-radius:8px; background:#111519; padding:10px 12px; margin:12px 0; }
     summary { cursor:pointer; color:var(--muted); font-weight:700; }
     .hidden { display:none !important; }
-    @media (max-width:1050px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .layout, .grid-2, .grid-3, .grid-4, .upload-grid, .field-pair { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
+    @media (max-width:1050px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .layout, .grid-2, .grid-3, .grid-4, .upload-grid, .field-pair, .value-grid { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
   </style>
 </head>
 <body>
@@ -89,7 +92,7 @@
             <div class="list" id="charList"></div>
           </div>
           <form class="card" id="charForm">
-            <div class="toolbar"><button class="btn primary" type="button" id="newChar">新建角色</button><button class="btn primary" type="submit">保存角色</button></div>
+            <div class="toolbar"><button class="btn primary" type="button" id="newChar">新建角色</button><button class="btn primary" type="submit">保存角色</button><button class="btn danger" type="button" id="deleteChar">删除角色</button></div>
             <div class="grid-2">
               <div class="field"><label>角色名</label><input id="charName" required placeholder="弭弗"></div>
               <div class="field"><label>星级</label><select id="charStars"><option>6</option><option>5</option><option>4</option></select></div>
@@ -123,7 +126,7 @@
             <div class="list" id="weaponList"></div>
           </div>
           <form class="card" id="weaponForm">
-            <div class="toolbar"><button class="btn primary" type="button" id="newWeapon">新建武器</button><button class="btn primary" type="submit">保存武器</button></div>
+            <div class="toolbar"><button class="btn primary" type="button" id="newWeapon">新建武器</button><button class="btn primary" type="submit">保存武器</button><button class="btn danger" type="button" id="deleteWeapon">删除武器</button></div>
             <div class="grid-2">
               <div class="field"><label>武器名</label><input id="weaponName" required placeholder="宏愿"></div>
               <div class="field"><label>类型</label><select id="weaponType"></select></div>
@@ -153,7 +156,7 @@
             <div class="list" id="gearList"></div>
           </div>
           <form class="card" id="gearForm">
-            <div class="toolbar"><button class="btn primary" type="button" id="newGear">新建装备</button><button class="btn primary" type="submit">保存装备</button></div>
+            <div class="toolbar"><button class="btn primary" type="button" id="newGear">新建装备</button><button class="btn primary" type="submit">保存装备</button><button class="btn danger" type="button" id="deleteGear">删除装备</button></div>
             <fieldset class="form-section">
               <legend>装备信息</legend>
               <div class="grid-2">
@@ -169,18 +172,18 @@
             <fieldset class="form-section">
               <legend>装备词条</legend>
               <div class="grid-2">
-                <div class="field full-row"><label>防御力</label><input id="gearDefense" placeholder="+56"></div>
+                <div class="field full-row"><label>防御力（只填数字）</label><input id="gearDefense" type="number" step="any" placeholder="56"></div>
                 <div class="field-pair full-row">
                   <div class="field"><label>词条 1 名称</label><select id="gearStat1Name"><option value="">选择词条</option></select></div>
-                  <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
+                  <div class="field"><label>词条 1 数值（只填数字）</label><div class="value-grid"><input id="gearStat1Value1" type="number" step="any" placeholder="115"><input id="gearStat1Value2" type="number" step="any" placeholder="126"><input id="gearStat1Value3" type="number" step="any" placeholder="138"><input id="gearStat1Value4" type="number" step="any" placeholder="149"></div></div>
                 </div>
                 <div class="field-pair full-row">
                   <div class="field"><label>词条 2 名称</label><select id="gearStat2Name"><option value="">选择词条</option></select></div>
-                  <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
+                  <div class="field"><label>词条 2 数值（只填数字）</label><div class="value-grid"><input id="gearStat2Value1" type="number" step="any" placeholder="87"><input id="gearStat2Value2" type="number" step="any" placeholder="95"><input id="gearStat2Value3" type="number" step="any" placeholder="104"><input id="gearStat2Value4" type="number" step="any" placeholder="113"></div></div>
                 </div>
                 <div class="field-pair full-row">
                   <div class="field"><label>最后词条</label><select id="gearBonusName"><option value="">选择词条</option></select></div>
-                  <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
+                  <div class="field"><label>最后词条数值（只填数字）</label><div class="value-grid"><input id="gearBonusValue1" type="number" step="any" placeholder="12.3"><input id="gearBonusValue2" type="number" step="any" placeholder="13.6"><input id="gearBonusValue3" type="number" step="any" placeholder="14.8"><input id="gearBonusValue4" type="number" step="any" placeholder="16"></div></div>
                 </div>
               </div>
             </fieldset>
@@ -202,7 +205,7 @@
             <div class="list" id="setEffectList"></div>
           </div>
           <form class="card" id="setEffectForm">
-            <div class="toolbar"><button class="btn primary" type="button" id="newSetEffect">新建套装效果</button><button class="btn primary" type="submit">保存套装效果</button></div>
+            <div class="toolbar"><button class="btn primary" type="button" id="newSetEffect">新建套装效果</button><button class="btn primary" type="submit">保存套装效果</button><button class="btn danger" type="button" id="deleteSetEffect">删除套装效果</button></div>
             <div class="field"><label>套装名称</label><input id="setEffectName" required list="setEffectOptions" placeholder="涉渊"><datalist id="setEffectOptions"></datalist></div>
             <div class="field"><label>套装效果</label><textarea id="setEffectText" required placeholder="装备者攻击力+15%。&#10;当装备者施放连携技时，所有技能伤害+20%。"></textarea></div>
           </form>
@@ -216,7 +219,7 @@
             <div class="list" id="axisList"></div>
           </div>
           <form class="card" id="axisForm">
-            <div class="toolbar"><button class="btn primary" type="button" id="newAxisChar">新建角色</button><button class="btn primary" type="submit">保存排轴角色</button></div>
+            <div class="toolbar"><button class="btn primary" type="button" id="newAxisChar">新建角色</button><button class="btn primary" type="submit">保存排轴角色</button><button class="btn danger" type="button" id="deleteAxisChar">删除排轴角色</button></div>
             <div class="field"><label>角色名</label><input id="axisName" required placeholder="弭弗"></div>
             <label class="upload-box" style="margin-bottom:12px"><strong>头像</strong><span id="axisAvatarFileText">点击选择图片</span><input id="axisAvatarFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
             <div class="grid-4" id="axisSkillFields"></div>
@@ -461,16 +464,16 @@
       $('gearImg').value = g.img || '';
       $('gearStats').value = (g.stats || []).join('\n');
       const stats = g.stats || [];
-      $('gearDefense').value = splitStat(stats[0]).value || '';
+      $('gearDefense').value = splitStat(stats[0]).value.replace(/^\+/, '').split('/')[0] || '';
       const s1 = splitStat(stats[1]);
       const s2 = splitStat(stats[2]);
       const s3 = splitStat(stats[3]);
       $('gearStat1Name').value = s1.name;
-      $('gearStat1Value').value = s1.value;
+      setNumericValues('gearStat1Value', s1.value.split('/'));
       $('gearStat2Name').value = s2.name;
-      $('gearStat2Value').value = s2.value;
+      setNumericValues('gearStat2Value', s2.value.split('/'));
       $('gearBonusName').value = s3.name;
-      $('gearBonusValue').value = s3.value;
+      setNumericValues('gearBonusValue', s3.value.split('/'));
     }
     function effectToTextarea(value) {
       return String(value || '').replace(/<br\s*\/?>/gi, '\n');
@@ -478,6 +481,16 @@
     function fillSetEffect(name = '') {
       $('setEffectName').value = name;
       $('setEffectText').value = effectToTextarea(state.setEffects?.[name] || '');
+    }
+    function setNumericValues(prefix, values) {
+      const clean = values.map(value => String(value || '').trim().replace(/^\+/, ''));
+      for (let index = 0; index < 4; index++) $(`${prefix}${index + 1}`).value = clean[index] || '';
+    }
+    function numericValues(prefix) {
+      return [1, 2, 3, 4].map(index => $(`${prefix}${index}`).value.trim()).filter(Boolean);
+    }
+    function signedValues(prefix) {
+      return numericValues(prefix).map(value => value.startsWith('+') ? value : `+${value}`).join('/');
     }
     function updateGearSetEffectPreview() {
       const setName = $('gearSet').value.trim();
@@ -487,10 +500,10 @@
     }
     function gearStatsFromForm() {
       const rows = [];
-      if ($('gearDefense').value.trim()) rows.push(`防御力：${$('gearDefense').value.trim()}`);
-      for (const [nameId, valueId] of [['gearStat1Name','gearStat1Value'], ['gearStat2Name','gearStat2Value'], ['gearBonusName','gearBonusValue']]) {
+      if ($('gearDefense').value.trim()) rows.push(`防御力：+${$('gearDefense').value.trim().replace(/^\+/, '')}`);
+      for (const [nameId, valuePrefix] of [['gearStat1Name','gearStat1Value'], ['gearStat2Name','gearStat2Value'], ['gearBonusName','gearBonusValue']]) {
         const name = $(nameId).value.trim();
-        const value = $(valueId).value.trim();
+        const value = signedValues(valuePrefix);
         if (name && value) rows.push(`${name}：${value}`);
       }
       return rows.length ? rows : $('gearStats').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
@@ -562,6 +575,21 @@
     $('newGear').addEventListener('click', () => fillGear());
     $('newSetEffect').addEventListener('click', () => fillSetEffect());
     $('newAxisChar').addEventListener('click', () => fillAxis());
+    async function deleteItem(entity, key, label, reset) {
+      if (!key) { setStatus(`请先选择要删除的${label}`, false); return; }
+      if (!confirm(`确定删除${label}“${key}”吗？此操作会立即修改本地数据。`)) return;
+      try {
+        const saved = await api('/api/delete', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ entity, key }) });
+        await loadData();
+        reset();
+        setStatus(`${label}已删除：${key}\n${saved.build.output}${saved.validate.output}`);
+      } catch (error) { setStatus(error.message, false); }
+    }
+    $('deleteChar').addEventListener('click', () => deleteItem('characters', $('charId').value.trim(), '角色', () => fillChar()));
+    $('deleteWeapon').addEventListener('click', () => deleteItem('weapons', $('weaponId').value.trim(), '武器', () => fillWeapon()));
+    $('deleteGear').addEventListener('click', () => deleteItem('gears', $('gearId').value.trim(), '装备', () => fillGear()));
+    $('deleteSetEffect').addEventListener('click', () => deleteItem('setEffects', $('setEffectName').value.trim(), '套装效果', () => fillSetEffect()));
+    $('deleteAxisChar').addEventListener('click', () => deleteItem('axisCharacter', $('axisName').value.trim(), '排轴角色', () => fillAxis()));
     document.querySelectorAll('.project-btn').forEach(btn => btn.addEventListener('click', () => switchProject(btn.dataset.project)));
     document.querySelectorAll('nav button').forEach(btn => btn.addEventListener('click', () => switchPanel(btn.dataset.panel)));
     $('jsonType').addEventListener('change', () => $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2));

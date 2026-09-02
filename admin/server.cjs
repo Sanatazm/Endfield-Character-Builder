@@ -479,6 +479,41 @@ async function handleApi(req, res, pathname, query) {
     return;
   }
 
+  if (req.method === 'POST' && pathname === '/api/delete') {
+    const input = JSON.parse(await readBody(req));
+    const entity = String(input.entity || '');
+    const key = String(input.key || '').trim();
+    if (!key) throw new Error('缺少要删除的数据');
+    let backup;
+    if (entity === 'setEffects') {
+      if (project.id !== 'builder') throw new Error('套装效果删除仅适用于角色配置工具');
+      const setEffects = readJsonFile(project, 'setEffects');
+      if (!Object.prototype.hasOwnProperty.call(setEffects, key)) throw new Error('套装效果不存在');
+      delete setEffects[key];
+      backup = writeJsonFile(project, 'setEffects', setEffects);
+    } else if (entity === 'axisCharacter') {
+      if (project.id !== 'axis') throw new Error('排轴角色删除仅适用于排轴工具');
+      const data = readJsonFile(project, 'axis');
+      if (!Object.prototype.hasOwnProperty.call(data.charAssets, key)) throw new Error('排轴角色不存在');
+      delete data.charAssets[key];
+      delete data.skillAttrMap[key];
+      data.orderedChars = data.orderedChars.filter(name => name !== key);
+      backup = writeJsonFile(project, 'axis', data);
+    } else if (['characters', 'weapons', 'gears'].includes(entity)) {
+      if (project.id !== 'builder') throw new Error('角色配置数据删除仅适用于角色配置工具');
+      const items = readJsonFile(project, entity);
+      const index = items.findIndex(item => item.id === key);
+      if (index < 0) throw new Error('要删除的数据不存在');
+      items.splice(index, 1);
+      backup = writeJsonFile(project, entity, items);
+    } else {
+      throw new Error('不支持的删除类型');
+    }
+    const result = buildAndValidate(project);
+    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, backup, ...result });
+    return;
+  }
+
   if (req.method === 'POST' && pathname === '/api/gear') {
     if (project.id !== 'builder') throw new Error('Gear editing is only available for the character builder project.');
     const input = JSON.parse(await readBody(req));
