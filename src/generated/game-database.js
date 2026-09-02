@@ -1324,6 +1324,45 @@ window.gameDatabase = {
   ],
   "gears": [
     {
+      "id": "g_170",
+      "name": "险关手甲",
+      "part": "护手",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E6%89%8B%E7%94%B2.png",
+      "stats": [
+        "防御力：+42",
+        "敏捷：+65/+71/+78/+84",
+        "意志：+43/+47/+51/+55",
+        "源石技艺强度：+34.50/+37.95/+41.40/+44.85"
+      ]
+    },
+    {
+      "id": "g_169",
+      "name": "险关装甲",
+      "part": "护甲",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E8%A3%85%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "敏捷：+87/+95/+104/+113",
+        "意志：+58/+63/+69/+75",
+        "源石技艺强度：+20.70/+22.77/+24.84/+26.91"
+      ]
+    },
+    {
+      "id": "g_171",
+      "name": "险关通信器",
+      "part": "配件",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E9%80%9A%E4%BF%A1%E5%99%A8.png",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+32/+35/+38/+41",
+        "意志：+21/+23/+25/+27",
+        "源石技艺强度：+41.40/+45.54/+49.68/+53.82"
+      ]
+    },
+    {
       "id": "g_173",
       "name": "长息重护板",
       "part": "配件",
@@ -1347,45 +1386,6 @@ window.gameDatabase = {
         "意志：+32/+35/+38/+41",
         "敏捷：+21/+23/+25/+27",
         "终结技充能效率：+24.64%/+27.11%/+29.57%/+32.04%"
-      ]
-    },
-    {
-      "id": "g_169",
-      "name": "险关装甲",
-      "part": "护甲",
-      "set": "险关",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E8%A3%85%E7%94%B2.png",
-      "stats": [
-        "防御力：+56",
-        "敏捷：+87/+95/+104/+113",
-        "意志：+58/+63/+69/+75",
-        "源石技艺强度：+20.70/+22.77/+24.84/+26.91"
-      ]
-    },
-    {
-      "id": "g_170",
-      "name": "险关手甲",
-      "part": "护手",
-      "set": "险关",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E6%89%8B%E7%94%B2.png",
-      "stats": [
-        "防御力：+42",
-        "敏捷：+65/+71/+78/+84",
-        "意志：+43/+47/+51/+55",
-        "源石技艺强度：+34.50/+37.95/+41.40/+44.85"
-      ]
-    },
-    {
-      "id": "g_171",
-      "name": "险关通信器",
-      "part": "配件",
-      "set": "险关",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E9%80%9A%E4%BF%A1%E5%99%A8.png",
-      "stats": [
-        "防御力：+21",
-        "敏捷：+32/+35/+38/+41",
-        "意志：+21/+23/+25/+27",
-        "源石技艺强度：+41.40/+45.54/+49.68/+53.82"
       ]
     },
     {
