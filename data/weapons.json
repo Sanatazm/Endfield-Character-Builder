@@ -1,5 +1,29 @@
 [
   {
+    "id": "w_2",
+    "name": "苦难的尽头",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8B%A6%E9%9A%BE%E7%9A%84%E5%B0%BD%E5%A4%B4.png",
+    "stats": [
+      "敏捷",
+      "自然伤害",
+      "迸发"
+    ]
+  },
+  {
+    "id": "w_1",
+    "name": "寒夜幽影",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AF%92%E5%A4%9C%E5%B9%BD%E5%BD%B1.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "迸发"
+    ]
+  },
+  {
     "id": "w_yw",
     "name": "遥望",
     "type": "单手剑",

@@ -1,5 +1,16 @@
 [
   {
+    "id": "char_1",
+    "name": "提弗洛斯",
+    "stars": 6,
+    "attr": "自然",
+    "class": "突击",
+    "mainPower": "敏捷",
+    "subPower": "意志",
+    "weaponType": "施术单元",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_1.png"
+  },
+  {
     "id": "char_ln",
     "name": "梨诺",
     "stars": 6,

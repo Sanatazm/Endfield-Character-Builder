@@ -19,9 +19,21 @@ window.gameDatabase = {
     "清波": "装备者连携技冷却缩减+15.0%。<br>当装备者施放连携技时，所有技能伤害+20.0%，持续15秒。<br>该效果最多叠加2层，每层单独计算持续时间。",
     "壤流": "装备者攻击力+10%。<br>装备者每次消耗导电或腐蚀后，根据异常等级获得相同层数的强化状态，每层使电磁伤害和自然伤害+15%，持续25秒。<br>强化状态最多存在3层，每层单独计算持续时间。",
     "纾难": "3件套效果待补充。",
-    "集成工业": "3件套：攻击力提升15%，电磁伤害额外提升10%。"
+    "集成工业": "攻击力提升15%，电磁伤害额外提升10%。",
+    "险关": "装备者法术伤害+16.0%。<br>当装备者造成自然爆发、寒冷爆发时，源石技艺强度+16，持续20秒。该效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次。"
   },
   "characters": [
+    {
+      "id": "char_1",
+      "name": "提弗洛斯",
+      "stars": 6,
+      "attr": "自然",
+      "class": "突击",
+      "mainPower": "敏捷",
+      "subPower": "意志",
+      "weaponType": "施术单元",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_1.png"
+    },
     {
       "id": "char_ln",
       "name": "梨诺",
@@ -354,6 +366,30 @@ window.gameDatabase = {
     }
   ],
   "weapons": [
+    {
+      "id": "w_2",
+      "name": "苦难的尽头",
+      "type": "施术单元",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8B%A6%E9%9A%BE%E7%9A%84%E5%B0%BD%E5%A4%B4.png",
+      "stats": [
+        "敏捷",
+        "自然伤害",
+        "迸发"
+      ]
+    },
+    {
+      "id": "w_1",
+      "name": "寒夜幽影",
+      "type": "施术单元",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AF%92%E5%A4%9C%E5%B9%BD%E5%BD%B1.png",
+      "stats": [
+        "敏捷",
+        "攻击",
+        "迸发"
+      ]
+    },
     {
       "id": "w_yw",
       "name": "遥望",
@@ -1287,6 +1323,201 @@ window.gameDatabase = {
     }
   ],
   "gears": [
+    {
+      "id": "g_173",
+      "name": "长息重护板",
+      "part": "配件",
+      "set": "长息",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E9%87%8D%E6%8A%A4%E6%9D%BF.png",
+      "stats": [
+        "防御力：+21",
+        "力量：+32/+35/+38/+41",
+        "意志：+21/+23/+25/+27",
+        "终结技充能效率：+24.64%/+27.11%/+29.57%/+32.04%"
+      ]
+    },
+    {
+      "id": "g_172",
+      "name": "长息加固板·壹型",
+      "part": "配件",
+      "set": "长息",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E5%8A%A0%E5%9B%BA%E6%9D%BF%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "stats": [
+        "防御力：+21",
+        "意志：+32/+35/+38/+41",
+        "敏捷：+21/+23/+25/+27",
+        "终结技充能效率：+24.64%/+27.11%/+29.57%/+32.04%"
+      ]
+    },
+    {
+      "id": "g_169",
+      "name": "险关装甲",
+      "part": "护甲",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E8%A3%85%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "敏捷：+87/+95/+104/+113",
+        "意志：+58/+63/+69/+75",
+        "源石技艺强度：+20.70/+22.77/+24.84/+26.91"
+      ]
+    },
+    {
+      "id": "g_170",
+      "name": "险关手甲",
+      "part": "护手",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E6%89%8B%E7%94%B2.png",
+      "stats": [
+        "防御力：+42",
+        "敏捷：+65/+71/+78/+84",
+        "意志：+43/+47/+51/+55",
+        "源石技艺强度：+34.50/+37.95/+41.40/+44.85"
+      ]
+    },
+    {
+      "id": "g_171",
+      "name": "险关通信器",
+      "part": "配件",
+      "set": "险关",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%99%A9%E5%85%B3%E9%80%9A%E4%BF%A1%E5%99%A8.png",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+32/+35/+38/+41",
+        "意志：+21/+23/+25/+27",
+        "源石技艺强度：+41.40/+45.54/+49.68/+53.82"
+      ]
+    },
+    {
+      "id": "g_168",
+      "name": "集成实训突袭护甲",
+      "part": "护甲",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E7%AA%81%E8%A2%AD%E6%8A%A4%E7%94%B2.png",
+      "stats": [
+        "防御力：+48",
+        "主能力：+74/+81/+96",
+        "副能力：+49/+53/+58/+63",
+        "源石技艺强度：+17.70/+19.47/+21.24/+23.01"
+      ]
+    },
+    {
+      "id": "g_167",
+      "name": "集成实训突袭护手",
+      "part": "护手",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E7%AA%81%E8%A2%AD%E6%8A%A4%E6%89%8B.png",
+      "stats": [
+        "防御力：+36",
+        "主能力：+55/+60/+66/+71",
+        "副能力：+37/+40/+44/+48",
+        "源石技艺强度：+29.50/+32.45/+35.40/+38.35"
+      ]
+    },
+    {
+      "id": "g_137",
+      "name": "集成实训医疗护甲",
+      "part": "护甲",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%8C%BB%E7%96%97%E6%8A%A4%E7%94%B2.png",
+      "stats": [
+        "防御力：+48",
+        "主能力：+74/+81/+96",
+        "副能力：+49/+53/+58/+63",
+        "治疗效率加成：+8.85%/+9.74%/+10.62%/+11.51%"
+      ]
+    },
+    {
+      "id": "g_166",
+      "name": "集成实训医疗护手",
+      "part": "护手",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%8C%BB%E7%96%97%E6%8A%A4%E6%89%8B.png",
+      "stats": [
+        "防御力：+36",
+        "主能力：+55/+60/+66/+71",
+        "副能力：+37/+40/+44/+48",
+        "治疗效率加成：+14.75%/+16.23%/+17.70%/+19.18%"
+      ]
+    },
+    {
+      "id": "g_165",
+      "name": "集成实训突袭刺刃",
+      "part": "配件",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E7%AA%81%E8%A2%AD%E5%88%BA%E5%88%83.png",
+      "stats": [
+        "防御力：+18",
+        "主能力：+27/+29/+32/+35",
+        "副能力：+18/+19/+21/+23",
+        "源石技艺强度：+35.40/+38.94/+42.48/+46.02"
+      ]
+    },
+    {
+      "id": "g_164",
+      "name": "集成实训供能栓",
+      "part": "配件",
+      "set": "集成实训",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E4%BE%9B%E8%83%BD%E6%A0%93.png",
+      "stats": [
+        "防御力：+18",
+        "主能力：+27/+29/+32/+35",
+        "副能力：+18/+19/+21/+23",
+        "治疗效率加成：+17.70%/+19.47%/+21.24%/+23.01%"
+      ]
+    },
+    {
+      "id": "g_163",
+      "name": "浊流切割炬·壹型",
+      "part": "配件",
+      "set": "潮涌",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B5%8A%E6%B5%81%E5%88%87%E5%89%B2%E7%82%AC%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "stats": [
+        "防御力：+21",
+        "智识：+32/+35/+38/+41",
+        "意志：+21/+23/+25/+27",
+        "灼热和自然伤害加成：+23.00%/+25.30%/+27.60%/+29.90%"
+      ]
+    },
+    {
+      "id": "g_162",
+      "name": "沉水手套",
+      "part": "护手",
+      "set": "潮涌",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B2%89%E6%B0%B4%E6%89%8B%E5%A5%97.png",
+      "stats": [
+        "防御力：+42",
+        "智识：+65/+71/+78/+84",
+        "意志：+43/+47/+51/+55",
+        "所有技能伤害加成：+23.00%/+25.30%/+27.60%/+29.90%"
+      ]
+    },
+    {
+      "id": "g_161",
+      "name": "涌浪重装甲",
+      "part": "护甲",
+      "set": "潮涌",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%8C%E6%B5%AA%E9%87%8D%E8%A3%85%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "力量：+87/+95/+104/+113",
+        "意志：+58/+63/+69/+75",
+        "寒冷和电磁伤害加成：+11.50%/+12.65%/+13.80%/+14.95%"
+      ]
+    },
+    {
+      "id": "g_160",
+      "name": "落潮轻甲·壹型",
+      "part": "护甲",
+      "set": "潮涌",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E8%90%BD%E6%BD%AE%E8%BD%BB%E7%94%B2%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "stats": [
+        "防御力：+56",
+        "智识：+87/+95/+104/+113",
+        "意志：+58/+63/+69/+75",
+        "终结技充能效率：+12.32%/+13.55%/+14.79%/+16.02%"
+      ]
+    },
     {
       "id": "g_1",
       "name": "天灾防护重甲",
@@ -3037,19 +3268,6 @@ window.gameDatabase = {
         "主能力：+74/+81/+96",
         "副能力：+49/+53/+58/+63",
         "法术伤害加成：+9.3%/+10.2%/+11.2%/+12.1%"
-      ]
-    },
-    {
-      "id": "g_137",
-      "name": "集成实训胸甲",
-      "part": "护甲",
-      "set": "集成实训",
-      "img": "https://via.placeholder.com/80?text=Armor",
-      "stats": [
-        "防御力：+48",
-        "副能力：+74/+81/+96",
-        "主能力：+49/+53/+58/+63",
-        "副能力：+8.9%/+9.7%/+10.6%/+11.5%"
       ]
     },
     {
