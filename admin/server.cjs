@@ -328,7 +328,8 @@ function publishToGithub(project) {
   const commit = runGit(project, ['commit', '-m', message]);
   if (!commit.ok) return { ok: false, step: 'commit', output: commit.output };
 
-  const push = runGit(project, ['push', 'origin', 'HEAD:main']);
+  let push = runGit(project, ['push', 'origin', 'HEAD:main']);
+  if (!push.ok) push = runGit(project, ['push', 'origin', 'HEAD:main']);
   if (!push.ok) return { ok: false, step: 'push', output: push.output };
 
   return { ok: true, step: 'push', output: `${commit.output}\n${push.output}`.trim() };
