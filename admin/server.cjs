@@ -155,6 +155,52 @@ function writeJsonFile(project, key, value) {
   return backup;
 }
 
+function rawAssetUrl(project, assetType, fileName) {
+  if (project.id !== 'builder') return `Sanatazm/endfield-axis-tool/${fileName}`;
+  const dirName = project.assetDirs[assetType];
+  return `https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/${encodeURIComponent(dirName).replace(/%2F/g, '/')}/${encodeURIComponent(fileName)}`;
+}
+
+function makeId(prefix, items) {
+  const max = items.reduce((best, item) => {
+    const match = String(item.id || '').match(new RegExp(`^${prefix}_(\\d+)$`));
+    return match ? Math.max(best, Number(match[1])) : best;
+  }, 0);
+  return `${prefix}_${max + 1 || Date.now().toString(36)}`;
+}
+
+function readIndexMap(name) {
+  const html = fs.readFileSync(path.join(builderRoot, 'index.html'), 'utf8');
+  const marker = `const ${name} =`;
+  const start = html.indexOf(marker);
+  if (start === -1) return {};
+  const braceStart = html.indexOf('{', start);
+  let depth = 0;
+  for (let index = braceStart; index < html.length; index++) {
+    const char = html[index];
+    if (char === '{') depth++;
+    if (char === '}') depth--;
+    if (depth === 0) {
+      const expression = html.slice(braceStart, index + 1);
+      return Function(`"use strict"; return (${expression});`)();
+    }
+  }
+  return {};
+}
+
+function assetFileNameForCharacter(charId, assetType, originalName) {
+  const ext = path.extname(originalName || '').toLowerCase() || '.png';
+  const maps = {
+    avatar: 'CHARACTER_AVATAR_BY_ID',
+    portrait: 'CHARACTER_PORTRAIT_BY_ID',
+    preview: 'CHARACTER_LANDSCAPE_AVATAR_BY_ID',
+    landscape: 'CHARACTER_LANDSCAPE_AVATAR_BY_ID',
+  };
+  const mapName = maps[assetType];
+  const mapped = mapName ? readIndexMap(mapName)[charId] : '';
+  return mapped || `${charId}${ext}`;
+}
+
 function safeAssetPath(project, assetType, fileName) {
   const dirName = project.assetDirs[assetType];
   if (!dirName) throw new Error(`Unknown asset type: ${assetType}`);
@@ -168,6 +214,16 @@ function safeAssetPath(project, assetType, fileName) {
   const target = path.resolve(dir, cleanName);
   if (!target.startsWith(dir)) throw new Error('Invalid file path');
   return target;
+}
+
+function writeBase64Asset(project, assetType, fileName, base64) {
+  const target = safeAssetPath(project, assetType, fileName);
+  const cleanBase64 = String(base64 || '').replace(/^data:[^,]+,/, '');
+  if (!cleanBase64) throw new Error('File data is required');
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  const backup = backupFile(project, target);
+  fs.writeFileSync(target, Buffer.from(cleanBase64, 'base64'));
+  return { file: path.relative(project.root, target), backup };
 }
 
 function runScript(project, script) {
@@ -243,6 +299,34 @@ function normalizeGear(input) {
   };
 }
 
+function normalizeWeapon(input, existing = []) {
+  const stats = Array.isArray(input.stats)
+    ? input.stats
+    : [input.stat1, input.stat2, input.stat3].filter(Boolean).map(value => String(value).trim());
+  return {
+    id: String(input.id || '').trim() || makeId('w', existing),
+    name: String(input.name || '').trim(),
+    type: String(input.type || '').trim(),
+    stars: Number(input.stars || 6),
+    img: String(input.img || '').trim() || 'https://via.placeholder.com/80?text=6',
+    stats,
+  };
+}
+
+function normalizeCharacter(input, existing = []) {
+  return {
+    id: String(input.id || '').trim() || makeId('char', existing),
+    name: String(input.name || '').trim(),
+    stars: Number(input.stars || 6),
+    attr: String(input.attr || '').trim(),
+    class: String(input.class || '').trim(),
+    mainPower: String(input.mainPower || '').trim(),
+    subPower: String(input.subPower || '').trim(),
+    weaponType: String(input.weaponType || '').trim(),
+    img: String(input.img || '').trim(),
+  };
+}
+
 function defaultGearImage(part) {
   if (part === '护甲') return 'https://via.placeholder.com/80?text=Armor';
   if (part === '护手') return 'https://via.placeholder.com/80?text=Gaunt';
@@ -255,6 +339,23 @@ function validateGear(gear) {
   if (!['护甲', '护手', '配件'].includes(gear.part)) throw new Error('装备部位必须是 护甲 / 护手 / 配件');
   if (!gear.set) throw new Error('套装名称必填');
   if (!Array.isArray(gear.stats) || gear.stats.length === 0) throw new Error('至少填写一条属性');
+}
+
+function validateWeapon(weapon) {
+  if (!weapon.id) throw new Error('武器 id 必填');
+  if (!weapon.name) throw new Error('武器名称必填');
+  if (!weapon.type) throw new Error('武器类型必填');
+  if (![4, 5, 6].includes(Number(weapon.stars))) throw new Error('武器星级必须是 4 / 5 / 6');
+  if (!Array.isArray(weapon.stats) || weapon.stats.length === 0) throw new Error('至少填写一条武器词条');
+}
+
+function validateCharacter(character) {
+  if (!character.id) throw new Error('角色 id 必填');
+  if (!character.name) throw new Error('角色名称必填');
+  if (![4, 5, 6].includes(Number(character.stars))) throw new Error('角色星级必须是 4 / 5 / 6');
+  for (const key of ['attr', 'class', 'mainPower', 'subPower', 'weaponType']) {
+    if (!character[key]) throw new Error(`角色 ${key} 必填`);
+  }
 }
 
 function saveAxisCharacter(input) {
@@ -322,6 +423,11 @@ async function handleApi(req, res, pathname, query) {
   if (req.method === 'POST' && pathname === '/api/gear') {
     if (project.id !== 'builder') throw new Error('Gear editing is only available for the character builder project.');
     const input = JSON.parse(await readBody(req));
+    if (input.image && input.name) {
+      const fileName = `${String(input.name).trim()}.png`;
+      const upload = writeBase64Asset(project, 'gear', fileName, input.image);
+      input.img = rawAssetUrl(project, 'gear', path.basename(upload.file));
+    }
     const gear = normalizeGear(input);
     validateGear(gear);
     const gears = readJsonFile(project, 'gears');
@@ -334,6 +440,51 @@ async function handleApi(req, res, pathname, query) {
     return;
   }
 
+  if (req.method === 'POST' && pathname === '/api/weapon') {
+    if (project.id !== 'builder') throw new Error('Weapon editing is only available for the character builder project.');
+    const input = JSON.parse(await readBody(req));
+    const weapons = readJsonFile(project, 'weapons');
+    if (input.image && input.name) {
+      const fileName = `${String(input.name).trim()}.png`;
+      const upload = writeBase64Asset(project, 'weapon', fileName, input.image);
+      input.img = rawAssetUrl(project, 'weapon', path.basename(upload.file));
+    }
+    const weapon = normalizeWeapon(input, weapons);
+    validateWeapon(weapon);
+    const index = weapons.findIndex(item => item.id === weapon.id);
+    if (index >= 0) weapons[index] = weapon;
+    else weapons.push(weapon);
+    const backup = writeJsonFile(project, 'weapons', weapons);
+    const result = buildAndValidate(project);
+    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', weapon, backup, ...result });
+    return;
+  }
+
+  if (req.method === 'POST' && pathname === '/api/character') {
+    if (project.id !== 'builder') throw new Error('Character editing is only available for the character builder project.');
+    const input = JSON.parse(await readBody(req));
+    const characters = readJsonFile(project, 'characters');
+    const character = normalizeCharacter(input, characters);
+    validateCharacter(character);
+
+    const uploads = input.images || {};
+    for (const assetType of ['avatar', 'portrait', 'preview', 'landscape']) {
+      if (!uploads[assetType]) continue;
+      const fileName = assetFileNameForCharacter(character.id, assetType, uploads[assetType].fileName);
+      const upload = writeBase64Asset(project, assetType, fileName, uploads[assetType].base64);
+      if (assetType === 'portrait') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
+      if (!character.img && assetType === 'avatar') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
+    }
+
+    const index = characters.findIndex(item => item.id === character.id);
+    if (index >= 0) characters[index] = character;
+    else characters.push(character);
+    const backup = writeJsonFile(project, 'characters', characters);
+    const result = buildAndValidate(project);
+    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', character, backup, ...result });
+    return;
+  }
+
   if (req.method === 'POST' && pathname === '/api/axis/character') {
     const { backup, result } = saveAxisCharacter(JSON.parse(await readBody(req)));
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, backup, ...result });
@@ -342,14 +493,9 @@ async function handleApi(req, res, pathname, query) {
 
   if (req.method === 'POST' && pathname === '/api/upload') {
     const input = JSON.parse(await readBody(req));
-    const target = safeAssetPath(project, input.assetType, input.fileName);
-    const base64 = String(input.base64 || '').replace(/^data:[^,]+,/, '');
-    if (!base64) throw new Error('File data is required');
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    const backup = backupFile(project, target);
-    fs.writeFileSync(target, Buffer.from(base64, 'base64'));
+    const upload = writeBase64Asset(project, input.assetType, input.fileName, input.base64);
     notifyLiveReload(`${project.id}-asset-updated`);
-    sendJson(res, 200, { ok: true, file: path.relative(project.root, target), backup });
+    sendJson(res, 200, { ok: true, ...upload });
     return;
   }
 
