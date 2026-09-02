@@ -440,10 +440,11 @@
       $('charWeaponType').value = c.weaponType || weaponTypes[0];
       $('charImg').value = c.img || '';
       const assets = state.characterAssets?.[c.id] || {};
-      $('charAvatarText').textContent = fileNameFromPath(assets.avatar) || '点击选择图片';
-      $('charPortraitText').textContent = fileNameFromPath(assets.portrait) || '点击选择图片';
-      $('charPreviewText').textContent = fileNameFromPath(assets.preview) || '点击选择图片';
-      $('charLandscapeText').textContent = fileNameFromPath(assets.landscape) || '点击选择图片';
+      const names = state.characterAssetNames?.[c.id] || {};
+      $('charAvatarText').textContent = assets.avatar ? `已关联：${names.avatar || fileNameFromPath(assets.avatar)}` : '未上传图片，点击选择或拖入图片';
+      $('charPortraitText').textContent = assets.portrait ? `已关联：${names.portrait || fileNameFromPath(assets.portrait)}` : '未上传图片，点击选择或拖入图片';
+      $('charPreviewText').textContent = assets.preview ? `已关联：${names.preview || fileNameFromPath(assets.preview)}` : '未上传图片，点击选择或拖入图片';
+      $('charLandscapeText').textContent = assets.landscape ? `已关联：${names.landscape || fileNameFromPath(assets.landscape)}` : '未上传图片，点击选择或拖入图片';
     }
     function fillWeapon(w = {}) {
       $('weaponId').value = w.id || '';

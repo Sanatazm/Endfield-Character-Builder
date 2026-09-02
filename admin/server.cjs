@@ -137,13 +137,15 @@ function readAllData(project) {
     payload.characterAssets = Object.fromEntries(payload.characters.map(character => {
       const id = character.id;
       const portraitFromData = fileNameFromAssetRef(character.img);
+      const existingAsset = (assetType, candidates) => candidates.find(file => file && fs.existsSync(path.join(project.root, project.assetDirs[assetType], file))) || '';
       return [id, {
-        avatar: avatarMap[id] || `${id}.png`,
-        portrait: portraitMap[id] || portraitFromData || `${id}.png`,
-        preview: landscapeMap[id] || portraitMap[id] || `${id}.png`,
-        landscape: landscapeMap[id] || avatarMap[id] || `${id}.png`,
+        avatar: existingAsset('avatar', [avatarMap[id], `${id}.png`]),
+        portrait: existingAsset('portrait', [portraitMap[id], portraitFromData, `${id}.png`]),
+        preview: existingAsset('preview', [landscapeMap[id], portraitMap[id], `${id}.png`]),
+        landscape: existingAsset('landscape', [landscapeMap[id], avatarMap[id], `${id}.png`]),
       }];
     }));
+    payload.characterAssetNames = Object.fromEntries(payload.characters.map(character => [character.id, character.assetNames || {}]));
     payload.weaponAssets = Object.fromEntries(payload.weapons.map(weapon => {
       const mappedName = {
         'J.E.T.': 'JET',
@@ -605,10 +607,13 @@ async function handleApi(req, res, pathname, query) {
     validateCharacter(character);
 
     const uploads = input.images || {};
+    const existing = characters.find(item => item.id === character.id) || {};
+    character.assetNames = { ...(existing.assetNames || {}) };
     for (const assetType of ['avatar', 'portrait', 'preview', 'landscape']) {
       if (!uploads[assetType]) continue;
       const fileName = assetFileNameForCharacter(character.id, assetType, uploads[assetType].fileName);
       const upload = writeBase64Asset(project, assetType, fileName, uploads[assetType].base64);
+      character.assetNames[assetType] = uploads[assetType].fileName || fileName;
       if (assetType === 'portrait') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
       if (!character.img && assetType === 'avatar') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
     }
