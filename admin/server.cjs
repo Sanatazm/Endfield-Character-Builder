@@ -130,6 +130,21 @@ function readJsonFile(project, key) {
 function readAllData(project) {
   const payload = {};
   for (const key of Object.keys(project.dataFiles)) payload[key] = readJsonFile(project, key);
+  if (project.id === 'builder') {
+    const avatarMap = readIndexMap('CHARACTER_AVATAR_BY_ID');
+    const portraitMap = readIndexMap('CHARACTER_PORTRAIT_BY_ID');
+    const landscapeMap = readIndexMap('CHARACTER_LANDSCAPE_AVATAR_BY_ID');
+    payload.characterAssets = Object.fromEntries(payload.characters.map(character => {
+      const id = character.id;
+      const portraitFromData = fileNameFromAssetRef(character.img);
+      return [id, {
+        avatar: avatarMap[id] || `${id}.png`,
+        portrait: portraitMap[id] || portraitFromData || `${id}.png`,
+        preview: landscapeMap[id] || portraitMap[id] || `${id}.png`,
+        landscape: landscapeMap[id] || avatarMap[id] || `${id}.png`,
+      }];
+    }));
+  }
   return payload;
 }
 

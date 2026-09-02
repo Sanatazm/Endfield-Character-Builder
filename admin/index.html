@@ -439,6 +439,11 @@
       $('charSubPower').value = c.subPower || powerChoices[1];
       $('charWeaponType').value = c.weaponType || weaponTypes[0];
       $('charImg').value = c.img || '';
+      const assets = state.characterAssets?.[c.id] || {};
+      $('charAvatarText').textContent = fileNameFromPath(assets.avatar) || '点击选择图片';
+      $('charPortraitText').textContent = fileNameFromPath(assets.portrait) || '点击选择图片';
+      $('charPreviewText').textContent = fileNameFromPath(assets.preview) || '点击选择图片';
+      $('charLandscapeText').textContent = fileNameFromPath(assets.landscape) || '点击选择图片';
     }
     function fillWeapon(w = {}) {
       $('weaponId').value = w.id || '';
