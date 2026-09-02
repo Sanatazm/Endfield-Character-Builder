@@ -12,13 +12,16 @@
     h1 { margin:0; font-size:20px; color:var(--cyan); }
     main { display:grid; grid-template-columns:260px minmax(0,1fr); min-height:calc(100vh - 58px); }
     nav { border-right:1px solid var(--line); padding:14px; background:#0d0f11; }
-    nav button, .btn { width:100%; border:1px solid var(--line); background:#15181b; color:var(--text); padding:9px 11px; border-radius:6px; cursor:pointer; text-align:left; font-weight:650; }
-    nav button + button { margin-top:8px; }
-    nav button.active, .btn.primary { border-color:var(--cyan); color:#041013; background:var(--cyan); }
+    nav button, .btn, .project-btn { width:100%; border:1px solid var(--line); background:#15181b; color:var(--text); padding:9px 11px; border-radius:6px; cursor:pointer; text-align:left; font-weight:650; }
+    nav button + button, .project-btn + .project-btn { margin-top:8px; }
+    nav button.active, .btn.primary, .project-btn.active { border-color:var(--cyan); color:#041013; background:var(--cyan); }
+    .project-switch { display:flex; gap:8px; min-width:320px; }
+    .project-switch .project-btn { width:auto; text-align:center; }
     .content { padding:18px 22px 28px; }
     .panel { display:none; }
     .panel.active { display:block; }
     .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .four { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .field { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
     label { color:var(--muted); font-size:13px; }
     input, select, textarea { width:100%; border:1px solid var(--line); border-radius:6px; background:#0f1113; color:var(--text); padding:9px 10px; font:inherit; }
@@ -35,23 +38,29 @@
     .item:hover { background:#171c20; }
     .item:last-child { border-bottom:none; }
     .pill { color:var(--muted); font-size:12px; }
-    @media (max-width:900px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .grid { grid-template-columns:1fr; } }
+    .hidden { display:none !important; }
+    @media (max-width:1000px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .grid, .four { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } .project-switch { min-width:0; flex-wrap:wrap; } }
   </style>
 </head>
 <body>
   <header>
     <h1>终末地配置数据后台</h1>
-    <div class="note">本地写入 data / assets，保存前自动备份</div>
+    <div class="project-switch">
+      <button class="project-btn active" data-project="builder">角色配置工具</button>
+      <button class="project-btn" data-project="axis">排轴工具</button>
+    </div>
+    <div class="note" id="projectNote">本地写入 data / assets，保存前自动备份</div>
   </header>
   <main>
     <nav>
-      <button class="active" data-panel="gear">装备维护</button>
+      <button class="active only-builder" data-panel="gear">装备维护</button>
+      <button class="only-axis hidden" data-panel="axisChar">排轴角色技能</button>
       <button data-panel="json">JSON 直改</button>
       <button data-panel="asset">图片上传</button>
       <button data-panel="build">发布 GitHub</button>
     </nav>
     <section class="content">
-      <div id="gear" class="panel active">
+      <div id="gear" class="panel active only-builder">
         <div class="toolbar">
           <button class="btn primary" id="newGear">新建装备</button>
           <button class="btn" id="reloadGear">重新加载</button>
@@ -78,9 +87,35 @@
         </div>
       </div>
 
+      <div id="axisChar" class="panel only-axis hidden">
+        <div class="toolbar">
+          <button class="btn primary" id="newAxisChar">新建角色</button>
+          <button class="btn" id="reloadAxis">重新加载</button>
+          <a class="btn" id="axisPreview" href="/app/axis/" target="_blank">打开排轴预览</a>
+        </div>
+        <div class="grid">
+          <div>
+            <div class="field"><label>搜索排轴角色</label><input id="axisSearch" placeholder="输入角色名"></div>
+            <div class="list" id="axisList"></div>
+          </div>
+          <form id="axisForm">
+            <div class="grid">
+              <div class="field"><label>角色名</label><input id="axisName" required placeholder="弭弗"></div>
+              <div class="field"><label>头像路径</label><input id="axisAvatar" placeholder="Sanatazm/endfield-axis-tool/mifu.png"></div>
+            </div>
+            <div class="four" id="axisSkillFields"></div>
+            <div class="toolbar">
+              <button class="btn primary" type="submit">保存排轴角色</button>
+              <label class="btn" style="width:auto;text-align:center;">上传图片<input id="axisImageQuick" type="file" accept="image/png,image/jpeg,image/webp" hidden></label>
+            </div>
+            <p class="note">上传后的图片会放在排轴工具仓库根目录；路径一般填写成 Sanatazm/endfield-axis-tool/文件名.png。</p>
+          </form>
+        </div>
+      </div>
+
       <div id="json" class="panel">
         <div class="toolbar">
-          <select id="jsonType" style="width:220px"><option value="gears">gears</option><option value="weapons">weapons</option><option value="characters">characters</option><option value="setEffects">setEffects</option></select>
+          <select id="jsonType" style="width:220px"></select>
           <button class="btn" id="loadJson">加载</button>
           <button class="btn primary" id="saveJson">保存当前 JSON</button>
         </div>
@@ -89,8 +124,8 @@
 
       <div id="asset" class="panel">
         <div class="grid">
-          <div class="field"><label>图片类型</label><select id="assetType"><option value="gear">装备 img-gear</option><option value="weapon">武器 imag-weapon</option><option value="avatar">头像 img-avatar</option><option value="portrait">立绘 imag-char</option><option value="preview">预览 imag-preview</option><option value="landscape">横版头像 imag-Landscape Avatar</option></select></div>
-          <div class="field"><label>保存文件名</label><input id="assetFileName" placeholder="涉渊重甲.png"></div>
+          <div class="field"><label>图片类型</label><select id="assetType"></select></div>
+          <div class="field"><label>保存文件名</label><input id="assetFileName" placeholder="mifuS2.png"></div>
         </div>
         <div class="field"><label>选择图片</label><input id="assetFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
         <button class="btn primary" id="uploadAsset" style="width:auto">上传图片</button>
@@ -99,8 +134,9 @@
       <div id="build" class="panel">
         <div class="toolbar">
           <button class="btn primary" id="runBuild">生成页面数据并推送 GitHub</button>
+          <a class="btn" id="previewLink" href="/app/builder/" target="_blank">打开本地预览</a>
         </div>
-        <p class="note">这会读取 data/*.json，生成 src/generated/game-database.js，运行校验，然后提交并推送到 GitHub main。GitHub Pages 更新通常需要几十秒到几分钟。</p>
+        <p class="note" id="buildHelp">会读取当前项目 data/*.json，生成页面用 JS，运行校验，然后提交并推送到对应 GitHub main。GitHub Pages 更新通常需要几十秒到几分钟。</p>
       </div>
 
       <h2 style="font-size:16px;margin-top:24px;">状态</h2>
@@ -109,16 +145,34 @@
   </main>
 
   <script>
-    let state = { characters: [], weapons: [], gears: [], setEffects: {} };
+    let currentProject = 'builder';
+    let projects = {};
+    let state = {};
     const $ = id => document.getElementById(id);
+    const attrChoices = ['物理', '电磁', '寒冷', '自然', '灼热'];
+    const builderJsonKeys = ['gears', 'weapons', 'characters', 'setEffects'];
+    const builderAssets = [
+      ['gear', '装备 img-gear'],
+      ['weapon', '武器 imag-weapon'],
+      ['avatar', '头像 img-avatar'],
+      ['portrait', '立绘 imag-char'],
+      ['preview', '预览 imag-preview'],
+      ['landscape', '横版头像 imag-Landscape Avatar'],
+    ];
+    const axisAssets = [['axisImage', '排轴图片 根目录']];
 
     function setStatus(text, ok = true) {
       $('status').className = `status ${ok ? 'ok' : 'err'}`;
       $('status').textContent = text;
     }
 
+    function projectQuery() {
+      return `project=${encodeURIComponent(currentProject)}`;
+    }
+
     async function api(path, options = {}) {
-      const res = await fetch(path, options);
+      const joiner = path.includes('?') ? '&' : '?';
+      const res = await fetch(`${path}${joiner}${projectQuery()}`, options);
       const json = await res.json();
       if (!res.ok || json.ok === false) throw new Error(json.error || JSON.stringify(json));
       return json;
@@ -126,9 +180,41 @@
 
     async function loadData() {
       state = await api('/api/data');
-      renderGearList();
+      setupJsonOptions();
+      setupAssetOptions();
+      if (currentProject === 'builder') renderGearList();
+      if (currentProject === 'axis') renderAxisList();
       $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2);
-      setStatus(`已加载：${state.characters.length} 角色，${state.weapons.length} 武器，${state.gears.length} 装备`);
+      const summary = currentProject === 'builder'
+        ? `已加载：${state.characters.length} 角色，${state.weapons.length} 武器，${state.gears.length} 装备`
+        : `已加载排轴：${Object.keys(state.axis.charAssets || {}).length} 角色，${(state.axis.orderedChars || []).length} 排序项`;
+      setStatus(summary);
+    }
+
+    function setupJsonOptions() {
+      const keys = currentProject === 'builder' ? builderJsonKeys : ['axis'];
+      $('jsonType').innerHTML = keys.map(key => `<option value="${key}">${key}</option>`).join('');
+    }
+
+    function setupAssetOptions() {
+      const assets = currentProject === 'builder' ? builderAssets : axisAssets;
+      $('assetType').innerHTML = assets.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
+    }
+
+    function switchPanel(panelId) {
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.toggle('active', btn.dataset.panel === panelId));
+      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === panelId));
+    }
+
+    function switchProject(project) {
+      currentProject = project;
+      document.querySelectorAll('.project-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.project === project));
+      document.querySelectorAll('.only-builder').forEach(el => el.classList.toggle('hidden', project !== 'builder'));
+      document.querySelectorAll('.only-axis').forEach(el => el.classList.toggle('hidden', project !== 'axis'));
+      $('previewLink').href = project === 'builder' ? '/app/builder/' : '/app/axis/';
+      $('projectNote').textContent = project === 'builder' ? '当前维护：角色配置工具' : '当前维护：排轴工具';
+      switchPanel(project === 'builder' ? 'gear' : 'axisChar');
+      loadData().catch(error => setStatus(error.message, false));
     }
 
     function renderGearList() {
@@ -144,6 +230,39 @@
       $('gearSet').value = gear?.set || '';
       $('gearImg').value = gear?.img || '';
       $('gearStats').value = (gear?.stats || []).join('\n');
+    }
+
+    function renderAxisSkillFields() {
+      const skillTypes = state.axis?.skillTypes || ['重击', '战技', '连携技', '终结技'];
+      $('axisSkillFields').innerHTML = skillTypes.map(type => `
+        <div>
+          <div class="field"><label>${escapeHtml(type)}图标路径</label><input data-skill-path="${escapeHtml(type)}" placeholder="Sanatazm/endfield-axis-tool/nameS2.png"></div>
+          <div class="field"><label>${escapeHtml(type)}属性</label><select data-skill-attr="${escapeHtml(type)}">${attrChoices.map(attr => `<option>${attr}</option>`).join('')}</select></div>
+        </div>
+      `).join('');
+    }
+
+    function renderAxisList() {
+      renderAxisSkillFields();
+      const data = state.axis;
+      const q = $('axisSearch').value.trim().toLowerCase();
+      const names = [...(data.orderedChars || []), ...Object.keys(data.charAssets || {}).filter(name => !(data.orderedChars || []).includes(name))];
+      const list = names.filter(name => !q || name.toLowerCase().includes(q));
+      $('axisList').innerHTML = list.map(name => `<div class="item" data-name="${escapeHtml(name)}"><span>${escapeHtml(name)}</span><span class="pill">${escapeHtml(data.charAssets[name]?.avatar || '')}</span></div>`).join('');
+    }
+
+    function fillAxis(name) {
+      const data = state.axis;
+      const assets = name ? data.charAssets[name] : null;
+      const attrs = name ? data.skillAttrMap[name] : null;
+      $('axisName').value = name || '';
+      $('axisAvatar').value = assets?.avatar || '';
+      for (const skillType of data.skillTypes || []) {
+        const pathInput = document.querySelector(`[data-skill-path="${CSS.escape(skillType)}"]`);
+        const attrSelect = document.querySelector(`[data-skill-attr="${CSS.escape(skillType)}"]`);
+        if (pathInput) pathInput.value = assets?.skills?.[skillType] || '';
+        if (attrSelect) attrSelect.value = attrs?.[skillType] || '物理';
+      }
     }
 
     async function fileToBase64(file) {
@@ -167,12 +286,8 @@
       return String(value).replace(/[&<>"]/g, s => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[s]));
     }
 
-    document.querySelectorAll('nav button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b === btn));
-        document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.panel));
-      });
-    });
+    document.querySelectorAll('.project-btn').forEach(btn => btn.addEventListener('click', () => switchProject(btn.dataset.project)));
+    document.querySelectorAll('nav button').forEach(btn => btn.addEventListener('click', () => switchPanel(btn.dataset.panel)));
 
     $('gearSearch').addEventListener('input', renderGearList);
     $('gearList').addEventListener('click', event => {
@@ -182,30 +297,71 @@
     });
     $('newGear').addEventListener('click', () => fillGear(null));
     $('reloadGear').addEventListener('click', loadData);
+
+    $('axisSearch').addEventListener('input', renderAxisList);
+    $('axisList').addEventListener('click', event => {
+      const item = event.target.closest('.item');
+      if (!item) return;
+      fillAxis(item.dataset.name);
+    });
+    $('newAxisChar').addEventListener('click', () => fillAxis(null));
+    $('reloadAxis').addEventListener('click', loadData);
+
     $('jsonType').addEventListener('change', () => $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2));
     $('loadJson').addEventListener('click', loadData);
 
     $('gearForm').addEventListener('submit', async event => {
       event.preventDefault();
-      const gear = {
-        id: $('gearId').value,
-        name: $('gearName').value,
-        part: $('gearPart').value,
-        set: $('gearSet').value,
-        img: $('gearImg').value,
-        stats: $('gearStats').value,
-      };
       try {
         const saved = await api('/api/gear', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(gear),
+          body: JSON.stringify({
+            id: $('gearId').value,
+            name: $('gearName').value,
+            part: $('gearPart').value,
+            set: $('gearSet').value,
+            img: $('gearImg').value,
+            stats: $('gearStats').value,
+          }),
         });
         const file = $('gearImage').files[0];
         let upload = null;
         if (file) upload = await uploadFile('gear', `${$('gearName').value.trim()}${file.name.slice(file.name.lastIndexOf('.')) || '.png'}`, file);
         await loadData();
-        setStatus(`装备已${saved.mode === 'created' ? '新增' : '更新'}：${saved.gear.name}\n备份：${saved.backup || '无'}${upload ? `\n图片：${upload.file}` : ''}\n\n已自动生成页面数据并校验：\n${saved.build.output}\n${saved.validate.output}`);
+        setStatus(`装备已${saved.mode === 'created' ? '新增' : '更新'}：${saved.gear.name}\n备份：${saved.backup || '无'}${upload ? `\n图片：${upload.file}` : ''}\n\n${saved.build.output}\n${saved.validate.output}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    $('axisForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      try {
+        const skills = {};
+        const attrs = {};
+        for (const skillType of state.axis.skillTypes || []) {
+          skills[skillType] = document.querySelector(`[data-skill-path="${CSS.escape(skillType)}"]`).value;
+          attrs[skillType] = document.querySelector(`[data-skill-attr="${CSS.escape(skillType)}"]`).value;
+        }
+        const saved = await api('/api/axis/character', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ name: $('axisName').value, avatar: $('axisAvatar').value, skills, attrs }),
+        });
+        await loadData();
+        setStatus(`排轴角色已保存：${$('axisName').value}\n备份：${saved.backup || '无'}\n\n${saved.build.output}\n${saved.validate.output}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    $('axisImageQuick').addEventListener('change', async () => {
+      try {
+        const file = $('axisImageQuick').files[0];
+        if (!file) return;
+        const result = await uploadFile('axisImage', file.name, file);
+        setStatus(`排轴图片已上传：${result.file}\n路径可填：Sanatazm/endfield-axis-tool/${result.file}`);
       } catch (error) {
         setStatus(error.message, false);
       }
@@ -221,7 +377,7 @@
           body: JSON.stringify(value),
         });
         await loadData();
-        setStatus(`${key} 已保存\n备份：${saved.backup || '无'}\n\n已自动生成页面数据并校验：\n${saved.build.output}\n${saved.validate.output}`);
+        setStatus(`${key} 已保存\n备份：${saved.backup || '无'}\n\n${saved.build.output}\n${saved.validate.output}`);
       } catch (error) {
         setStatus(error.message, false);
       }
@@ -233,7 +389,8 @@
         if (!file) throw new Error('请选择图片');
         const fileName = $('assetFileName').value.trim() || file.name;
         const result = await uploadFile($('assetType').value, fileName, file);
-        setStatus(`图片已上传：${result.file}\n备份：${result.backup || '无'}`);
+        const extra = currentProject === 'axis' ? `\n路径可填：Sanatazm/endfield-axis-tool/${result.file}` : '';
+        setStatus(`图片已上传：${result.file}\n备份：${result.backup || '无'}${extra}`);
       } catch (error) {
         setStatus(error.message, false);
       }
@@ -248,7 +405,12 @@
       }
     });
 
-    loadData().catch(error => setStatus(error.message, false));
+    async function boot() {
+      projects = await fetch('/api/projects').then(res => res.json());
+      switchProject('builder');
+    }
+
+    boot().catch(error => setStatus(error.message, false));
   </script>
 </body>
 </html>
