@@ -48,6 +48,7 @@
     .err { color:var(--danger); }
     .upload-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .upload-box { border:1px dashed var(--line); border-radius:8px; background:#111519; padding:12px; cursor:pointer; min-height:88px; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+    .upload-box.dragover { border-color:var(--cyan); background:#182a2e; }
     .upload-box strong { color:var(--cyan); }
     .upload-box span { color:var(--muted); font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .upload-box input { display:none; }
@@ -177,7 +178,7 @@
                   <div class="field"><label>词条 2 名称</label><select id="gearStat2Name"><option value="">选择词条</option></select></div>
                   <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
                 </div>
-                <div class="field-pair">
+                <div class="field-pair full-row">
                   <div class="field"><label>最后词条</label><select id="gearBonusName"><option value="">选择词条</option></select></div>
                   <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
                 </div>
@@ -295,7 +296,35 @@
       return { fileName: file.name, base64 };
     }
     function bindFileText(inputId, textId) {
-      $(inputId).addEventListener('change', () => $(textId).textContent = $(inputId).files?.[0]?.name || '点击选择图片');
+      const input = $(inputId);
+      const text = $(textId);
+      input.addEventListener('change', () => text.textContent = input.files?.[0]?.name || '点击选择图片');
+      bindFileDrop(input, text);
+    }
+    function bindFileDrop(input, text) {
+      const box = input.closest('.upload-box');
+      if (!box) return;
+      for (const eventName of ['dragenter', 'dragover']) {
+        box.addEventListener(eventName, event => {
+          event.preventDefault();
+          box.classList.add('dragover');
+        });
+      }
+      for (const eventName of ['dragleave', 'drop']) {
+        box.addEventListener(eventName, event => {
+          event.preventDefault();
+          box.classList.remove('dragover');
+        });
+      }
+      box.addEventListener('drop', event => {
+        const files = [...(event.dataTransfer?.files || [])].filter(file => file.type.startsWith('image/'));
+        if (!files.length) return;
+        const transfer = new DataTransfer();
+        transfer.items.add(files[0]);
+        input.files = transfer.files;
+        input.dispatchEvent(new Event('change', { bubbles:true }));
+        if (text) text.textContent = files[0].name;
+      });
     }
 
     async function loadData() {
@@ -476,10 +505,12 @@
         <div class="field"><label>${escapeHtml(type)}路径</label><input data-skill-path="${escapeHtml(type)}"></div>
       `).join('');
       document.querySelectorAll('[data-axis-skill-file]').forEach(input => {
+        const text = document.querySelector(`[data-axis-upload-text="${CSS.escape(input.dataset.axisSkillFile)}"]`);
+        bindFileDrop(input, text);
         input.addEventListener('change', () => {
           const type = input.dataset.axisSkillFile;
-          const text = document.querySelector(`[data-axis-upload-text="${CSS.escape(type)}"]`);
-          if (text) text.textContent = input.files?.[0]?.name || '点击选择图片';
+          const uploadText = document.querySelector(`[data-axis-upload-text="${CSS.escape(type)}"]`);
+          if (uploadText) uploadText.textContent = input.files?.[0]?.name || '点击选择图片';
         });
       });
     }
