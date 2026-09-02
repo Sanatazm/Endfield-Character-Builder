@@ -129,9 +129,9 @@
               <div class="field"><label>星级</label><select id="weaponStars"><option>6</option><option>5</option><option>4</option></select></div>
             </div>
             <div class="grid-3">
-              <div class="field"><label>词条 1</label><input id="weaponStat1" placeholder="主能力"></div>
-              <div class="field"><label>词条 2</label><input id="weaponStat2" placeholder="物理伤害"></div>
-              <div class="field"><label>词条 3</label><input id="weaponStat3" placeholder="残暴"></div>
+              <div class="field"><label>词条 1</label><select id="weaponStat1"><option value="">选择词条</option></select></div>
+              <div class="field"><label>词条 2</label><select id="weaponStat2"><option value="">选择词条</option></select></div>
+              <div class="field"><label>词条 3</label><select id="weaponStat3"><option value="">选择词条</option></select></div>
             </div>
             <label class="upload-box"><strong>武器图片</strong><span id="weaponImageText">点击选择，自动保存为 武器名.png</span><input id="weaponImageFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
             <details>
@@ -322,12 +322,22 @@
       $('charSubPower').innerHTML = optionHtml(powerChoices);
       $('charWeaponType').innerHTML = optionHtml(weaponTypes);
       $('weaponType').innerHTML = optionHtml(weaponTypes);
+      setupWeaponStatOptions();
       setupGearStatOptions();
       if (state.setEffects) {
         const options = Object.keys(state.setEffects).map(set => `<option value="${escapeHtml(set)}">`).join('');
         $('gearSetOptions').innerHTML = options;
         $('setEffectOptions').innerHTML = options;
       }
+    }
+    function setupWeaponStatOptions() {
+      const names = new Set();
+      for (const weapon of state.weapons || []) for (const stat of weapon.stats || []) {
+        const name = String(stat || '').trim();
+        if (name) names.add(name);
+      }
+      const html = '<option value="">选择词条</option>' + [...names].map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+      for (const id of ['weaponStat1', 'weaponStat2', 'weaponStat3']) $(id).innerHTML = html;
     }
     function setupGearStatOptions() {
       const names = new Set(['力量', '敏捷', '智识', '意志', '终结技充能效率']);
