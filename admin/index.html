@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>终末地配置数据后台</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101214; --panel:#191c1f; --line:#333a40; --text:#e9eef2; --muted:#94a0a8; --cyan:#66e8f4; --danger:#ff6868; --ok:#80d67a; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; }
+    header { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 20px; border-bottom:1px solid var(--line); background:rgba(16,18,20,.96); }
+    h1 { margin:0; font-size:20px; color:var(--cyan); }
+    main { display:grid; grid-template-columns:260px minmax(0,1fr); min-height:calc(100vh - 58px); }
+    nav { border-right:1px solid var(--line); padding:14px; background:#0d0f11; }
+    nav button, .btn { width:100%; border:1px solid var(--line); background:#15181b; color:var(--text); padding:9px 11px; border-radius:6px; cursor:pointer; text-align:left; font-weight:650; }
+    nav button + button { margin-top:8px; }
+    nav button.active, .btn.primary { border-color:var(--cyan); color:#041013; background:var(--cyan); }
+    .content { padding:18px 22px 28px; }
+    .panel { display:none; }
+    .panel.active { display:block; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .field { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
+    label { color:var(--muted); font-size:13px; }
+    input, select, textarea { width:100%; border:1px solid var(--line); border-radius:6px; background:#0f1113; color:var(--text); padding:9px 10px; font:inherit; }
+    textarea { min-height:140px; resize:vertical; line-height:1.5; font-family:"Cascadia Code",Consolas,monospace; font-size:13px; }
+    .json-editor { min-height:52vh; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:12px 0 16px; }
+    .toolbar .btn { width:auto; text-align:center; }
+    .note { color:var(--muted); font-size:13px; line-height:1.55; }
+    .status { white-space:pre-wrap; border:1px solid var(--line); background:#0c0e10; border-radius:6px; padding:12px; min-height:90px; color:var(--muted); font-family:"Cascadia Code",Consolas,monospace; font-size:12px; }
+    .ok { color:var(--ok); }
+    .err { color:var(--danger); }
+    .list { max-height:420px; overflow:auto; border:1px solid var(--line); border-radius:6px; }
+    .item { display:flex; justify-content:space-between; gap:12px; padding:9px 10px; border-bottom:1px solid #252b30; cursor:pointer; }
+    .item:hover { background:#171c20; }
+    .item:last-child { border-bottom:none; }
+    .pill { color:var(--muted); font-size:12px; }
+    @media (max-width:900px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>终末地配置数据后台</h1>
+    <div class="note">本地写入 data / assets，保存前自动备份</div>
+  </header>
+  <main>
+    <nav>
+      <button class="active" data-panel="gear">装备维护</button>
+      <button data-panel="json">JSON 直改</button>
+      <button data-panel="asset">图片上传</button>
+      <button data-panel="build">发布 GitHub</button>
+    </nav>
+    <section class="content">
+      <div id="gear" class="panel active">
+        <div class="toolbar">
+          <button class="btn primary" id="newGear">新建装备</button>
+          <button class="btn" id="reloadGear">重新加载</button>
+        </div>
+        <div class="grid">
+          <div>
+            <div class="field"><label>搜索现有装备</label><input id="gearSearch" placeholder="输入名称 / ID / 套装"></div>
+            <div class="list" id="gearList"></div>
+          </div>
+          <form id="gearForm">
+            <div class="grid">
+              <div class="field"><label>ID</label><input id="gearId" required placeholder="g_160"></div>
+              <div class="field"><label>名称</label><input id="gearName" required placeholder="涉渊短刃"></div>
+              <div class="field"><label>部位</label><select id="gearPart"><option>护甲</option><option>护手</option><option>配件</option></select></div>
+              <div class="field"><label>套装</label><input id="gearSet" required placeholder="涉渊"></div>
+            </div>
+            <div class="field"><label>图片字段</label><input id="gearImg" placeholder="留空会按部位填 placeholder；实际图片请上传到 img-gear/名称.png"></div>
+            <div class="field"><label>属性，一行一条</label><textarea id="gearStats" required placeholder="防御力：+56&#10;力量：+115/+126/+138/+149"></textarea></div>
+            <div class="toolbar">
+              <button class="btn primary" type="submit">保存装备</button>
+              <label class="btn" style="width:auto;text-align:center;">同时上传图片<input id="gearImage" type="file" accept="image/png,image/jpeg,image/webp" hidden></label>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="json" class="panel">
+        <div class="toolbar">
+          <select id="jsonType" style="width:220px"><option value="gears">gears</option><option value="weapons">weapons</option><option value="characters">characters</option><option value="setEffects">setEffects</option></select>
+          <button class="btn" id="loadJson">加载</button>
+          <button class="btn primary" id="saveJson">保存当前 JSON</button>
+        </div>
+        <textarea id="jsonText" class="json-editor"></textarea>
+      </div>
+
+      <div id="asset" class="panel">
+        <div class="grid">
+          <div class="field"><label>图片类型</label><select id="assetType"><option value="gear">装备 img-gear</option><option value="weapon">武器 imag-weapon</option><option value="avatar">头像 img-avatar</option><option value="portrait">立绘 imag-char</option><option value="preview">预览 imag-preview</option><option value="landscape">横版头像 imag-Landscape Avatar</option></select></div>
+          <div class="field"><label>保存文件名</label><input id="assetFileName" placeholder="涉渊重甲.png"></div>
+        </div>
+        <div class="field"><label>选择图片</label><input id="assetFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
+        <button class="btn primary" id="uploadAsset" style="width:auto">上传图片</button>
+      </div>
+
+      <div id="build" class="panel">
+        <div class="toolbar">
+          <button class="btn primary" id="runBuild">生成页面数据并推送 GitHub</button>
+        </div>
+        <p class="note">这会读取 data/*.json，生成 src/generated/game-database.js，运行校验，然后提交并推送到 GitHub main。GitHub Pages 更新通常需要几十秒到几分钟。</p>
+      </div>
+
+      <h2 style="font-size:16px;margin-top:24px;">状态</h2>
+      <div id="status" class="status">待操作</div>
+    </section>
+  </main>
+
+  <script>
+    let state = { characters: [], weapons: [], gears: [], setEffects: {} };
+    const $ = id => document.getElementById(id);
+
+    function setStatus(text, ok = true) {
+      $('status').className = `status ${ok ? 'ok' : 'err'}`;
+      $('status').textContent = text;
+    }
+
+    async function api(path, options = {}) {
+      const res = await fetch(path, options);
+      const json = await res.json();
+      if (!res.ok || json.ok === false) throw new Error(json.error || JSON.stringify(json));
+      return json;
+    }
+
+    async function loadData() {
+      state = await api('/api/data');
+      renderGearList();
+      $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2);
+      setStatus(`已加载：${state.characters.length} 角色，${state.weapons.length} 武器，${state.gears.length} 装备`);
+    }
+
+    function renderGearList() {
+      const q = $('gearSearch').value.trim().toLowerCase();
+      const list = state.gears.filter(g => !q || [g.id, g.name, g.set, g.part].some(v => String(v).toLowerCase().includes(q)));
+      $('gearList').innerHTML = list.map(g => `<div class="item" data-id="${escapeHtml(g.id)}"><span>${escapeHtml(g.name)}</span><span class="pill">${escapeHtml(g.id)} / ${escapeHtml(g.set)} / ${escapeHtml(g.part)}</span></div>`).join('');
+    }
+
+    function fillGear(gear) {
+      $('gearId').value = gear?.id || '';
+      $('gearName').value = gear?.name || '';
+      $('gearPart').value = gear?.part || '护甲';
+      $('gearSet').value = gear?.set || '';
+      $('gearImg').value = gear?.img || '';
+      $('gearStats').value = (gear?.stats || []).join('\n');
+    }
+
+    async function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadFile(assetType, fileName, file) {
+      return api('/api/upload', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ assetType, fileName, base64: await fileToBase64(file) }),
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"]/g, s => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[s]));
+    }
+
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b === btn));
+        document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.panel));
+      });
+    });
+
+    $('gearSearch').addEventListener('input', renderGearList);
+    $('gearList').addEventListener('click', event => {
+      const item = event.target.closest('.item');
+      if (!item) return;
+      fillGear(state.gears.find(g => g.id === item.dataset.id));
+    });
+    $('newGear').addEventListener('click', () => fillGear(null));
+    $('reloadGear').addEventListener('click', loadData);
+    $('jsonType').addEventListener('change', () => $('jsonText').value = JSON.stringify(state[$('jsonType').value], null, 2));
+    $('loadJson').addEventListener('click', loadData);
+
+    $('gearForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      const gear = {
+        id: $('gearId').value,
+        name: $('gearName').value,
+        part: $('gearPart').value,
+        set: $('gearSet').value,
+        img: $('gearImg').value,
+        stats: $('gearStats').value,
+      };
+      try {
+        const saved = await api('/api/gear', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(gear),
+        });
+        const file = $('gearImage').files[0];
+        let upload = null;
+        if (file) upload = await uploadFile('gear', `${$('gearName').value.trim()}${file.name.slice(file.name.lastIndexOf('.')) || '.png'}`, file);
+        await loadData();
+        setStatus(`装备已${saved.mode === 'created' ? '新增' : '更新'}：${saved.gear.name}\n备份：${saved.backup || '无'}${upload ? `\n图片：${upload.file}` : ''}\n\n已自动生成页面数据并校验：\n${saved.build.output}\n${saved.validate.output}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    $('saveJson').addEventListener('click', async () => {
+      try {
+        const key = $('jsonType').value;
+        const value = JSON.parse($('jsonText').value);
+        const saved = await api(`/api/data/${key}`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(value),
+        });
+        await loadData();
+        setStatus(`${key} 已保存\n备份：${saved.backup || '无'}\n\n已自动生成页面数据并校验：\n${saved.build.output}\n${saved.validate.output}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    $('uploadAsset').addEventListener('click', async () => {
+      try {
+        const file = $('assetFile').files[0];
+        if (!file) throw new Error('请选择图片');
+        const fileName = $('assetFileName').value.trim() || file.name;
+        const result = await uploadFile($('assetType').value, fileName, file);
+        setStatus(`图片已上传：${result.file}\n备份：${result.backup || '无'}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    $('runBuild').addEventListener('click', async () => {
+      try {
+        const result = await api('/api/build', { method: 'POST' });
+        setStatus(`构建：\n${result.build.output}\n\n校验：\n${result.validate.output}\n\nGitHub：\n${result.publish.output}`);
+      } catch (error) {
+        setStatus(error.message, false);
+      }
+    });
+
+    loadData().catch(error => setStatus(error.message, false));
+  </script>
+</body>
+</html>
