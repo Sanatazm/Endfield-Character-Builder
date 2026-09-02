@@ -299,12 +299,12 @@ function publishToGithub(project) {
   return { ok: true, step: 'push', output: `${commit.output}\n${push.output}`.trim() };
 }
 
-function normalizeGear(input) {
+function normalizeGear(input, existing = []) {
   const stats = Array.isArray(input.stats)
     ? input.stats
     : String(input.stats || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
   return {
-    id: String(input.id || '').trim(),
+    id: String(input.id || '').trim() || makeId('g', existing),
     name: String(input.name || '').trim(),
     part: String(input.part || '').trim(),
     set: String(input.set || '').trim(),
@@ -487,9 +487,9 @@ async function handleApi(req, res, pathname, query) {
       const upload = writeBase64Asset(project, 'gear', fileName, input.image);
       input.img = rawAssetUrl(project, 'gear', path.basename(upload.file));
     }
-    const gear = normalizeGear(input);
-    validateGear(gear);
     const gears = readJsonFile(project, 'gears');
+    const gear = normalizeGear(input, gears);
+    validateGear(gear);
     const index = gears.findIndex(item => item.id === gear.id);
     if (index >= 0) gears[index] = gear;
     else gears.unshift(gear);
