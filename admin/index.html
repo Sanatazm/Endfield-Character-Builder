@@ -32,6 +32,7 @@
     textarea { min-height:112px; resize:vertical; line-height:1.45; font-family:"Cascadia Code",Consolas,monospace; font-size:13px; }
     .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .field-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .full-row { grid-column:1 / -1; }
     .grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     .grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .form-section { border:1px solid var(--line); border-radius:8px; background:#14181c; padding:12px; margin:12px 0; }
@@ -167,13 +168,17 @@
             <fieldset class="form-section">
               <legend>装备词条</legend>
               <div class="grid-2">
-                <div class="field"><label>防御力</label><input id="gearDefense" placeholder="+56"></div>
-                <div class="field"><label>词条 1 名称</label><input id="gearStat1Name" placeholder="力量"></div>
-                <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
-                <div class="field"><label>词条 2 名称</label><input id="gearStat2Name" placeholder="敏捷"></div>
-                <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
+                <div class="field full-row"><label>防御力</label><input id="gearDefense" placeholder="+56"></div>
+                <div class="field-pair full-row">
+                  <div class="field"><label>词条 1 名称</label><select id="gearStat1Name"><option value="">选择词条</option></select></div>
+                  <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
+                </div>
+                <div class="field-pair full-row">
+                  <div class="field"><label>词条 2 名称</label><select id="gearStat2Name"><option value="">选择词条</option></select></div>
+                  <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
+                </div>
                 <div class="field-pair">
-                  <div class="field"><label>最后词条</label><input id="gearBonusName" placeholder="终结技充能效率"></div>
+                  <div class="field"><label>最后词条</label><select id="gearBonusName"><option value="">选择词条</option></select></div>
                   <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
                 </div>
               </div>
@@ -317,11 +322,23 @@
       $('charSubPower').innerHTML = optionHtml(powerChoices);
       $('charWeaponType').innerHTML = optionHtml(weaponTypes);
       $('weaponType').innerHTML = optionHtml(weaponTypes);
+      setupGearStatOptions();
       if (state.setEffects) {
         const options = Object.keys(state.setEffects).map(set => `<option value="${escapeHtml(set)}">`).join('');
         $('gearSetOptions').innerHTML = options;
         $('setEffectOptions').innerHTML = options;
       }
+    }
+    function setupGearStatOptions() {
+      const names = new Set(['力量', '敏捷', '智识', '意志', '终结技充能效率']);
+      for (const gear of state.gears || []) {
+        for (const stat of gear.stats || []) {
+          const name = String(stat || '').split('：')[0].trim();
+          if (name && name !== '防御力') names.add(name);
+        }
+      }
+      const html = '<option value="">选择词条</option>' + [...names].map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+      for (const id of ['gearStat1Name', 'gearStat2Name', 'gearBonusName']) $(id).innerHTML = html;
     }
     function setupJsonOptions() {
       const keys = currentProject === 'builder' ? ['characters', 'weapons', 'gears', 'setEffects'] : ['axis'];
