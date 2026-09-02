@@ -384,6 +384,7 @@ function saveAxisCharacter(input) {
   const data = readJsonFile(projects.axis, 'axis');
   const name = String(input.name || '').trim();
   if (!name) throw new Error('角色名必填');
+  const isNew = !Object.prototype.hasOwnProperty.call(data.charAssets, name);
   const existing = data.charAssets[name] || { avatar: '', skills: {} };
   const images = input.images || {};
   let avatar = String(input.avatar || existing.avatar || '').trim();
@@ -412,7 +413,10 @@ function saveAxisCharacter(input) {
     skills,
   };
   data.skillAttrMap[name] = attrs;
-  if (input.includeInOrder !== false && !data.orderedChars.includes(name)) data.orderedChars.push(name);
+  if (input.includeInOrder !== false && !data.orderedChars.includes(name)) {
+    if (isNew) data.orderedChars.unshift(name);
+    else data.orderedChars.push(name);
+  }
   const backup = writeJsonFile(projects.axis, 'axis', data);
   const result = buildAndValidate(projects.axis);
   return { backup, data, result };
