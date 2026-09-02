@@ -328,6 +328,7 @@
     }
 
     async function loadData() {
+      const pageScrollY = window.scrollY;
       state = await api('/api/data');
       setupOptions();
       setupJsonOptions();
@@ -342,6 +343,7 @@
         renderAxisList();
         setStatus(`已加载排轴：${Object.keys(state.axis.charAssets || {}).length} 角色`);
       }
+      window.scrollTo(0, pageScrollY);
     }
 
     function setupOptions() {
