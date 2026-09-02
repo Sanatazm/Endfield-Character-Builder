@@ -451,6 +451,7 @@
       $('weaponType').value = w.type || weaponTypes[0];
       $('weaponStars').value = w.stars || 6;
       $('weaponImg').value = w.img || '';
+      $('weaponImageText').textContent = state.weaponAssets?.[w.id] || '未上传图片，点击选择或拖入图片';
       const stats = w.stats || [];
       $('weaponStat1').value = stats[0] || '';
       $('weaponStat2').value = stats[1] || '';
@@ -467,6 +468,7 @@
       $('gearSet').value = g.set || '';
       updateGearSetEffectPreview();
       $('gearImg').value = g.img || '';
+      $('gearImageText').textContent = state.gearAssets?.[g.id] || '未上传图片，点击选择或拖入图片';
       $('gearStats').value = (g.stats || []).join('\n');
       const stats = g.stats || [];
       $('gearDefense').value = splitStat(stats[0]).value.replace(/^\+/, '').split('/')[0] || '';
@@ -576,7 +578,13 @@
     $('setEffectList').addEventListener('click', e => fillSetEffect(e.target.closest('.item')?.dataset.name || ''));
     $('axisList').addEventListener('click', e => fillAxis(e.target.closest('.item')?.dataset.name || ''));
     $('newChar').addEventListener('click', () => fillChar());
-    $('newWeapon').addEventListener('click', () => fillWeapon());
+    $('newWeapon').addEventListener('click', () => {
+      fillWeapon();
+      $('weaponImageFile').value = '';
+      $('weaponImageText').textContent = '点击选择或拖入图片';
+      $('weaponName').focus();
+      setStatus('已准备新增武器，请填写后点击“保存武器”');
+    });
     $('newGear').addEventListener('click', () => {
       fillGear();
       $('gearImageFile').value = '';

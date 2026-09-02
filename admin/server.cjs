@@ -144,6 +144,24 @@ function readAllData(project) {
         landscape: landscapeMap[id] || avatarMap[id] || `${id}.png`,
       }];
     }));
+    payload.weaponAssets = Object.fromEntries(payload.weapons.map(weapon => {
+      const mappedName = {
+        'J.E.T.': 'JET',
+        '作品·蚀迹': '作品：蚀迹',
+        '作品·众生': '作品：众生',
+        'O.B.J重荷': 'O.B.J.重荷',
+      }[weapon.name] || weapon.name;
+      const candidate = `${mappedName}.png`;
+      const current = fileNameFromAssetRef(weapon.img);
+      const file = current && !/^via\.placeholder\.com/i.test(weapon.img || '') && fs.existsSync(path.join(project.root, project.assetDirs.weapon, current))
+        ? current
+        : (fs.existsSync(path.join(project.root, project.assetDirs.weapon, candidate)) ? candidate : '');
+      return [weapon.id, file];
+    }));
+    payload.gearAssets = Object.fromEntries(payload.gears.map(gear => {
+      const candidate = `${gear.name}.png`;
+      return [gear.id, fs.existsSync(path.join(project.root, project.assetDirs.gear, candidate)) ? candidate : ''];
+    }));
   }
   return payload;
 }
