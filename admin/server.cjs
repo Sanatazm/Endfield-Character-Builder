@@ -386,6 +386,7 @@ function normalizeCharacter(input, existing = []) {
     subPower: String(input.subPower || '').trim(),
     weaponType: String(input.weaponType || '').trim(),
     img: String(input.img || '').trim(),
+    avatarImg: String(input.avatarImg || '').trim(),
   };
 }
 
@@ -609,12 +610,14 @@ async function handleApi(req, res, pathname, query) {
 
     const uploads = input.images || {};
     const existing = characters.find(item => item.id === character.id) || {};
+    character.avatarImg = character.avatarImg || existing.avatarImg || '';
     character.assetNames = { ...(existing.assetNames || {}) };
     for (const assetType of ['avatar', 'portrait', 'preview', 'landscape']) {
       if (!uploads[assetType]) continue;
       const fileName = assetFileNameForCharacter(character.id, assetType, uploads[assetType].fileName);
       const upload = writeBase64Asset(project, assetType, fileName, uploads[assetType].base64);
       character.assetNames[assetType] = uploads[assetType].fileName || fileName;
+      if (assetType === 'avatar') character.avatarImg = rawAssetUrl(project, assetType, path.basename(upload.file));
       if (assetType === 'portrait') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
       if (!character.img && assetType === 'avatar') character.img = rawAssetUrl(project, assetType, path.basename(upload.file));
     }

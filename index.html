@@ -1782,10 +1782,12 @@
     }
 
     function getCharacterAvatarUrl(character) {
-        const uploaded = getPreferredDataImage(character);
+        const uploaded = getPreferredDataImage({ img: character?.avatarImg });
         if (uploaded) return uploaded;
+        const portrait = getPreferredDataImage(character);
+        if (portrait && !CHARACTER_AVATAR_BY_ID[character.id]) return portrait;
         const file = CHARACTER_AVATAR_BY_ID[character.id];
-        return file ? `${AVATAR_BASE_URL}${file}` : '';
+        return file ? `${AVATAR_BASE_URL}${file}` : portrait;
     }
 
     function getSkillPriorityIconUrl(character, skillName) {
