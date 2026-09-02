@@ -459,6 +459,22 @@ async function handleApi(req, res, pathname, query) {
     return;
   }
 
+  if (req.method === 'POST' && pathname === '/api/set-effect') {
+    if (project.id !== 'builder') throw new Error('Set effect editing is only available for the character builder project.');
+    const input = JSON.parse(await readBody(req));
+    const name = String(input.name || '').trim();
+    const effect = normalizeSetEffect(input.effect);
+    if (!name) throw new Error('请输入套装名称');
+    if (!effect) throw new Error('请输入套装效果');
+    const setEffects = readJsonFile(project, 'setEffects');
+    const existed = Object.prototype.hasOwnProperty.call(setEffects, name);
+    setEffects[name] = effect;
+    const backup = writeJsonFile(project, 'setEffects', setEffects);
+    const result = buildAndValidate(project);
+    sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: existed ? 'updated' : 'created', name, effect, backup, ...result });
+    return;
+  }
+
   if (req.method === 'POST' && pathname === '/api/gear') {
     if (project.id !== 'builder') throw new Error('Gear editing is only available for the character builder project.');
     const input = JSON.parse(await readBody(req));
@@ -474,17 +490,6 @@ async function handleApi(req, res, pathname, query) {
     if (index >= 0) gears[index] = gear;
     else gears.push(gear);
     const backups = { gears: writeJsonFile(project, 'gears', gears) };
-    if (input.setEffect !== undefined) {
-      const setEffects = readJsonFile(project, 'setEffects');
-      const effect = normalizeSetEffect(input.setEffect);
-      if (effect) {
-        setEffects[gear.set] = effect;
-        backups.setEffects = writeJsonFile(project, 'setEffects', setEffects);
-      } else if (!Object.prototype.hasOwnProperty.call(setEffects, gear.set)) {
-        setEffects[gear.set] = '3件套效果待补充。';
-        backups.setEffects = writeJsonFile(project, 'setEffects', setEffects);
-      }
-    }
     const result = buildAndValidate(project);
     sendJson(res, result.ok ? 200 : 400, { ok: result.ok, mode: index >= 0 ? 'updated' : 'created', gear, backup: backups.gears, backups, ...result });
     return;

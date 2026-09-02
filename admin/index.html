@@ -31,10 +31,12 @@
     input, select, textarea { width:100%; border:1px solid var(--line); border-radius:6px; background:#0f1215; color:var(--text); padding:9px 10px; }
     textarea { min-height:112px; resize:vertical; line-height:1.45; font-family:"Cascadia Code",Consolas,monospace; font-size:13px; }
     .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .field-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
     .grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .form-section { border:1px solid var(--line); border-radius:8px; background:#14181c; padding:12px; margin:12px 0; }
     .form-section legend { padding:0 6px; color:var(--cyan); font-weight:700; }
+    .readonly-effect { white-space:pre-wrap; min-height:72px; border:1px solid var(--line); border-radius:6px; background:#0f1215; color:var(--muted); padding:9px 10px; line-height:1.45; }
     .list { max-height:62vh; overflow:auto; border:1px solid var(--line); border-radius:8px; background:#101316; }
     .item { display:flex; justify-content:space-between; gap:10px; padding:10px 11px; border-bottom:1px solid #252b30; cursor:pointer; }
     .item:hover { background:#1a2025; }
@@ -52,7 +54,7 @@
     details { border:1px solid var(--line); border-radius:8px; background:#111519; padding:10px 12px; margin:12px 0; }
     summary { cursor:pointer; color:var(--muted); font-weight:700; }
     .hidden { display:none !important; }
-    @media (max-width:1050px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .layout, .grid-2, .grid-3, .grid-4, .upload-grid { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
+    @media (max-width:1050px) { main { grid-template-columns:1fr; } nav { border-right:0; border-bottom:1px solid var(--line); } .layout, .grid-2, .grid-3, .grid-4, .upload-grid, .field-pair { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
   </style>
 </head>
 <body>
@@ -68,6 +70,7 @@
       <button class="active only-builder" data-panel="character">角色维护</button>
       <button class="only-builder" data-panel="weapon">武器维护</button>
       <button class="only-builder" data-panel="gear">装备维护</button>
+      <button class="only-builder" data-panel="setEffect">套装效果维护</button>
       <button class="only-axis hidden" data-panel="axisChar">排轴角色技能</button>
       <button data-panel="publish">发布 GitHub</button>
       <details class="advanced-toggle">
@@ -158,8 +161,8 @@
               </div>
             </fieldset>
             <fieldset class="form-section">
-              <legend>套装效果</legend>
-              <div class="field"><label>当前套装的效果，保存装备时会同步保存到该套装</label><textarea id="gearSetEffect" placeholder="装备者攻击力+15%。&#10;当装备者施放连携技时，所有技能伤害+20%。"></textarea></div>
+              <legend>当前套装效果</legend>
+              <div id="gearSetEffectPreview" class="readonly-effect">选择套装后显示效果</div>
             </fieldset>
             <fieldset class="form-section">
               <legend>装备词条</legend>
@@ -169,8 +172,10 @@
                 <div class="field"><label>词条 1 数值</label><input id="gearStat1Value" placeholder="+115/+126/+138/+149"></div>
                 <div class="field"><label>词条 2 名称</label><input id="gearStat2Name" placeholder="敏捷"></div>
                 <div class="field"><label>词条 2 数值</label><input id="gearStat2Value" placeholder="+87/+95/+104/+113"></div>
-                <div class="field"><label>最后词条</label><input id="gearBonusName" placeholder="终结技充能效率"></div>
-                <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
+                <div class="field-pair">
+                  <div class="field"><label>最后词条</label><input id="gearBonusName" placeholder="终结技充能效率"></div>
+                  <div class="field"><label>最后词条数值</label><input id="gearBonusValue" placeholder="+12.3%/+13.6%/+14.8%/+16%"></div>
+                </div>
               </div>
             </fieldset>
             <label class="upload-box"><strong>装备图片</strong><span id="gearImageText">点击选择，自动保存为 装备名.png</span><input id="gearImageFile" type="file" accept="image/png,image/jpeg,image/webp"></label>
@@ -180,6 +185,20 @@
               <div class="field"><label>原始属性，一行一条</label><textarea id="gearStats"></textarea></div>
               <div class="field"><label>备用图片地址</label><input id="gearImg" placeholder="一般不用填"></div>
             </details>
+          </form>
+        </div>
+      </div>
+
+      <div id="setEffect" class="panel only-builder">
+        <div class="layout">
+          <div class="card">
+            <div class="field"><label>搜索套装效果</label><input id="setEffectSearch" placeholder="输入套装名"></div>
+            <div class="list" id="setEffectList"></div>
+          </div>
+          <form class="card" id="setEffectForm">
+            <div class="toolbar"><button class="btn primary" type="button" id="newSetEffect">新建套装效果</button><button class="btn primary" type="submit">保存套装效果</button></div>
+            <div class="field"><label>套装名称</label><input id="setEffectName" required list="setEffectOptions" placeholder="涉渊"><datalist id="setEffectOptions"></datalist></div>
+            <div class="field"><label>套装效果</label><textarea id="setEffectText" required placeholder="装备者攻击力+15%。&#10;当装备者施放连携技时，所有技能伤害+20%。"></textarea></div>
           </form>
         </div>
       </div>
@@ -283,6 +302,7 @@
         renderCharList();
         renderWeaponList();
         renderGearList();
+        renderSetEffectList();
         setStatus(`已加载：${state.characters.length} 角色，${state.weapons.length} 武器，${state.gears.length} 装备`);
       } else {
         renderAxisList();
@@ -297,7 +317,11 @@
       $('charSubPower').innerHTML = optionHtml(powerChoices);
       $('charWeaponType').innerHTML = optionHtml(weaponTypes);
       $('weaponType').innerHTML = optionHtml(weaponTypes);
-      if (state.setEffects) $('gearSetOptions').innerHTML = Object.keys(state.setEffects).map(set => `<option value="${escapeHtml(set)}">`).join('');
+      if (state.setEffects) {
+        const options = Object.keys(state.setEffects).map(set => `<option value="${escapeHtml(set)}">`).join('');
+        $('gearSetOptions').innerHTML = options;
+        $('setEffectOptions').innerHTML = options;
+      }
     }
     function setupJsonOptions() {
       const keys = currentProject === 'builder' ? ['characters', 'weapons', 'gears', 'setEffects'] : ['axis'];
@@ -338,6 +362,11 @@
       const list = itemList(state.gears || [], $('gearSearch').value, [g => g.name, g => g.set, g => g.part, g => (g.stats || []).join(' ')]);
       $('gearList').innerHTML = list.map(g => `<div class="item" data-id="${escapeHtml(g.id)}"><span>${escapeHtml(g.name)}</span><span class="pill">${escapeHtml(g.set)} / ${escapeHtml(g.part)}</span></div>`).join('');
     }
+    function renderSetEffectList() {
+      const entries = Object.entries(state.setEffects || {});
+      const q = $('setEffectSearch').value.trim().toLowerCase();
+      $('setEffectList').innerHTML = entries.filter(([name, effect]) => !q || `${name} ${effect}`.toLowerCase().includes(q)).map(([name, effect]) => `<div class="item" data-name="${escapeHtml(name)}"><span>${escapeHtml(name)}</span><span class="pill">${escapeHtml(effectToTextarea(effect).split('\n')[0])}</span></div>`).join('');
+    }
 
     function fillChar(c = {}) {
       $('charId').value = c.id || '';
@@ -370,7 +399,7 @@
       $('gearName').value = g.name || '';
       $('gearPart').value = g.part || '护甲';
       $('gearSet').value = g.set || '';
-      $('gearSetEffect').value = effectToTextarea(state.setEffects?.[g.set] || '');
+      updateGearSetEffectPreview();
       $('gearImg').value = g.img || '';
       $('gearStats').value = (g.stats || []).join('\n');
       const stats = g.stats || [];
@@ -388,9 +417,15 @@
     function effectToTextarea(value) {
       return String(value || '').replace(/<br\s*\/?>/gi, '\n');
     }
-    function updateGearSetEffect() {
+    function fillSetEffect(name = '') {
+      $('setEffectName').value = name;
+      $('setEffectText').value = effectToTextarea(state.setEffects?.[name] || '');
+    }
+    function updateGearSetEffectPreview() {
       const setName = $('gearSet').value.trim();
-      $('gearSetEffect').value = effectToTextarea(state.setEffects?.[setName] || '');
+      $('gearSetEffectPreview').textContent = setName && state.setEffects?.[setName]
+        ? effectToTextarea(state.setEffects[setName])
+        : '暂无套装效果';
     }
     function gearStatsFromForm() {
       const rows = [];
@@ -454,15 +489,18 @@
     $('charSearch').addEventListener('input', renderCharList);
     $('weaponSearch').addEventListener('input', renderWeaponList);
     $('gearSearch').addEventListener('input', renderGearList);
-    $('gearSet').addEventListener('change', updateGearSetEffect);
+    $('gearSet').addEventListener('input', updateGearSetEffectPreview);
+    $('setEffectSearch').addEventListener('input', renderSetEffectList);
     $('axisSearch').addEventListener('input', renderAxisList);
     $('charList').addEventListener('click', e => fillChar(state.characters.find(c => c.id === e.target.closest('.item')?.dataset.id)));
     $('weaponList').addEventListener('click', e => fillWeapon(state.weapons.find(w => w.id === e.target.closest('.item')?.dataset.id)));
     $('gearList').addEventListener('click', e => fillGear(state.gears.find(g => g.id === e.target.closest('.item')?.dataset.id)));
+    $('setEffectList').addEventListener('click', e => fillSetEffect(e.target.closest('.item')?.dataset.name || ''));
     $('axisList').addEventListener('click', e => fillAxis(e.target.closest('.item')?.dataset.name || ''));
     $('newChar').addEventListener('click', () => fillChar());
     $('newWeapon').addEventListener('click', () => fillWeapon());
     $('newGear').addEventListener('click', () => fillGear());
+    $('newSetEffect').addEventListener('click', () => fillSetEffect());
     $('newAxisChar').addEventListener('click', () => fillAxis());
     document.querySelectorAll('.project-btn').forEach(btn => btn.addEventListener('click', () => switchProject(btn.dataset.project)));
     document.querySelectorAll('nav button').forEach(btn => btn.addEventListener('click', () => switchPanel(btn.dataset.panel)));
@@ -502,10 +540,19 @@
       try {
         const saved = await api('/api/gear', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({
           id:$('gearId').value, name:$('gearName').value, part:$('gearPart').value, set:$('gearSet').value, img:$('gearImg').value,
-          stats:gearStatsFromForm(), setEffect:$('gearSetEffect').value, image: await filePayload($('gearImageFile')).then(v => v?.base64),
+          stats:gearStatsFromForm(), image: await filePayload($('gearImageFile')).then(v => v?.base64),
         })});
         await loadData();
         setStatus(`装备已${saved.mode === 'created' ? '新增' : '更新'}：${saved.gear.name}\n${saved.build.output}${saved.validate.output}`);
+      } catch (error) { setStatus(error.message, false); }
+    });
+    $('setEffectForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      try {
+        const saved = await api('/api/set-effect', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ name:$('setEffectName').value, effect:$('setEffectText').value }) });
+        await loadData();
+        fillSetEffect(saved.name);
+        setStatus(`套装效果已${saved.mode === 'created' ? '新增' : '更新'}：${saved.name}\n${saved.build.output}${saved.validate.output}`);
       } catch (error) { setStatus(error.message, false); }
     });
     $('axisForm').addEventListener('submit', async e => {
