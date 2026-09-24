@@ -24,6 +24,24 @@ window.gameDatabase = {
   },
   "characters": [
     {
+      "id": "char_2",
+      "name": "噗切娜",
+      "stars": 5,
+      "attr": "物理",
+      "class": "重装",
+      "mainPower": "力量",
+      "subPower": "意志",
+      "weaponType": "单手剑",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_2.png",
+      "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_2.png",
+      "assetNames": {
+        "avatar": "purrche.d14c39f4.png",
+        "portrait": "purrche.bdb051d3.png",
+        "preview": "purrche.bdb051d3.png",
+        "landscape": "purrche.bdb051d3.png"
+      }
+    },
+    {
       "id": "char_1",
       "name": "提弗洛斯",
       "stars": 6,
@@ -373,6 +391,18 @@ window.gameDatabase = {
     }
   ],
   "weapons": [
+    {
+      "id": "w_3",
+      "name": "点心时刻",
+      "type": "单手剑",
+      "stars": 5,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%82%B9%E5%BF%83%E6%97%B6%E5%88%BB.png",
+      "stats": [
+        "力量",
+        "治疗效率",
+        "医疗"
+      ]
+    },
     {
       "id": "w_2",
       "name": "苦难的尽头",

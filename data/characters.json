@@ -1,5 +1,23 @@
 [
   {
+    "id": "char_2",
+    "name": "噗切娜",
+    "stars": 5,
+    "attr": "物理",
+    "class": "重装",
+    "mainPower": "力量",
+    "subPower": "意志",
+    "weaponType": "单手剑",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_2.png",
+    "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_2.png",
+    "assetNames": {
+      "avatar": "purrche.d14c39f4.png",
+      "portrait": "purrche.bdb051d3.png",
+      "preview": "purrche.bdb051d3.png",
+      "landscape": "purrche.bdb051d3.png"
+    }
+  },
+  {
     "id": "char_1",
     "name": "提弗洛斯",
     "stars": 6,
