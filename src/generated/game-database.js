@@ -24,6 +24,42 @@ window.gameDatabase = {
   },
   "characters": [
     {
+      "id": "char_4",
+      "name": "祀",
+      "stars": 6,
+      "attr": "寒冷",
+      "class": "辅助",
+      "mainPower": "智识",
+      "subPower": "意志",
+      "weaponType": "双手剑",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_4.png",
+      "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_4.png",
+      "assetNames": {
+        "avatar": "jsspsi.0a31758c.png",
+        "portrait": "jsspsi.409b46fa.png",
+        "preview": "jsspsi.409b46fa.png",
+        "landscape": "jsspsi.409b46fa.png"
+      }
+    },
+    {
+      "id": "char_3",
+      "name": "明河",
+      "stars": 6,
+      "attr": "电磁",
+      "class": "近卫",
+      "mainPower": "意志",
+      "subPower": "力量",
+      "weaponType": "单手剑",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_3.png",
+      "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_3.png",
+      "assetNames": {
+        "avatar": "minghe.d65390b1.png",
+        "portrait": "minghe.6860bf19.png",
+        "preview": "minghe.6860bf19.png",
+        "landscape": "minghe.6860bf19.png"
+      }
+    },
+    {
       "id": "char_2",
       "name": "噗切娜",
       "stars": 5,
@@ -391,6 +427,54 @@ window.gameDatabase = {
     }
   ],
   "weapons": [
+    {
+      "id": "w_7",
+      "name": "玉中身",
+      "type": "单手剑",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%8E%89%E4%B8%AD%E8%BA%AB.png",
+      "stats": [
+        "智识",
+        "寒冷伤害",
+        "效益"
+      ]
+    },
+    {
+      "id": "w_6",
+      "name": "悠久传承",
+      "type": "双手剑",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%82%A0%E4%B9%85%E4%BC%A0%E6%89%BF.png",
+      "stats": [
+        "智识",
+        "寒冷伤害",
+        "效益"
+      ]
+    },
+    {
+      "id": "w_5",
+      "name": "唤月",
+      "type": "单手剑",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%94%A4%E6%9C%88.png",
+      "stats": [
+        "意志",
+        "攻击",
+        "附术"
+      ]
+    },
+    {
+      "id": "w_4",
+      "name": "聚合工业",
+      "type": "单手剑",
+      "stars": 6,
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%81%9A%E5%90%88%E5%B7%A5%E4%B8%9A.png",
+      "stats": [
+        "意志",
+        "电磁伤害",
+        "迸发"
+      ]
+    },
     {
       "id": "w_3",
       "name": "点心时刻",
