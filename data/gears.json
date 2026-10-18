@@ -1,5 +1,210 @@
 [
   {
+    "id": "g_189",
+    "name": "脉冲式护甲板",
+    "part": "配件",
+    "set": "脉冲式",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E8%84%89%E5%86%B2%E5%BC%8F%E6%8A%A4%E7%94%B2%E6%9D%BF.png",
+    "stats": [
+      "防御力：+21",
+      "意志：+32/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "终结技充能效率：+24.64%/+27.11%/+29.57%/+32.04%"
+    ]
+  },
+  {
+    "id": "g_188",
+    "name": "脉冲式轻护手",
+    "part": "护手",
+    "set": "脉冲式",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E8%84%89%E5%86%B2%E5%BC%8F%E8%BD%BB%E6%8A%A4%E6%89%8B.png",
+    "stats": [
+      "防御力：+42",
+      "意志：+65/+71/+78/+84",
+      "力量：+43/+47/+51/+55",
+      "寒冷和电磁伤害加成：+19.17%/+21.08%/+23.00%/+24.92%"
+    ]
+  },
+  {
+    "id": "g_187",
+    "name": "脉冲式轻甲",
+    "part": "护甲",
+    "set": "脉冲式",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E8%84%89%E5%86%B2%E5%BC%8F%E8%BD%BB%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "意志：+87/+95/+104/+113",
+      "力量：+58/+63/+69/+75",
+      "寒冷和电磁伤害加成：+11.50%/+12.65%/+13.80%/+14.95%"
+    ]
+  },
+  {
+    "id": "g_186",
+    "name": "涉渊裹手",
+    "part": "护手",
+    "set": "涉渊",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%A3%B9%E6%89%8B.png",
+    "stats": [
+      "防御力：+42",
+      "意志：+86/+94/+103/+111",
+      "寒冷和电磁伤害加成：+20.00%/+22.00%/+24.00%/+26.00%"
+    ]
+  },
+  {
+    "id": "g_185",
+    "name": "涉渊防护服",
+    "part": "护甲",
+    "set": "涉渊",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%98%B2%E6%8A%A4%E6%9C%8D.png",
+    "stats": [
+      "防御力：+56",
+      "智识：+115/+126/+138/+149",
+      "灼热和自然伤害加成：+12.00%/+13.20%/+14.40%/+15.60%"
+    ]
+  },
+  {
+    "id": "g_184",
+    "name": "涉渊钢甲",
+    "part": "护甲",
+    "set": "涉渊",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%92%A2%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "敏捷：+115/+126/+138/+149",
+      "连携技伤害加成：+21.60%/+23.76%/+25.92%/+28.08%"
+    ]
+  },
+  {
+    "id": "g_183",
+    "name": "集成实训刃装短锯",
+    "part": "配件",
+    "set": "集成工业",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%88%83%E8%A3%85%E7%9F%AD%E9%94%AF.png",
+    "stats": [
+      "防御力：+18",
+      "主能力：+27/+29/+32/+35",
+      "副能力：+18/+19/+21/+23",
+      "物理伤害加成：+19.67%/+21.63%/+23.60%/+25.57%"
+    ]
+  },
+  {
+    "id": "g_182",
+    "name": "集成实训刃装护手",
+    "part": "护手",
+    "set": "集成工业",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%88%83%E8%A3%85%E6%8A%A4%E6%89%8B.png",
+    "stats": [
+      "防御力：+36",
+      "主能力：+55/+60/+66/+71",
+      "副能力：+37/+40/+44/+48",
+      "物理伤害加成：+16.39%/+18.03%/+19.67%/+21.31%"
+    ]
+  },
+  {
+    "id": "g_181",
+    "name": "集成实训刃装护甲",
+    "part": "护甲",
+    "set": "集成工业",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%88%83%E8%A3%85%E6%8A%A4%E7%94%B2.png",
+    "stats": [
+      "防御力：+48",
+      "主能力：+74/+81/+88/+96",
+      "副能力：+49/+53/+58/+63",
+      "物理伤害加成：+9.83%/+10.82%/+11.80%/+12.78%"
+    ]
+  },
+  {
+    "id": "g_180",
+    "name": "50式应龙信标",
+    "part": "配件",
+    "set": "50式应龙",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/50%E5%BC%8F%E5%BA%94%E9%BE%99%E4%BF%A1%E6%A0%87.png",
+    "stats": [
+      "防御力：+21",
+      "智识：+32/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "连携技伤害加成：+41.40%/+45.54%/+49.68%/+53.82%"
+    ]
+  },
+  {
+    "id": "g_179",
+    "name": "50式应龙手套",
+    "part": "护手",
+    "set": "50式应龙",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/50%E5%BC%8F%E5%BA%94%E9%BE%99%E6%89%8B%E5%A5%97.png",
+    "stats": [
+      "防御力：+42",
+      "智识：+65/+71/+78/+84",
+      "力量：+43/+47/+51/+55",
+      "连携技伤害加成：+34.50%/+37.95%/+41.40%/+44.85%"
+    ]
+  },
+  {
+    "id": "g_178",
+    "name": "50式应龙软甲",
+    "part": "护甲",
+    "set": "50式应龙",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/50%E5%BC%8F%E5%BA%94%E9%BE%99%E8%BD%AF%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "智识：+87/+95/+104/+113",
+      "力量：+58/+63/+69/+75",
+      "连携技伤害加成：+20.70%/+22.77%/+24.84%/+26.91%"
+    ]
+  },
+  {
+    "id": "g_177",
+    "name": "长息测距仪",
+    "part": "配件",
+    "set": "长息",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E6%B5%8B%E8%B7%9D%E4%BB%AA.png",
+    "stats": [
+      "防御力：+21",
+      "智识：+35/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "连携技伤害加成：+41.40%/+45.54%/+49.68%/+53.82%"
+    ]
+  },
+  {
+    "id": "g_176",
+    "name": "长息导能护手",
+    "part": "护手",
+    "set": "长息",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E5%AF%BC%E8%83%BD%E6%8A%A4%E6%89%8B.png",
+    "stats": [
+      "防御力：+42",
+      "智识：+65/+71/+78/+84",
+      "力量：+43/+47/+51/+55",
+      "连携技伤害加成：+34.50%/+37.95%/+41.40%/+44.85%"
+    ]
+  },
+  {
+    "id": "g_175",
+    "name": "长息改装护甲",
+    "part": "护甲",
+    "set": "长息",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E6%94%B9%E8%A3%85%E6%8A%A4%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "智识：+87/+95/+104/+113",
+      "力量：+58/+63/+69/+75",
+      "连携技伤害加成：+20.70%/+22.77%/+24.84%/+26.91%"
+    ]
+  },
+  {
+    "id": "g_174",
+    "name": "长息防护服",
+    "part": "护甲",
+    "set": "长息",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E9%98%B2%E6%8A%A4%E6%9C%8D.png",
+    "stats": [
+      "防御力：+56",
+      "智识：+87/+95/+104/+113",
+      "力量：+58/+63/+69/+75",
+      "终结技充能效率：+12.32%/+13.55%/+14.79%/+16.02%"
+    ]
+  },
+  {
     "id": "g_170",
     "name": "险关手甲",
     "part": "护手",
