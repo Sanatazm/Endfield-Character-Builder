@@ -430,7 +430,7 @@ window.gameDatabase = {
     {
       "id": "w_7",
       "name": "玉中身",
-      "type": "单手剑",
+      "type": "双手剑",
       "stars": 6,
       "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%8E%89%E4%B8%AD%E8%BA%AB.png",
       "stats": [

@@ -274,9 +274,41 @@
     const weaponTypes = ['单手剑', '双手剑', '长柄武器', '施术单元', '手铳'];
     const builderAssets = [['gear','装备'], ['weapon','武器'], ['avatar','角色头像'], ['portrait','角色立绘'], ['preview','存档预览头像'], ['landscape','移动端横图']];
 
+    function chineseMessage(value) {
+      let text = String(value || '操作失败，请重试');
+      if (/SSL|TLS|schannel|handshake/i.test(text)) return '连接 GitHub 时安全连接失败。数据已保存在本地，请检查网络后重新点击发布。';
+      if (/Could not resolve host|Failed to connect|Connection timed out|unable to access|Connection reset/i.test(text)) return '无法连接 GitHub。数据已保存在本地，请检查网络或代理后重新点击发布。';
+      if (/Authentication failed|Permission denied|could not read Username|403/i.test(text)) return 'GitHub 登录失效或没有仓库权限，请重新登录 Git 后再发布。';
+      if (/non-fast-forward|fetch first|rejected/i.test(text)) return 'GitHub 上有本地尚未同步的更新，本次发布未完成。请先同步仓库后重试。';
+      if (/Failed to fetch|NetworkError|fetch failed/i.test(text)) return '无法连接本地后台，请确认后台服务正在运行，然后重试。';
+      if (/Unexpected token|Unexpected end of JSON|JSON.*position|not valid JSON/i.test(text)) return '数据格式不正确，请检查填写内容或 JSON 格式后重试。';
+      const replacements = [
+        [/Built src\/generated\/game-database\.js \((\d+) characters, (\d+) weapons, (\d+) gears\)/g, '页面数据已生成：$1 个角色、$2 把武器、$3 件装备'],
+        [/OK: (\d+) characters, (\d+) weapons, (\d+) gears, (\d+) set effects/g, '数据校验通过：$1 个角色、$2 把武器、$3 件装备、$4 套套装效果'],
+        [/Generated src\/generated\/axis-data\.js: (\d+) characters, (\d+) ordered entries\./g, '排轴页面数据已生成：$1 个角色、$2 条排序记录。'],
+        [/Axis data valid: (\d+) ordered characters, (\d+) asset entries\./g, '排轴数据校验通过：$1 个角色、$2 组图片资源。'],
+        [/gear image missing:/g, '装备图片缺失：'],
+        [/weapon image may be missing:/g, '武器图片可能缺失：'],
+        [/gear set has no effect entry:/g, '装备对应的套装效果不存在：'],
+        [/duplicate/g, '重复'], [/has empty/g, '缺少必填字段'],
+        [/characters/g, '角色'], [/weapons/g, '武器'], [/gears/g, '装备'],
+        [/ERROR:/g, '错误：'], [/WARN:/g, '提示：'],
+        [/File name is required/g, '请选择图片或填写文件名'],
+        [/File data is required/g, '图片内容为空，请重新选择图片'],
+        [/Only png, jpg, jpeg, and webp are allowed/g, '仅支持 PNG、JPG、JPEG 和 WebP 图片'],
+        [/Invalid file path/g, '图片保存路径无效'],
+        [/Unknown data key:/g, '不支持的数据类型：'],
+        [/Unknown asset type:/g, '不支持的图片类型：'],
+        [/ENOENT: no such file or directory/g, '文件或目录不存在'],
+        [/EACCES|EPERM/g, '文件访问被拒绝，请检查文件是否被占用'],
+        [/Request body is too large/g, '上传内容过大，请缩小图片后重试'],
+      ];
+      for (const [pattern, replacement] of replacements) text = text.replace(pattern, replacement);
+      return text;
+    }
     function setStatus(text, ok = true) {
       $('status').className = `status ${ok ? 'ok' : 'err'}`;
-      $('status').textContent = text;
+      $('status').textContent = chineseMessage(text);
     }
     function optionHtml(values) { return values.map(v => `<option>${escapeHtml(v)}</option>`).join(''); }
     function escapeHtml(value) { return String(value ?? '').replace(/[&<>"]/g, s => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[s])); }
@@ -284,7 +316,12 @@
     async function api(path, options = {}) {
       const res = await fetch(`${path}${path.includes('?') ? '&' : '?'}${projectQuery()}`, options);
       const json = await res.json();
-      if (!res.ok || json.ok === false) throw new Error(json.error || JSON.stringify(json));
+      if (!res.ok || json.ok === false) {
+        const failed = ['build', 'validate', 'publish'].find(key => json[key]?.ok === false);
+        const labels = { build:'页面数据生成失败', validate:'数据校验未通过', publish:'发布 GitHub 失败' };
+        const detail = json.error || (failed && json[failed].output) || `后台请求失败（状态码 ${res.status}）`;
+        throw new Error(`${failed ? labels[failed] + '：\n' : ''}${chineseMessage(detail)}`);
+      }
       return json;
     }
     async function filePayload(input) {
@@ -702,7 +739,7 @@
     $('runBuild').addEventListener('click', async () => {
       try {
         const result = await api('/api/build', { method:'POST' });
-        setStatus(`构建：\n${result.build.output}\n校验：\n${result.validate.output}\nGitHub：\n${result.publish.output}`);
+        setStatus(`${result.build.output}\n${result.validate.output}\n已成功推送到 GitHub。网页部署完成后即可查看，若仍显示旧内容请强制刷新。`);
       } catch (error) { setStatus(error.message, false); }
     });
 
