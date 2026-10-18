@@ -429,7 +429,7 @@ function validateCharacter(character) {
   if (!character.name) throw new Error('角色名称必填');
   if (![4, 5, 6].includes(Number(character.stars))) throw new Error('角色星级必须是 4 / 5 / 6');
   for (const key of ['attr', 'class', 'mainPower', 'subPower', 'weaponType']) {
-    if (!character[key]) throw new Error(`角色 ${key} 必填`);
+    if (!character[key]) throw new Error(`请填写角色${({ attr:'属性', class:'职业', mainPower:'主能力', subPower:'副能力', weaponType:'武器类型' })[key] || key}`);
   }
 }
 
@@ -516,7 +516,7 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (req.method === 'POST' && pathname === '/api/set-effect') {
-    if (project.id !== 'builder') throw new Error('Set effect editing is only available for the character builder project.');
+    if (project.id !== 'builder') throw new Error('请切换到角色配置工具后维护套装效果');
     const input = JSON.parse(await readBody(req));
     const name = String(input.name || '').trim();
     const effect = normalizeSetEffect(input.effect);
@@ -570,7 +570,7 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (req.method === 'POST' && pathname === '/api/gear') {
-    if (project.id !== 'builder') throw new Error('Gear editing is only available for the character builder project.');
+    if (project.id !== 'builder') throw new Error('请切换到角色配置工具后维护装备');
     const input = JSON.parse(await readBody(req));
     if (input.image && input.name) {
       const fileName = `${String(input.name).trim()}.png`;
@@ -588,7 +588,7 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (req.method === 'POST' && pathname === '/api/weapon') {
-    if (project.id !== 'builder') throw new Error('Weapon editing is only available for the character builder project.');
+    if (project.id !== 'builder') throw new Error('请切换到角色配置工具后维护武器');
     const input = JSON.parse(await readBody(req));
     const weapons = readJsonFile(project, 'weapons');
     if (input.image && input.name) {
@@ -606,7 +606,7 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (req.method === 'POST' && pathname === '/api/character') {
-    if (project.id !== 'builder') throw new Error('Character editing is only available for the character builder project.');
+    if (project.id !== 'builder') throw new Error('请切换到角色配置工具后维护角色');
     const input = JSON.parse(await readBody(req));
     const characters = readJsonFile(project, 'characters');
     const character = normalizeCharacter(input, characters);
