@@ -289,9 +289,29 @@ function runScript(project, script) {
   }
 }
 
+function currentWindowsProxy() {
+  if (process.platform !== 'win32') return null;
+  const script = "$p=Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings'; @{enabled=[bool]$p.ProxyEnable;server=[string]$p.ProxyServer}|ConvertTo-Json -Compress";
+  const settings = JSON.parse(childProcess.execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', script], {
+    encoding: 'utf8', windowsHide: true, timeout: 5000,
+  }).trim());
+  if (!settings.enabled) return '';
+  const server = String(settings.server || '').trim();
+  const entries = server.split(';').map(value => value.trim());
+  const selected = entries.find(value => /^https=/i.test(value)) || entries.find(value => /^http=/i.test(value)) || entries.find(value => value && !value.includes('='));
+  if (!selected) throw new Error('系统代理已开启，但没有可用的 HTTP 或 HTTPS 代理地址，请检查电脑代理设置');
+  const address = selected.replace(/^https?=/i, '');
+  return /^[a-z]+:\/\//i.test(address) ? address : `http://${address}`;
+}
+
 function runGit(project, args) {
   try {
-    const output = childProcess.execFileSync('git', args, {
+    let gitArgs = args;
+    if (args[0] === 'push') {
+      const proxy = currentWindowsProxy();
+      if (proxy !== null) gitArgs = ['-c', `http.proxy=${proxy}`, '-c', `http.https://github.com.proxy=${proxy}`, ...args];
+    }
+    const output = childProcess.execFileSync('git', gitArgs, {
       cwd: project.root,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
