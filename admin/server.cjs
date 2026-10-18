@@ -315,7 +315,11 @@ function buildAndValidate(project) {
 function publishToGithub(project) {
   const before = runGit(project, ['status', '--porcelain']);
   if (!before.ok) return { ok: false, step: 'status', output: before.output };
-  if (!before.output) return { ok: true, step: 'noop', output: 'No local changes to publish.' };
+  if (!before.output) {
+    let push = runGit(project, ['push', 'origin', 'HEAD:main']);
+    if (!push.ok) push = runGit(project, ['push', 'origin', 'HEAD:main']);
+    return { ok: push.ok, step: 'push', output: push.output };
+  }
 
   const add = runGit(project, ['add', '-A']);
   if (!add.ok) return { ok: false, step: 'add', output: add.output };
