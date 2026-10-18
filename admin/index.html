@@ -260,7 +260,11 @@
         </div>
       </div>
 
-      <div id="status" class="status">待操作</div>
+      <div id="publishProgress" hidden role="status" aria-live="polite" style="margin-top:18px">
+        <progress aria-label="发布进行中" style="width:100%;height:12px"></progress>
+        <div id="publishProgressText" style="margin-top:8px"></div>
+      </div>
+      <div id="status" class="status" role="status" aria-live="polite">待操作</div>
     </section>
   </main>
 
@@ -737,10 +741,37 @@
       } catch (error) { setStatus(error.message, false); }
     });
     $('runBuild').addEventListener('click', async () => {
+      const button = $('runBuild');
+      if (button.disabled) return;
+      const label = button.textContent;
+      const started = Date.now();
+      const projectLabel = currentProject === 'axis' ? '排轴工具' : '角色配置工具';
+      button.disabled = true;
+      button.textContent = '正在发布，请稍候…';
+      button.setAttribute('aria-busy', 'true');
+      $('publishProgress').hidden = false;
+      $('publishProgress').querySelector('progress').hidden = false;
+      const updateProgress = () => {
+        const seconds = Math.floor((Date.now() - started) / 1000);
+        $('publishProgressText').textContent = `${projectLabel}正在发布，已用时 ${seconds} 秒。${seconds >= 20 ? '连接 GitHub 可能需要较长时间，后台仍在处理中。' : '正在生成、校验页面数据并推送 GitHub。'}`;
+      };
+      updateProgress();
+      setStatus('已收到发布请求，正在处理，请勿重复点击。');
+      const timer = setInterval(updateProgress, 1000);
       try {
         const result = await api('/api/build', { method:'POST' });
         setStatus(`${result.build.output}\n${result.validate.output}\n已成功推送到 GitHub。网页部署完成后即可查看，若仍显示旧内容请强制刷新。`);
-      } catch (error) { setStatus(error.message, false); }
+        $('publishProgressText').textContent = `${projectLabel}发布成功，用时 ${Math.ceil((Date.now() - started) / 1000)} 秒。`;
+      } catch (error) {
+        setStatus(error.message, false);
+        $('publishProgressText').textContent = `${projectLabel}发布失败，用时 ${Math.ceil((Date.now() - started) / 1000)} 秒。请查看下方原因后重试。`;
+      } finally {
+        clearInterval(timer);
+        $('publishProgress').querySelector('progress').hidden = true;
+        button.disabled = false;
+        button.textContent = label;
+        button.removeAttribute('aria-busy');
+      }
     });
 
     switchProject('builder');
