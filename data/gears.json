@@ -1,5 +1,17 @@
 [
   {
+    "id": "g_190",
+    "name": "涉渊白刃",
+    "part": "配件",
+    "set": "涉渊",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E7%99%BD%E5%88%83.png",
+    "stats": [
+      "防御力：+21",
+      "敏捷：+43/+47/+51/+55",
+      "终结技充能效率：+25.71%/+28.29%/+30.86%/+33.43%"
+    ]
+  },
+  {
     "id": "g_189",
     "name": "脉冲式护甲板",
     "part": "配件",
