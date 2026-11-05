@@ -1,5 +1,24 @@
 [
   {
+    "id": "char_3",
+    "name": "明河",
+    "stars": 6,
+    "attr": "电磁",
+    "class": "近卫",
+    "mainPower": "意志",
+    "subPower": "力量",
+    "weaponType": "单手剑",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/chr_0037_minghe.png",
+    "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/chr_0037_minghe.png",
+    "assetNames": {
+      "avatar": "minghe.d65390b1.png",
+      "portrait": "minghe.6860bf19.png",
+      "preview": "minghe.6860bf19.png",
+      "landscape": "minghe.6860bf19.png"
+    },
+    "sourceId": "chr_0037_minghe"
+  },
+  {
     "id": "char_4",
     "name": "祀",
     "stars": 6,
@@ -15,24 +34,6 @@
       "portrait": "jsspsi.409b46fa.png",
       "preview": "jsspsi.409b46fa.png",
       "landscape": "jsspsi.409b46fa.png"
-    }
-  },
-  {
-    "id": "char_3",
-    "name": "明河",
-    "stars": 6,
-    "attr": "电磁",
-    "class": "近卫",
-    "mainPower": "意志",
-    "subPower": "力量",
-    "weaponType": "单手剑",
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/char_3.png",
-    "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/char_3.png",
-    "assetNames": {
-      "avatar": "minghe.d65390b1.png",
-      "portrait": "minghe.6860bf19.png",
-      "preview": "minghe.6860bf19.png",
-      "landscape": "minghe.6860bf19.png"
     }
   },
   {

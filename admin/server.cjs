@@ -8,6 +8,9 @@ const builderRoot = path.resolve(__dirname, '..');
 const adminDir = __dirname;
 const axisRoot = path.resolve(process.env.AXIS_TOOL_ROOT || path.join(builderRoot, '..', 'endfield-axis-tool'));
 const liveReloadClients = new Set();
+const websiteSync = require('./website-sync.cjs');
+let syncJob = { state:'idle', message:'尚未检查更新' };
+let syncPlan = null;
 
 const projects = {
   builder: {
@@ -520,6 +523,53 @@ async function handleApi(req, res, pathname, query) {
   }
 
   const project = projectFromQuery(query);
+
+  if (pathname === '/api/website-sync' && req.method === 'GET') {
+    sendJson(res, 200, { ok:true, ...syncJob });
+    return;
+  }
+  if (pathname === '/api/website-sync/check' && req.method === 'POST') {
+    if (['checking','applying'].includes(syncJob.state)) throw new Error('已有更新任务正在运行，请稍候');
+    syncPlan = null;
+    syncJob = { state:'checking', message:'正在连接数据网站' };
+    websiteSync.collect(message => { syncJob.message = message; }).then(collected => {
+      syncPlan = websiteSync.prepare(collected, projects);
+      const imageSources = Object.fromEntries(collected.assets.map(asset => {
+        const repo = asset.project === 'axis' ? 'endfield-axis-tool' : 'Endfield-Character-Builder';
+        const target = `https://raw.githubusercontent.com/Sanatazm/${repo}/main/${asset.file.split('/').map(encodeURIComponent).join('/')}`;
+        return [target, asset.address];
+      }));
+      syncJob = { state:'ready', message:'检查完成，请核对清单；点击“发布到 GitHub”后才会发布', version:collected.version, id:collected.id, changes:syncPlan.changes, warnings:syncPlan.warnings, imageSources };
+    }).catch(error => { syncJob = { state:'failed', message:error.message }; });
+    sendJson(res, 202, { ok:true });
+    return;
+  }
+  if (pathname === '/api/website-sync/apply' && req.method === 'POST') {
+    const input = JSON.parse(await readBody(req));
+    if (syncJob.state !== 'ready' || !syncPlan || input.id !== syncPlan.id) throw new Error('请先重新检查网站更新');
+    const plan = syncPlan;
+    syncJob = { ...syncJob, state:'applying', message:'正在获取图片资源' };
+    websiteSync.apply(plan, projects, message => { syncJob.message = message; }, () => {
+      for (const item of Object.values(projects)) {
+        const result = buildAndValidate(item);
+        if (!result.ok) throw new Error(`数据校验失败：${result.build?.output || ''}\n${result.validate?.output || ''}`);
+      }
+    }).then(() => {
+      syncJob.message = '正在发布排轴工具';
+      const axis = publishToGithub(projects.axis);
+      if (!axis.ok) throw new Error(`数据已保存到本地，排轴工具推送失败：${axis.output}`);
+      syncJob.message = '正在发布角色配置工具';
+      const builder = publishToGithub(projects.builder);
+      if (!builder.ok) throw new Error(`数据已保存到本地，角色配置工具推送失败：${builder.output}`);
+      syncJob = { ...syncJob, state:'done', message:'已成功发布到 GitHub：角色配置工具和排轴工具均已更新。网页部署完成后即可查看。' };
+      syncPlan = null;
+    }).catch(error => {
+      for (const item of Object.values(projects)) buildAndValidate(item);
+      syncJob = { ...syncJob, state:'failed', message:error.message };
+    });
+    sendJson(res, 202, { ok:true });
+    return;
+  }
 
   if (req.method === 'GET' && pathname === '/api/data') {
     sendJson(res, 200, readAllData(project));

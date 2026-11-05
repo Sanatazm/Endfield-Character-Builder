@@ -1,5 +1,18 @@
 [
   {
+    "id": "w_5",
+    "name": "唤月",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%94%A4%E6%9C%88.png",
+    "stats": [
+      "意志",
+      "攻击",
+      "附术"
+    ],
+    "sourceId": "wpn_sword_0025"
+  },
+  {
     "id": "w_7",
     "name": "玉中身",
     "type": "双手剑",
@@ -21,18 +34,6 @@
       "智识",
       "寒冷伤害",
       "效益"
-    ]
-  },
-  {
-    "id": "w_5",
-    "name": "唤月",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%94%A4%E6%9C%88.png",
-    "stats": [
-      "意志",
-      "攻击",
-      "附术"
     ]
   },
   {

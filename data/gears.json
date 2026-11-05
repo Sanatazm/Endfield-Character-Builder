@@ -1,5 +1,143 @@
 [
   {
+    "id": "g_18",
+    "name": "生物辅助胸甲",
+    "part": "护甲",
+    "set": "生物辅助",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%94%9F%E7%89%A9%E8%BE%85%E5%8A%A9%E8%83%B8%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "意志：+87/+95/+104/+113",
+      "智识：+58/+63/+69/+75",
+      "治疗效率加成：+10.35%/+11.38%/+12.42%/+13.46%"
+    ],
+    "sourceId": "item_equip_t4_suit_heal01_body_02"
+  },
+  {
+    "id": "g_17",
+    "name": "生物辅助重甲",
+    "part": "护甲",
+    "set": "生物辅助",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%94%9F%E7%89%A9%E8%BE%85%E5%8A%A9%E9%87%8D%E7%94%B2.png",
+    "stats": [
+      "防御力：+56",
+      "力量：+87/+95/+104/+113",
+      "意志：+58/+63/+69/+75",
+      "治疗效率加成：+10.35%/+11.38%/+12.42%/+13.46%"
+    ],
+    "sourceId": "item_equip_t4_suit_heal01_body_01"
+  },
+  {
+    "id": "g_87",
+    "name": "M.I.警用瞄具·壹型",
+    "part": "配件",
+    "set": "M.I.警用",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/M.I.%E8%AD%A6%E7%94%A8%E7%9E%84%E5%85%B7%C2%B7%E5%A3%B9%E5%9E%8B.png",
+    "stats": [
+      "防御力：+21",
+      "敏捷：+32/+35/+38/+41",
+      "智识：+21/+23/+25/+27",
+      "暴击率：+10.35%/+11.38%/+12.42%/+13.46%"
+    ],
+    "sourceId": "item_equip_t4_suit_criti01_edc_06"
+  },
+  {
+    "id": "g_85",
+    "name": "M.I.警用工具组",
+    "part": "配件",
+    "set": "M.I.警用",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/M.I.%E8%AD%A6%E7%94%A8%E5%B7%A5%E5%85%B7%E7%BB%84.png",
+    "stats": [
+      "防御力：+21",
+      "智识：+32/+35/+38/+41",
+      "敏捷：+21/+23/+25/+27",
+      "暴击率：+10.35%/+11.38%/+12.42%/+13.46%"
+    ],
+    "sourceId": "item_equip_t4_suit_criti01_edc_03"
+  },
+  {
+    "id": "g_42",
+    "name": "碾骨面具·壹型",
+    "part": "配件",
+    "set": "碾骨",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%A2%BE%E9%AA%A8%E9%9D%A2%E5%85%B7%C2%B7%E5%A3%B9%E5%9E%8B.png",
+    "stats": [
+      "防御力：+21",
+      "敏捷：+32/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "暴击率：+10.35%/+11.38%/+12.42%/+13.46%"
+    ],
+    "sourceId": "item_equip_t4_suit_attri01_edc_05"
+  },
+  {
+    "id": "g_14",
+    "name": "点剑短刃",
+    "part": "配件",
+    "set": "点剑",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%82%B9%E5%89%91%E7%9F%AD%E5%88%83.png",
+    "stats": [
+      "防御力：+21",
+      "敏捷：+32/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "终结技伤害加成：+51.75%/+56.92%/+62.1%/+67.27%"
+    ],
+    "sourceId": "item_equip_t4_suit_phy01_edc_04"
+  },
+  {
+    "id": "g_65",
+    "name": "拓荒分析仪",
+    "part": "配件",
+    "set": "拓荒",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%88%86%E6%9E%90%E4%BB%AA.png",
+    "stats": [
+      "防御力：+21",
+      "力量：+41/+45/+49/+53",
+      "终结技伤害加成：+51.75%/+56.92%/+62.1%/+67.27%"
+    ],
+    "sourceId": "item_equip_t4_suit_atb01_edc_03"
+  },
+  {
+    "id": "g_98",
+    "name": "50式应龙雷达·壹型",
+    "part": "配件",
+    "set": "50式应龙",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/50%E5%BC%8F%E5%BA%94%E9%BE%99%E9%9B%B7%E8%BE%BE%C2%B7%E5%A3%B9%E5%9E%8B.png",
+    "stats": [
+      "防御力：+21",
+      "敏捷：+32/+35/+38/+41",
+      "力量：+21/+23/+25/+27",
+      "终结技伤害加成：+51.75%/+56.92%/+62.1%/+67.27%"
+    ],
+    "sourceId": "item_equip_t4_suit_atk02_edc_02"
+  },
+  {
+    "id": "g_166",
+    "name": "集成实训医疗护手",
+    "part": "护手",
+    "set": "集成实训",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%8C%BB%E7%96%97%E6%8A%A4%E6%89%8B.png",
+    "stats": [
+      "防御力：+36",
+      "主能力：+55/+60/+66/+71",
+      "副能力：+37/+40/+44/+48",
+      "治疗效率加成：+14.75%/+16.22%/+17.7%/+19.18%"
+    ],
+    "sourceId": "item_equip_t4_parts_wuling00_hand_05"
+  },
+  {
+    "id": "g_51",
+    "name": "脉冲式侵入核",
+    "part": "配件",
+    "set": "脉冲式",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E8%84%89%E5%86%B2%E5%BC%8F%E4%BE%B5%E5%85%A5%E6%A0%B8.png",
+    "stats": [
+      "防御力：+21",
+      "意志：+41/+45/+49/+53",
+      "终结技伤害加成：+51.75%/+56.92%/+62.1%/+67.27%"
+    ],
+    "sourceId": "item_equip_t4_suit_pulse_cryst01_edc_03"
+  },
+  {
     "id": "g_190",
     "name": "涉渊白刃",
     "part": "配件",
@@ -321,19 +459,6 @@
     ]
   },
   {
-    "id": "g_166",
-    "name": "集成实训医疗护手",
-    "part": "护手",
-    "set": "集成实训",
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E5%8C%BB%E7%96%97%E6%8A%A4%E6%89%8B.png",
-    "stats": [
-      "防御力：+36",
-      "主能力：+55/+60/+66/+71",
-      "副能力：+37/+40/+44/+48",
-      "治疗效率加成：+14.75%/+16.23%/+17.70%/+19.18%"
-    ]
-  },
-  {
     "id": "g_165",
     "name": "集成实训突袭刺刃",
     "part": "配件",
@@ -581,19 +706,6 @@
     ]
   },
   {
-    "id": "g_14",
-    "name": "点剑短刃",
-    "part": "配件",
-    "set": "点剑",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "敏捷：+32/+35/+38/+41",
-      "力量：+21/+23/+25/+27",
-      "终结技伤害加成：+51.8%/+56.9%/+62.1%/+67.3%"
-    ]
-  },
-  {
     "id": "g_15",
     "name": "点剑微型滤芯",
     "part": "配件",
@@ -616,32 +728,6 @@
       "防御力：+21",
       "力量：+41/+45/+49/+53",
       "源石技艺强度：+41/+46/+50/+54"
-    ]
-  },
-  {
-    "id": "g_17",
-    "name": "生物辅助重甲",
-    "part": "护甲",
-    "set": "生物辅助",
-    "img": "https://via.placeholder.com/80?text=Armor",
-    "stats": [
-      "防御力：+56",
-      "力量：+87/+95/+104/+113",
-      "意志：+58/+63/+69/+75",
-      "治疗效率加成：+10.4%/+11.5%/+12.5%/+13.6%"
-    ]
-  },
-  {
-    "id": "g_18",
-    "name": "生物辅助胸甲",
-    "part": "护甲",
-    "set": "生物辅助",
-    "img": "https://via.placeholder.com/80?text=Armor",
-    "stats": [
-      "防御力：+56",
-      "意志：+87/+95/+104/+113",
-      "智识：+58/+63/+69/+75",
-      "治疗效率加成：+10.4%/+11.5%/+12.5%/+13.6%"
     ]
   },
   {
@@ -942,19 +1028,6 @@
     ]
   },
   {
-    "id": "g_42",
-    "name": "碾骨面具·壹型",
-    "part": "配件",
-    "set": "碾骨",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "敏捷：+32/+35/+38/+41",
-      "力量：+21/+23/+25/+27",
-      "暴击率：+10.4%/+11.4%/+12.4%/+13.5%"
-    ]
-  },
-  {
     "id": "g_43",
     "name": "碾骨面具·贰型",
     "part": "配件",
@@ -1055,18 +1128,6 @@
       "智识：+32/+35/+38/+41",
       "敏捷：+21/+23/+25/+27",
       "源石技艺强度：+41/+46/+50/+54"
-    ]
-  },
-  {
-    "id": "g_51",
-    "name": "脉冲式侵入核",
-    "part": "配件",
-    "set": "脉冲式",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "意志：+41/+45/+49/+53",
-      "终结技伤害加成：+51.8%/+56.9%/+62.1%/+67.3%"
     ]
   },
   {
@@ -1235,18 +1296,6 @@
       "防御力：+21",
       "意志：+41/+45/+49/+53",
       "物理伤害加成：+23%/+25.3%/+27.6%/+29.9%"
-    ]
-  },
-  {
-    "id": "g_65",
-    "name": "拓荒分析仪",
-    "part": "配件",
-    "set": "拓荒",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "力量：+41/+45/+49/+53",
-      "终结技伤害加成：+51.8%/+56.9%/+62.1%/+67.3%"
     ]
   },
   {
@@ -1496,19 +1545,6 @@
     ]
   },
   {
-    "id": "g_85",
-    "name": "M.I.警用工具组",
-    "part": "配件",
-    "set": "M.I.警用",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "意志：+32/+35/+38/+41",
-      "智识：+21/+23/+25/+27",
-      "暴击率：+10.4%/+11.5%/+12.5%/+13.5%"
-    ]
-  },
-  {
     "id": "g_86",
     "name": "M.I.警用瞄具",
     "part": "配件",
@@ -1519,19 +1555,6 @@
       "敏捷：+32/+35/+38/+41",
       "力量：+21/+23/+25/+27",
       "战技伤害加成：+41.4%/+45.5%/+49.7%/+53.8%"
-    ]
-  },
-  {
-    "id": "g_87",
-    "name": "M.I.警用瞄具·壹型",
-    "part": "配件",
-    "set": "M.I.警用",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "敏捷：+32/+35/+38/+41",
-      "智识：+21/+23/+25/+27",
-      "暴击率：+10.4%/+11.5%/+12.5%/+13.5%"
     ]
   },
   {
@@ -1662,19 +1685,6 @@
       "力量：+32/+35/+38/+41",
       "意志：+21/+23/+25/+27",
       "物理伤害加成：+23%/+25.3%/+27.6%/+29.9%"
-    ]
-  },
-  {
-    "id": "g_98",
-    "name": "50式应龙雷达·壹型",
-    "part": "配件",
-    "set": "50式应龙",
-    "img": "https://via.placeholder.com/80?text=Acc",
-    "stats": [
-      "防御力：+21",
-      "敏捷：+32/+35/+38/+41",
-      "力量：+21/+23/+25/+27",
-      "终结技伤害加成：+51.8%/+56.9%/+62.1%/+67.3%"
     ]
   },
   {

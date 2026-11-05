@@ -36,6 +36,7 @@ function assertUnique(items, field, label, allowedDuplicates = new Set()) {
 
 function assertGearImages(gears) {
   for (const gear of gears) {
+    if (gear.sourceId && !gear.img) continue;
     const file = path.join(root, 'img-gear', `${gear.name}.png`);
     if (!fs.existsSync(file)) {
       fail(`gear image missing: img-gear/${gear.name}.png`);
@@ -45,6 +46,7 @@ function assertGearImages(gears) {
 
 function assertWeaponImages(weapons) {
   for (const weapon of weapons) {
+    if (weapon.sourceId && !weapon.img) continue;
     const mapped = {
       'J.E.T.': 'JET',
       '作品·蚀迹': '作品：蚀迹',

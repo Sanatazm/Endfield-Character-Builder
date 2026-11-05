@@ -77,7 +77,7 @@
       <button class="only-builder" data-panel="gear">装备维护</button>
       <button class="only-builder" data-panel="setEffect">套装效果维护</button>
       <button class="only-axis hidden" data-panel="axisChar">排轴角色技能</button>
-      <button data-panel="publish">发布 GitHub</button>
+      <button data-panel="websiteSync">网站更新</button>
       <details class="advanced-toggle">
         <summary>高级工具</summary>
         <button data-panel="json" style="margin-top:10px">JSON 直改</button>
@@ -232,14 +232,16 @@
         </div>
       </div>
 
-      <div id="publish" class="panel">
-        <div class="card">
-          <div class="toolbar">
-            <button class="btn primary" id="runBuild">生成页面数据并推送 GitHub</button>
-            <a class="btn" id="previewLink" href="/app/builder/" target="_blank">打开本地预览</a>
-          </div>
-          <p class="hint">当前项目会先生成页面数据并校验，通过后自动提交并推送到对应 GitHub Pages 仓库。</p>
+      <div id="websiteSync" class="panel">
+        <div class="toolbar">
+          <button class="btn primary" id="checkWebsite">更新</button>
+          <button class="btn" id="applyWebsite">发布到 GitHub</button>
+          <a class="btn" id="previewLink" href="/app/builder/" target="_blank" rel="noopener">打开本地预览</a>
         </div>
+        <p><a href="https://www.akedata.wiki/?plugin=v3_character" target="_blank" rel="noopener">AKEData 数据库</a> · <a href="https://endfield.hypergryph.com/#operator" target="_blank" rel="noopener">官网角色图片</a></p>
+        <progress id="websiteBusy" hidden aria-label="网站更新进行中" style="width:100%"></progress>
+        <p id="websiteMessage" role="status" aria-live="polite">尚未检查更新</p>
+        <div id="websiteChanges"></div>
       </div>
 
       <div id="json" class="panel">
@@ -740,13 +742,13 @@
         setStatus(`图片已上传：${result.file}`);
       } catch (error) { setStatus(error.message, false); }
     });
-    $('runBuild').addEventListener('click', async () => {
-      const button = $('runBuild');
-      if (button.disabled) return;
+    async function publishLocal() {
+      const button = $('applyWebsite');
       const label = button.textContent;
       const started = Date.now();
       const projectLabel = currentProject === 'axis' ? '排轴工具' : '角色配置工具';
       button.disabled = true;
+      $('checkWebsite').disabled = true;
       button.textContent = '正在发布，请稍候…';
       button.setAttribute('aria-busy', 'true');
       $('publishProgress').hidden = false;
@@ -769,11 +771,63 @@
         clearInterval(timer);
         $('publishProgress').querySelector('progress').hidden = true;
         button.disabled = false;
+        $('checkWebsite').disabled = false;
         button.textContent = label;
         button.removeAttribute('aria-busy');
       }
-    });
+    }
 
+    let websiteTimer;
+    let websitePlanId;
+    let websitePending = false;
+    async function pollWebsite() {
+      const job = await api('/api/website-sync');
+      const busy = ['checking','applying'].includes(job.state);
+      $('websiteBusy').hidden = !busy;
+      $('checkWebsite').disabled = busy;
+      $('applyWebsite').disabled = busy;
+      $('websiteMessage').textContent = chineseMessage(job.message);
+      websitePlanId = job.id;
+      websitePending = job.state === 'ready' && Object.values(job.changes || {}).some(rows => rows.length > 0);
+      if (job.changes) {
+        const labels = { characters:'角色', weapons:'武器', gears:'装备', setEffects:'套装效果', axis:'排轴技能图片' };
+        const fields = { id:'编号', sourceId:'来源编号', name:'名称', stars:'星级', class:'职业', attr:'属性', mainPower:'主能力', subPower:'副能力', weaponType:'武器类型', avatarImg:'官网头像', img:'图片', type:'类型', stats:'装备或武器词条', part:'部位', set:'套装', effect:'套装效果', images:'排轴图片' };
+        const imagePreview = address => {
+          if (!address || /via\.placeholder\.com/i.test(address)) return '无关联图片';
+          const source = job.imageSources?.[address] || address;
+          if (!/^https?:\/\//i.test(source)) return escapeHtml(address);
+          const safe = escapeHtml(source);
+          return `<a href="${safe}" target="_blank" rel="noopener" style="display:inline-block"><img src="${safe}" alt="图片预览" loading="lazy" referrerpolicy="no-referrer" style="display:block;width:160px;height:180px;max-width:100%;object-fit:contain;background:#202326;border:1px solid #41464d;border-radius:4px" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden>图片暂时无法加载，点击查看原图</span></a>`;
+        };
+        const value = (input, key) => {
+          if (['img','avatarImg'].includes(key)) return imagePreview(input);
+          if (key === 'images' && input && typeof input === 'object') {
+            return Object.entries({ '头像':input.avatar, ...(input.skills || {}) }).map(([label, address]) => `<div style="display:inline-block;vertical-align:top;margin:8px"><div>${escapeHtml(label)}</div>${imagePreview(address)}</div>`).join('');
+          }
+          return escapeHtml(typeof input === 'object' ? JSON.stringify(input, null, 2) : input);
+        };
+        $('websiteChanges').innerHTML = `<p>数据版本：${escapeHtml(job.version)}</p>` + Object.entries(job.changes).map(([key, rows]) => `<details open><summary>${labels[key]}：${rows.length} 项变更</summary>${rows.map(row => `<details><summary>${escapeHtml(row.mode)} ${escapeHtml(row.name)}</summary>${(row.fields || []).map(field => `<div style="margin:10px 0;overflow-wrap:anywhere"><strong>${escapeHtml(fields[field.key] || field.key)}</strong><div style="display:flex;flex-wrap:wrap;gap:16px"><div>原内容：<div>${value(field.before, field.key) || '无'}</div></div><div>更新后：<div>${value(field.after, field.key) || '无'}</div></div></div></div>`).join('')}</details>`).join('') || '<p>无变更</p>'}</details>`).join('') + `<details open><summary>缺失资源与提醒：${(job.warnings || []).length} 项</summary>${(job.warnings || []).map(message => `<p>${escapeHtml(message)}</p>`).join('') || '<p>本次未发现缺失资源</p>'}</details>`;
+      }
+      if (busy) websiteTimer = setTimeout(() => pollWebsite().catch(error => { $('websiteMessage').textContent = chineseMessage(error.message); }), 1000);
+      if (job.state === 'done') { await loadData(); setStatus(job.message); }
+      if (job.state === 'failed') setStatus(job.message, false);
+    }
+    $('checkWebsite').addEventListener('click', async () => {
+      clearTimeout(websiteTimer);
+      $('checkWebsite').disabled = true;
+      $('websiteMessage').textContent = '正在检查网站更新…';
+      $('websiteChanges').innerHTML = '';
+      try { await api('/api/website-sync/check', { method:'POST' }); await pollWebsite(); }
+      catch (error) { $('checkWebsite').disabled = false; $('websiteMessage').textContent = chineseMessage(error.message); }
+    });
+    $('applyWebsite').addEventListener('click', async () => {
+      if (!websitePending) { await publishLocal(); return; }
+      $('applyWebsite').disabled = true;
+      setStatus('正在应用已确认的更新并发布到 GitHub，请稍候。');
+      try { await api('/api/website-sync/apply', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ id:websitePlanId }) }); await pollWebsite(); }
+      catch (error) { $('websiteMessage').textContent = chineseMessage(error.message); }
+    });
+    pollWebsite().catch(() => {});
     switchProject('builder');
   </script>
 </body>
