@@ -162,8 +162,11 @@ function mergeRows(existing, incoming, prefix) {
     const old = index >= 0 ? merged[index] : null;
     const next = { ...(prefix === 'char' ? { mainPower:'', subPower:'' } : {}), ...old, ...normalized, id:old?.id || `${prefix}_${++max}` };
     if (JSON.stringify(next) === JSON.stringify(old)) continue;
-    if (index >= 0) merged.splice(index, 1);
-    merged.unshift(next);
+    if (index >= 0 && prefix === 'char') merged[index] = next;
+    else {
+      if (index >= 0) merged.splice(index, 1);
+      merged.unshift(next);
+    }
     const fields = Object.keys(next).filter(key => JSON.stringify(next[key]) !== JSON.stringify(old?.[key])).map(key => ({ key, before:old?.[key] ?? '', after:next[key] }));
     changes.push({ name:row.name, mode:old ? '更新' : '新增', fields });
   }
@@ -241,8 +244,9 @@ function prepare(collected, projects, options = {}) {
     for (const type of axis.skillTypes) if (!(type in next.skills)) next.skills[type] = '';
     if (JSON.stringify(axis.charAssets[name]) === JSON.stringify(next)) continue;
     changes.axis.push({ name, mode:axis.charAssets[name] ? '更新' : '新增', fields:[{ key:'images', before:axis.charAssets[name] || '', after:next }] });
+    const isNew = !axis.charAssets[name];
     axis.charAssets[name] = next;
-    axis.orderedChars = [name, ...axis.orderedChars.filter(value => value !== name)];
+    if (isNew) axis.orderedChars = [name, ...axis.orderedChars.filter(value => value !== name)];
   }
   const axisTarget = path.join(projects.axis.root, 'data', 'axis-data.json');
   originals[axisTarget] = fs.readFileSync(axisTarget, 'utf8');
