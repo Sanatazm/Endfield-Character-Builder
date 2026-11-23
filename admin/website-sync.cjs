@@ -160,7 +160,7 @@ function mergeRows(existing, incoming, prefix) {
     const normalized = Object.fromEntries(Object.entries(row).filter(([key, value]) => !['img','avatarImg'].includes(key) || value));
     const index = merged.findIndex(old => old.sourceId === row.sourceId || old.name === row.name);
     const old = index >= 0 ? merged[index] : null;
-    const next = { ...old, ...normalized, id:old?.id || `${prefix}_${++max}` };
+    const next = { ...(prefix === 'char' ? { mainPower:'', subPower:'' } : {}), ...old, ...normalized, id:old?.id || `${prefix}_${++max}` };
     if (JSON.stringify(next) === JSON.stringify(old)) continue;
     if (index >= 0) merged.splice(index, 1);
     merged.unshift(next);
@@ -170,7 +170,7 @@ function mergeRows(existing, incoming, prefix) {
   return { rows:merged, changes };
 }
 
-function prepare(collected, projects) {
+function prepare(collected, projects, options = {}) {
   const baselineFile = path.join(projects.builder.root, '.backups', 'website-sync-baseline.json');
   const resourceKeys = new Map(collected.assets.map(asset => {
     const repo = asset.project === 'axis' ? 'endfield-axis-tool' : 'Endfield-Character-Builder';
@@ -194,10 +194,19 @@ function prepare(collected, projects) {
     fs.mkdirSync(path.dirname(baselineFile), { recursive:true });
     fs.writeFileSync(baselineFile, JSON.stringify(baseline, null, 2) + '\n');
   }
+  const forced = new Set(options.forceNames || []);
+  const nextSnapshot = options.forceNames ? Object.fromEntries(Object.keys(snapshot).map(key => [key, { ...baseline[key], ...snapshot[key] }])) : snapshot;
   const pending = { ...collected };
-  for (const key of ['characters','weapons','gears']) pending[key] = collected[key].filter(row => baseline[key]?.[row.sourceId] !== snapshot[key][row.sourceId]);
+  for (const key of ['characters','weapons','gears']) pending[key] = collected[key].filter(row => forced.has(row.name) || baseline[key]?.[row.sourceId] !== snapshot[key][row.sourceId]);
   pending.setEffects = Object.fromEntries(Object.entries(collected.setEffects).filter(([name]) => baseline.setEffects?.[name] !== snapshot.setEffects[name]));
-  pending.axis = Object.fromEntries(Object.entries(collected.axis).filter(([name]) => baseline.axis?.[name] !== snapshot.axis[name]));
+  const localSetEffects = JSON.parse(fs.readFileSync(path.join(projects.builder.root, 'data', 'set-effects.json'), 'utf8'));
+  for (const gear of pending.gears) {
+    if (Object.prototype.hasOwnProperty.call(localSetEffects, gear.set)) continue;
+    const effect = collected.setEffects[gear.set];
+    if (!effect) throw new Error(`无法更新装备“${gear.name}”：本地及来源网站均缺少“${gear.set}”套装效果`);
+    pending.setEffects[gear.set] = effect;
+  }
+  pending.axis = Object.fromEntries(Object.entries(collected.axis).filter(([name]) => forced.has(name) || baseline.axis?.[name] !== snapshot.axis[name]));
   const pendingNames = [...pending.characters, ...pending.weapons, ...pending.gears].map(row => row.name).concat(Object.keys(pending.axis));
   pending.warnings = collected.warnings.filter(message => pendingNames.some(name => message.includes(name)));
   const references = JSON.stringify([pending.characters, pending.weapons, pending.gears, pending.axis]);
@@ -238,7 +247,7 @@ function prepare(collected, projects) {
   const axisTarget = path.join(projects.axis.root, 'data', 'axis-data.json');
   originals[axisTarget] = fs.readFileSync(axisTarget, 'utf8');
   files.push({ target:axisTarget, value:axis });
-  return { ...collected, files, changes, originals, baselineFile, snapshot };
+  return { ...collected, files, changes, originals, baselineFile, snapshot:nextSnapshot };
 }
 
 async function apply(plan, projects, report, validate) {
@@ -246,20 +255,56 @@ async function apply(plan, projects, report, validate) {
     if (fs.readFileSync(target, 'utf8') !== original) throw new Error('预览后本地数据已有修改，请重新检查更新');
   }
   const staged = [];
+  const skipped = new Set();
   const unique = [...new Map(plan.assets.map(row => [`${row.project}/${row.file}`, row])).values()];
   let complete = 0;
   // Download everything before modifying live data or images.
   for (let offset = 0; offset < unique.length; offset += 4) {
     const settled = await Promise.allSettled(unique.slice(offset, offset + 4).map(async row => {
-      const content = await download(row.address);
-      const png = content.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
-      if (!png) throw new Error(`图片格式异常：${row.file}`);
-      if (row.expected && (content.length !== row.expected.size || crypto.createHash('md5').update(content).digest('hex') !== row.expected.md5)) throw new Error(`图片与资源目录不一致：${row.file}，请重新检查更新`);
-      staged.push({ target:path.join(projects[row.project].root, row.file), content });
-      report(`正在获取图片：${++complete}/${unique.length}`);
+      const target = path.join(projects[row.project].root, row.file);
+      try {
+        if (row.expected && fs.existsSync(target)) {
+          const current = fs.readFileSync(target);
+          if (current.length === row.expected.size && crypto.createHash('md5').update(current).digest('hex') === row.expected.md5) return;
+        }
+        let content;
+        let failure;
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            content = await download(row.address);
+            if (!content.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) throw new Error('图片格式异常');
+            if (row.expected && (content.length !== row.expected.size || crypto.createHash('md5').update(content).digest('hex') !== row.expected.md5)) throw new Error('图片内容与来源目录不一致');
+            failure = null;
+            break;
+          } catch (error) { failure = error; }
+        }
+        if (failure) {
+          const repo = row.project === 'axis' ? 'endfield-axis-tool' : 'Endfield-Character-Builder';
+          skipped.add(`https://raw.githubusercontent.com/Sanatazm/${repo}/main/${row.file.split('/').map(encodeURIComponent).join('/')}`);
+          plan.warnings.push(`图片获取失败，已跳过：${row.file}。保留已有图片，后续更新将继续重试。`);
+          return;
+        }
+        staged.push({ target, content });
+      } finally { report(`已处理图片：${++complete}/${unique.length}，跳过 ${skipped.size} 张`); }
     }));
     const failed = settled.find(row => row.status === 'rejected');
     if (failed) throw failed.reason;
+  }
+  if (skipped.size) {
+    const restoreImages = (value, original) => {
+      if (typeof value === 'string') return skipped.has(value) ? (typeof original === 'string' ? original : '') : value;
+      if (Array.isArray(value)) return value.map((row, index) => restoreImages(row, row?.id ? original?.find(old => old.id === row.id) : original?.[index]));
+      if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, restoreImages(item, original?.[key])]));
+      return value;
+    };
+    for (const file of plan.files) file.value = restoreImages(file.value, JSON.parse(plan.originals[file.target]));
+    // Do not mark a failed image as synchronized; the next check must offer it again.
+    const previous = fs.existsSync(plan.baselineFile) ? JSON.parse(fs.readFileSync(plan.baselineFile, 'utf8')) : {};
+    for (const [group, entries] of Object.entries(plan.snapshot)) for (const [key, signature] of Object.entries(entries)) {
+      if (![...skipped].some(address => signature.includes(address))) continue;
+      if (previous[group]?.[key] !== undefined) entries[key] = previous[group][key];
+      else delete entries[key];
+    }
   }
   for (const [target, original] of Object.entries(plan.originals)) {
     if (fs.readFileSync(target, 'utf8') !== original) throw new Error('图片获取期间本地数据已有修改，请重新检查更新');
@@ -289,4 +334,57 @@ async function apply(plan, projects, report, validate) {
   }
 }
 
-module.exports = { collect, download, prepare, apply };
+async function collectCharacters(names, report = () => {}) {
+  const manifest = parse((await download(`${DATA}/manifest.json`)).toString('utf8'));
+  const version = manifest.versions.find(row => row.id === manifest.latest);
+  if (!version || !/^public\/[\w./-]+$/.test(version.tableCfgPath)) throw new Error('AKEData 版本目录无效');
+  const table = async name => parse((await download(`${DATA}/${version.tableCfgPath}/${name}.json`)).toString('utf8'));
+  report('正在读取角色正式与预告数据');
+  const [characters, growth, foresight, professions, texts, images] = await Promise.all([
+    table('CharacterTable'), table('CharGrowthTable'), table('ForesightCharGrowthTable'), table('CharProfessionTable'), table('I18nTextTable_CN'), officialImages(),
+  ]);
+  const index = parse((await download(`${DATA}/asset-sync-index.json`)).toString('utf8')).datasets?.images?.files;
+  if (!index) throw new Error('无法读取图片资源目录');
+  const text = value => texts[value?.id] || value?.text || '';
+  const result = { id:crypto.randomUUID(), version:version.id, characters:[], weapons:[], gears:[], setEffects:{}, axis:{}, warnings:[], assets:[] };
+  const asset = (project, directory, file, address, expected) => {
+    result.assets.push({ project, file:directory ? `${directory}/${file}` : file, address, expected });
+    return `https://raw.githubusercontent.com/Sanatazm/${project === 'axis' ? 'endfield-axis-tool' : 'Endfield-Character-Builder'}/main/${directory ? directory + '/' : ''}${encodeURIComponent(file)}`;
+  };
+  for (const name of names) {
+    const entry = Object.entries({ ...foresight, ...characters }).find(([, row]) => text(row.name) === name);
+    if (!entry) throw new Error(`来源网站尚未提供${name}的角色资料`);
+    const [id, char] = entry;
+    const grow = growth[id] || char;
+    const weaponPrefixes = { sword:'单手剑', lance:'长柄武器', claym:'双手剑', funnel:'施术单元', pistol:'手铳' };
+    const weaponTypes = { 1:'单手剑', 2:'施术单元', 3:'双手剑', 5:'长柄武器', 6:'手铳' };
+    const attrs = { 39:'力量', 40:'敏捷', 41:'智识', 42:'意志' };
+    const row = { sourceId:id, name, stars:char.rarity, class:text(professions[grow.profession]?.name), attr:({ Physical:'物理', Fire:'灼热', Pulse:'电磁', Cryst:'寒冷', Natural:'自然' })[grow.charTypeId], weaponType:weaponTypes[grow.weaponType] || weaponPrefixes[grow.weaponIds?.[0]?.split('_')[1]] };
+    if (!row.class || !row.attr || !row.weaponType || !row.stars) throw new Error(`${name}的公开基础资料不完整`);
+    for (const [key, label] of [['mainPower','主能力'],['subPower','副能力']]) {
+      const attr = key === 'mainPower' ? char.mainAttrType : char.subAttrType ?? grow.subAttrType;
+      if (attrs[attr]) row[key] = attrs[attr];
+      else result.warnings.push(`${name}：${label}尚未公开，本次不填写`);
+    }
+    const axis = { skills:{} };
+    for (const [kind, directory, field, label] of [['avatar','img-avatar','avatarImg','正方形头像'],['portrait','imag-char','img','全身立绘']]) {
+      const address = images[name]?.[kind];
+      if (!address) { result.warnings.push(`${name}：缺少官网${label}`); continue; }
+      row[field] = asset('builder', directory, `${id}.png`, address);
+      if (kind === 'avatar') axis.avatar = asset('axis', '', `sync_${id}_avatar.png`, address);
+    }
+    for (const [type, label] of [[0,'重击'],[1,'战技'],[2,'终结技'],[3,'连携技']]) {
+      const group = Object.values(grow.skillGroupMap || {}).find(group => group.skillGroupType === type);
+      const icon = group?.icon;
+      const ref = icon ? `${SPRITES}skillicon/${icon}.png` : '';
+      const expected = ref && index[ref.replace('/public/images/', '')];
+      if (expected) axis.skills[label] = asset('axis', '', `${icon}.png`, `${DATA}${ref}`, expected);
+      else result.warnings.push(`${name}：${label}图标尚未提供，保留已有图标`);
+    }
+    result.characters.push(row);
+    result.axis[name] = axis;
+  }
+  return result;
+}
+
+module.exports = { collect, collectCharacters, download, prepare, apply };

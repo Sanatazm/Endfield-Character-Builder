@@ -142,8 +142,8 @@ function readAllData(project) {
       const portraitFromData = fileNameFromAssetRef(character.img);
       const existingAsset = (assetType, candidates) => candidates.find(file => file && fs.existsSync(path.join(project.root, project.assetDirs[assetType], file))) || '';
       return [id, {
-        avatar: existingAsset('avatar', [avatarMap[id], `${id}.png`]),
-        portrait: existingAsset('portrait', [portraitMap[id], portraitFromData, `${id}.png`]),
+        avatar: existingAsset('avatar', [fileNameFromAssetRef(character.avatarImg), avatarMap[id], `${id}.png`]),
+        portrait: existingAsset('portrait', [portraitFromData, portraitMap[id], `${id}.png`]),
         preview: existingAsset('preview', [landscapeMap[id], portraitMap[id], `${id}.png`]),
         landscape: existingAsset('landscape', [landscapeMap[id], avatarMap[id], `${id}.png`]),
       }];
@@ -552,7 +552,10 @@ async function handleApi(req, res, pathname, query) {
     websiteSync.apply(plan, projects, message => { syncJob.message = message; }, () => {
       for (const item of Object.values(projects)) {
         const result = buildAndValidate(item);
-        if (!result.ok) throw new Error(`数据校验失败：${result.build?.output || ''}\n${result.validate?.output || ''}`);
+        if (!result.ok) {
+          const lines = String(result.validate?.output || result.build?.output || '未知校验错误').split('\n').filter(Boolean);
+          throw new Error(`${item.name}数据校验未通过，本次更新已撤回。\n${lines.slice(0, 6).join('\n')}${lines.length > 6 ? `\n另有 ${lines.length - 6} 条校验错误。` : ''}`);
+        }
       }
     }).then(() => {
       syncJob.message = '正在发布排轴工具';
@@ -561,7 +564,8 @@ async function handleApi(req, res, pathname, query) {
       syncJob.message = '正在发布角色配置工具';
       const builder = publishToGithub(projects.builder);
       if (!builder.ok) throw new Error(`数据已保存到本地，角色配置工具推送失败：${builder.output}`);
-      syncJob = { ...syncJob, state:'done', message:'已成功发布到 GitHub：角色配置工具和排轴工具均已更新。网页部署完成后即可查看。' };
+      const skippedCount = plan.warnings.filter(message => message.startsWith('图片获取失败，已跳过')).length;
+      syncJob = { ...syncJob, state:'done', message:`已成功发布到 GitHub：角色配置工具和排轴工具均已更新。${skippedCount ? `有 ${skippedCount} 张图片未获取成功，详见缺失资源清单。` : ''}网页部署完成后即可查看。` };
       syncPlan = null;
     }).catch(error => {
       for (const item of Object.values(projects)) buildAndValidate(item);
@@ -745,6 +749,11 @@ function serveApp(res, pathname) {
     return;
   }
   let body = fs.readFileSync(target);
+  if (['.html', '.js'].includes(path.extname(target).toLowerCase())) {
+    body = body.toString('utf8')
+      .replaceAll('https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/', `http://127.0.0.1:${port}/app/builder/`)
+      .replaceAll('https://raw.githubusercontent.com/Sanatazm/endfield-axis-tool/main/', `http://127.0.0.1:${port}/app/axis/`);
+  }
   if (path.basename(target).toLowerCase() === 'index.html') body = injectLiveReload(body.toString('utf8'));
   res.writeHead(200, { 'content-type': mimeType(target) });
   res.end(body);

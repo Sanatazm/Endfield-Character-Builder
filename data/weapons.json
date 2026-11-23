@@ -1,5 +1,1019 @@
 [
   {
+    "id": "w_yw",
+    "name": "遥望",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%81%A5%E6%9C%9B.png",
+    "stats": [
+      "主能力",
+      "源石技艺",
+      "强攻"
+    ],
+    "sourceId": "wpn_sword_0026"
+  },
+  {
+    "id": "w_4",
+    "name": "聚合工业",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%81%9A%E5%90%88%E5%B7%A5%E4%B8%9A.png",
+    "stats": [
+      "意志",
+      "电磁伤害",
+      "迸发"
+    ],
+    "sourceId": "wpn_sword_0024"
+  },
+  {
+    "id": "w_3",
+    "name": "点心时刻",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%82%B9%E5%BF%83%E6%97%B6%E5%88%BB.png",
+    "stats": [
+      "力量",
+      "治疗效率",
+      "医疗"
+    ],
+    "sourceId": "wpn_sword_0023"
+  },
+  {
+    "id": "w_lzf",
+    "name": "狼之绯",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%8B%BC%E4%B9%8B%E7%BB%AF.png",
+    "stats": [
+      "敏捷",
+      "暴击率",
+      "切骨"
+    ],
+    "sourceId": "wpn_sword_0022"
+  },
+  {
+    "id": "w_hy",
+    "name": "宏愿",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AE%8F%E6%84%BF.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "附术"
+    ],
+    "sourceId": "wpn_sword_0021"
+  },
+  {
+    "id": "w_zl3",
+    "name": "逐鳞3.0",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%80%90%E9%B3%9E3.0.png",
+    "stats": [
+      "力量",
+      "寒冷伤害",
+      "压制"
+    ],
+    "sourceId": "wpn_sword_0020"
+  },
+  {
+    "id": "w_obj_lm",
+    "name": "O.B.J.轻芒",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/O.B.J.%E8%BD%BB%E8%8A%92.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "流转"
+    ],
+    "sourceId": "wpn_sword_0019"
+  },
+  {
+    "id": "w_bzg",
+    "name": "不知归",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E4%B8%8D%E7%9F%A5%E5%BD%92.png",
+    "stats": [
+      "意志",
+      "攻击",
+      "流转"
+    ],
+    "sourceId": "wpn_sword_0016"
+  },
+  {
+    "id": "w_byxx",
+    "name": "白夜新星",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%99%BD%E5%A4%9C%E6%96%B0%E6%98%9F.png",
+    "stats": [
+      "主能力",
+      "源石技艺",
+      "附术"
+    ],
+    "sourceId": "wpn_sword_0014"
+  },
+  {
+    "id": "w_xhsm",
+    "name": "显赫声名",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%98%BE%E8%B5%AB%E5%A3%B0%E5%90%8D.png",
+    "stats": [
+      "主能力",
+      "物理伤害",
+      "残暴"
+    ],
+    "sourceId": "wpn_sword_0013"
+  },
+  {
+    "id": "w_rrqgq",
+    "name": "热熔切割器",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%83%AD%E7%86%94%E5%88%87%E5%89%B2%E5%99%A8.png",
+    "stats": [
+      "意志",
+      "攻击",
+      "流转"
+    ],
+    "sourceId": "wpn_sword_0012"
+  },
+  {
+    "id": "w_fy",
+    "name": "扶摇",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%89%B6%E6%91%87.png",
+    "stats": [
+      "主能力",
+      "暴击率",
+      "夜幕"
+    ],
+    "sourceId": "wpn_sword_0011"
+  },
+  {
+    "id": "w_ashj",
+    "name": "黯色火炬",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%BB%AF%E8%89%B2%E7%81%AB%E7%82%AC.png",
+    "stats": [
+      "智识",
+      "灼热伤害",
+      "附术"
+    ],
+    "sourceId": "wpn_sword_0010"
+  },
+  {
+    "id": "w_lc_4",
+    "name": "浪潮",
+    "type": "单手剑",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%B5%AA%E6%BD%AE.png",
+    "stats": [
+      "智识",
+      "攻击",
+      "追袭"
+    ],
+    "sourceId": "wpn_sword_0009"
+  },
+  {
+    "sourceId": "wpn_sword_0008",
+    "name": "显锋",
+    "stars": 4,
+    "type": "单手剑",
+    "stats": [
+      "敏捷",
+      "物理伤害",
+      "压制"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%98%BE%E9%94%8B.png",
+    "id": "w_11"
+  },
+  {
+    "id": "w_rzhy",
+    "name": "熔铸火焰",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%86%94%E9%93%B8%E7%81%AB%E7%84%B0.png",
+    "stats": [
+      "智识",
+      "攻击",
+      "夜幕"
+    ],
+    "sourceId": "wpn_sword_0006"
+  },
+  {
+    "id": "w_obj_xj",
+    "name": "O.B.J.迅极",
+    "type": "手铳",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/O.B.J.%E8%BF%85%E6%9E%81.png",
+    "stats": [
+      "敏捷",
+      "终结技充能效率",
+      "迸发"
+    ],
+    "sourceId": "wpn_pistol_0012"
+  },
+  {
+    "id": "w_lc",
+    "name": "落草",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%90%BD%E8%8D%89.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "迸发"
+    ],
+    "sourceId": "wpn_pistol_0011"
+  },
+  {
+    "id": "w_tlxh",
+    "name": "同类相食",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%90%8C%E7%B1%BB%E7%9B%B8%E9%A3%9F.png",
+    "stats": [
+      "主能力",
+      "法术伤害",
+      "附术"
+    ],
+    "sourceId": "wpn_pistol_0009"
+  },
+  {
+    "sourceId": "wpn_pistol_0006",
+    "name": "作品：众生",
+    "stars": 5,
+    "type": "手铳",
+    "stats": [
+      "敏捷",
+      "法术伤害",
+      "附术"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E4%BD%9C%E5%93%81%EF%BC%9A%E4%BC%97%E7%94%9F.png",
+    "id": "w_10"
+  },
+  {
+    "id": "w_lhz",
+    "name": "领航者",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%A2%86%E8%88%AA%E8%80%85.png",
+    "stats": [
+      "智识",
+      "寒冷伤害",
+      "附术"
+    ],
+    "sourceId": "wpn_pistol_0005"
+  },
+  {
+    "id": "w_cl",
+    "name": "长路",
+    "type": "手铳",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%95%BF%E8%B7%AF.png",
+    "stats": [
+      "力量",
+      "法术伤害",
+      "追袭"
+    ],
+    "sourceId": "wpn_pistol_0003"
+  },
+  {
+    "id": "w_hxhw",
+    "name": "呼啸守卫",
+    "type": "手铳",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%91%BC%E5%95%B8%E5%AE%88%E5%8D%AB.png",
+    "stats": [
+      "智识",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_pistol_0002"
+  },
+  {
+    "id": "w_lxgf",
+    "name": "理性告别",
+    "type": "手铳",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%90%86%E6%80%A7%E5%91%8A%E5%88%AB.png",
+    "stats": [
+      "力量",
+      "灼热伤害",
+      "追袭"
+    ],
+    "sourceId": "wpn_pistol_0004"
+  },
+  {
+    "id": "w_fs",
+    "name": "负山",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%B4%9F%E5%B1%B1.png",
+    "stats": [
+      "敏捷",
+      "物理伤害",
+      "效益"
+    ],
+    "sourceId": "wpn_lance_0012"
+  },
+  {
+    "id": "w_tssj",
+    "name": "天使杀手",
+    "type": "长柄武器",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%A4%A9%E4%BD%BF%E6%9D%80%E6%89%8B.png",
+    "stats": [
+      "意志",
+      "法术伤害",
+      "压制"
+    ],
+    "sourceId": "wpn_lance_0008"
+  },
+  {
+    "id": "w_dhsm",
+    "name": "灯火使命",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%81%AF%E7%81%AB%E4%BD%BF%E5%91%BD.png",
+    "stats": [
+      "敏捷",
+      "终结技充能效率",
+      "效益"
+    ],
+    "sourceId": "wpn_lance_0007"
+  },
+  {
+    "id": "w_qhzy",
+    "name": "嵌合正义",
+    "type": "长柄武器",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%B5%8C%E5%90%88%E6%AD%A3%E4%B9%89.png",
+    "stats": [
+      "力量",
+      "终结技充能效率",
+      "残暴"
+    ],
+    "sourceId": "wpn_lance_0004"
+  },
+  {
+    "id": "w_wx",
+    "name": "望乡",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%9C%9B%E4%B9%A1.png",
+    "stats": [
+      "敏捷",
+      "寒冷伤害",
+      "压制"
+    ],
+    "sourceId": "wpn_pistol_0007"
+  },
+  {
+    "id": "w_xlzdb",
+    "name": "寻路者道标",
+    "type": "长柄武器",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AF%BB%E8%B7%AF%E8%80%85%E9%81%93%E6%A0%87.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "昂扬"
+    ],
+    "sourceId": "wpn_lance_0003"
+  },
+  {
+    "id": "w_yz",
+    "name": "仰止",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E4%BB%B0%E6%AD%A2.png",
+    "stats": [
+      "敏捷",
+      "物理伤害",
+      "夜幕"
+    ],
+    "sourceId": "wpn_sword_0015"
+  },
+  {
+    "id": "w_2",
+    "name": "苦难的尽头",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8B%A6%E9%9A%BE%E7%9A%84%E5%B0%BD%E5%A4%B4.png",
+    "stats": [
+      "敏捷",
+      "自然伤害",
+      "迸发"
+    ],
+    "sourceId": "wpn_funnel_0020"
+  },
+  {
+    "id": "w_xxzy",
+    "name": "向心之引",
+    "type": "长柄武器",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%90%91%E5%BF%83%E4%B9%8B%E5%BC%95.png",
+    "stats": [
+      "意志",
+      "电磁伤害",
+      "压制"
+    ],
+    "sourceId": "wpn_lance_0006"
+  },
+  {
+    "id": "w_cmxm",
+    "name": "沧溟星梦",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%B2%A7%E6%BA%9F%E6%98%9F%E6%A2%A6.png",
+    "stats": [
+      "智识",
+      "治疗效率",
+      "附术"
+    ],
+    "sourceId": "wpn_funnel_0013"
+  },
+  {
+    "id": "w_bdzy",
+    "name": "布道自由",
+    "type": "施术单元",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%B8%83%E9%81%93%E8%87%AA%E7%94%B1.png",
+    "stats": [
+      "意志",
+      "治疗效率",
+      "医疗"
+    ],
+    "sourceId": "wpn_funnel_0012"
+  },
+  {
+    "id": "w_ysbj",
+    "name": "艺术暴君",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%89%BA%E6%9C%AF%E6%9A%B4%E5%90%9B.png",
+    "stats": [
+      "智识",
+      "暴击率",
+      "切骨"
+    ],
+    "sourceId": "wpn_pistol_0010"
+  },
+  {
+    "id": "w_smbd",
+    "name": "使命必达",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E4%BD%BF%E5%91%BD%E5%BF%85%E8%BE%BE.png",
+    "stats": [
+      "意志",
+      "终结技充能效率",
+      "追袭"
+    ],
+    "sourceId": "wpn_funnel_0011"
+  },
+  {
+    "id": "w_hjsd",
+    "name": "黄金时代",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%BB%84%E9%87%91%E6%97%B6%E4%BB%A3.png",
+    "stats": [
+      "意志",
+      "治疗效率",
+      "追袭"
+    ],
+    "sourceId": "wpn_lance_0016"
+  },
+  {
+    "id": "w_qsjs",
+    "name": "骑士精神",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%AA%91%E5%A3%AB%E7%B2%BE%E7%A5%9E.png",
+    "stats": [
+      "意志",
+      "生命",
+      "医疗"
+    ],
+    "sourceId": "wpn_funnel_0010"
+  },
+  {
+    "id": "w_yiwang",
+    "name": "遗忘",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%81%97%E5%BF%98.png",
+    "stats": [
+      "智识",
+      "法术伤害",
+      "夜幕"
+    ],
+    "sourceId": "wpn_funnel_0009"
+  },
+  {
+    "id": "w_gtyy",
+    "name": "钢铁余音",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%92%A2%E9%93%81%E4%BD%99%E9%9F%B3.png",
+    "stats": [
+      "敏捷",
+      "物理伤害",
+      "巧技"
+    ],
+    "sourceId": "wpn_sword_0005"
+  },
+  {
+    "id": "w_bpdy",
+    "name": "爆破单元",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%88%86%E7%A0%B4%E5%8D%95%E5%85%83.png",
+    "stats": [
+      "主能力",
+      "源石技艺",
+      "迸发"
+    ],
+    "sourceId": "wpn_funnel_0008"
+  },
+  {
+    "id": "w_mnh",
+    "name": "莫奈何",
+    "type": "施术单元",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8E%AB%E5%A5%88%E4%BD%95.png",
+    "stats": [
+      "意志",
+      "终结技充能效率",
+      "昂扬"
+    ],
+    "sourceId": "wpn_funnel_0007"
+  },
+  {
+    "sourceId": "wpn_funnel_0006",
+    "name": "作品：蚀迹",
+    "stars": 6,
+    "type": "施术单元",
+    "stats": [
+      "意志",
+      "自然伤害",
+      "压制"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E4%BD%9C%E5%93%81%EF%BC%9A%E8%9A%80%E8%BF%B9.png",
+    "id": "w_9"
+  },
+  {
+    "id": "w_1",
+    "name": "寒夜幽影",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AF%92%E5%A4%9C%E5%B9%BD%E5%BD%B1.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "迸发"
+    ],
+    "sourceId": "wpn_funnel_0019"
+  },
+  {
+    "id": "w_dws",
+    "name": "悼亡诗",
+    "type": "施术单元",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%82%BC%E4%BA%A1%E8%AF%97.png",
+    "stats": [
+      "智识",
+      "攻击",
+      "夜幕"
+    ],
+    "sourceId": "wpn_funnel_0005"
+  },
+  {
+    "id": "w_wzwg",
+    "name": "雾中微光",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%9B%BE%E4%B8%AD%E5%BE%AE%E5%85%89.png",
+    "stats": [
+      "意志",
+      "电磁伤害",
+      "效益"
+    ],
+    "sourceId": "wpn_funnel_0017"
+  },
+  {
+    "id": "w_gxly",
+    "name": "荧光雷羽",
+    "type": "施术单元",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8D%A7%E5%85%89%E9%9B%B7%E7%BE%BD.png",
+    "stats": [
+      "意志",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_funnel_0003"
+  },
+  {
+    "id": "w_42_sz",
+    "name": "四二式·肃阵",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%9B%9B%E4%BA%8C%E5%BC%8F%C2%B7%E8%82%83%E9%98%B5.png",
+    "stats": [
+      "智识",
+      "终结技充能效率",
+      "迸发"
+    ],
+    "sourceId": "wpn_funnel_0016"
+  },
+  {
+    "id": "w_jczzz",
+    "name": "坚城铸造者",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%9D%9A%E5%9F%8E%E9%93%B8%E9%80%A0%E8%80%85.png",
+    "stats": [
+      "智识",
+      "终结技充能效率",
+      "昂扬"
+    ],
+    "sourceId": "wpn_sword_0007"
+  },
+  {
+    "id": "w_gz",
+    "name": "孤舟",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AD%A4%E8%88%9F.png",
+    "stats": [
+      "意志",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_funnel_0015"
+  },
+  {
+    "id": "w_qzdhxx",
+    "name": "全自动骇新星",
+    "type": "施术单元",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%85%A8%E8%87%AA%E5%8A%A8%E9%AA%87%E6%96%B0%E6%98%9F.png",
+    "stats": [
+      "智识",
+      "法术伤害",
+      "昂扬"
+    ],
+    "sourceId": "wpn_funnel_0001"
+  },
+  {
+    "id": "w_6",
+    "name": "悠久传承",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%82%A0%E4%B9%85%E4%BC%A0%E6%89%BF.png",
+    "stats": [
+      "智识",
+      "寒冷伤害",
+      "效益"
+    ],
+    "sourceId": "wpn_claym_0019"
+  },
+  {
+    "id": "w_7",
+    "name": "玉中身",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%8E%89%E4%B8%AD%E8%BA%AB.png",
+    "stats": [
+      "智识",
+      "寒冷伤害",
+      "效益"
+    ],
+    "sourceId": "wpn_claym_0018"
+  },
+  {
+    "id": "w_xz",
+    "name": "楔子",
+    "type": "手铳",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%A5%94%E5%AD%90.png",
+    "stats": [
+      "主能力",
+      "暴击率",
+      "附术"
+    ],
+    "sourceId": "wpn_pistol_0008"
+  },
+  {
+    "id": "w_obj_jf",
+    "name": "O.B.J.尖峰",
+    "type": "长柄武器",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/O.B.J.%E5%B0%96%E5%B3%B0.png",
+    "stats": [
+      "意志",
+      "物理伤害",
+      "附术"
+    ],
+    "sourceId": "wpn_lance_0013"
+  },
+  {
+    "sourceId": "wpn_claym_0015",
+    "name": "O.B.J.重荷",
+    "stars": 5,
+    "type": "双手剑",
+    "stats": [
+      "力量",
+      "生命",
+      "效益"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/O.B.J.%E9%87%8D%E8%8D%B7.png",
+    "id": "w_8"
+  },
+  {
+    "id": "w_grjy",
+    "name": "光荣记忆",
+    "type": "单手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%85%89%E8%8D%A3%E8%AE%B0%E5%BF%86.png",
+    "stats": [
+      "敏捷",
+      "暴击率",
+      "夜幕"
+    ],
+    "sourceId": "wpn_sword_0017"
+  },
+  {
+    "id": "w_obj_ss",
+    "name": "O.B.J.术识",
+    "type": "施术单元",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/O.B.J.%E6%9C%AF%E8%AF%86.png",
+    "stats": [
+      "智识",
+      "源石技艺",
+      "追袭"
+    ],
+    "sourceId": "wpn_funnel_0014"
+  },
+  {
+    "id": "w_tl",
+    "name": "探骊",
+    "type": "双手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%8E%A2%E9%AA%8A.png",
+    "stats": [
+      "力量",
+      "终结技充能效率",
+      "迸发"
+    ],
+    "sourceId": "wpn_claym_0011"
+  },
+  {
+    "id": "w_ljd",
+    "name": "联结点",
+    "type": "施术单元",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%81%94%E7%BB%93%E7%82%B9.png",
+    "stats": [
+      "智识",
+      "终结技充能效率",
+      "效益"
+    ],
+    "sourceId": "wpn_funnel_0018"
+  },
+  {
+    "id": "w_mshf",
+    "name": "迷失荒野",
+    "type": "施术单元",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%BF%B7%E5%A4%B1%E8%8D%92%E9%87%8E.png",
+    "stats": [
+      "智识",
+      "电磁伤害",
+      "附术"
+    ],
+    "sourceId": "wpn_funnel_0004"
+  },
+  {
+    "id": "w_qhz",
+    "name": "淬火者",
+    "type": "双手剑",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%B7%AC%E7%81%AB%E8%80%85.png",
+    "stats": [
+      "意志",
+      "生命",
+      "粉碎"
+    ],
+    "sourceId": "wpn_claym_0009"
+  },
+  {
+    "id": "w_sw",
+    "name": "十二问",
+    "type": "单手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%8D%81%E4%BA%8C%E9%97%AE.png",
+    "stats": [
+      "敏捷",
+      "攻击",
+      "附术"
+    ],
+    "sourceId": "wpn_sword_0018"
+  },
+  {
+    "id": "w_xy",
+    "name": "骁勇",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%AA%81%E5%8B%87.png",
+    "stats": [
+      "敏捷",
+      "物理伤害",
+      "巧技"
+    ],
+    "sourceId": "wpn_lance_0010"
+  },
+  {
+    "id": "w_zdzs",
+    "name": "终点之声",
+    "type": "双手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%BB%88%E7%82%B9%E4%B9%8B%E5%A3%B0.png",
+    "stats": [
+      "力量",
+      "生命",
+      "医疗"
+    ],
+    "sourceId": "wpn_claym_0012"
+  },
+  {
+    "id": "w_psjw",
+    "name": "破碎君王",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%A0%B4%E7%A2%8E%E5%90%9B%E7%8E%8B.png",
+    "stats": [
+      "力量",
+      "暴击率",
+      "粉碎"
+    ],
+    "sourceId": "wpn_claym_0008"
+  },
+  {
+    "id": "w_jet",
+    "name": "J.E.T.",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/J.E.T..png",
+    "stats": [
+      "主能力",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_lance_0011"
+  },
+  {
+    "id": "w_hlfg",
+    "name": "赫拉芬格",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%B5%AB%E6%8B%89%E8%8A%AC%E6%A0%BC.png",
+    "stats": [
+      "力量",
+      "攻击",
+      "迸发"
+    ],
+    "sourceId": "wpn_claym_0013"
+  },
+  {
+    "id": "w_dlb",
+    "name": "大雷斑",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%A4%A7%E9%9B%B7%E6%96%91.png",
+    "stats": [
+      "力量",
+      "生命",
+      "医疗"
+    ],
+    "sourceId": "wpn_claym_0007"
+  },
+  {
+    "id": "w_gq",
+    "name": "古渠",
+    "type": "双手剑",
+    "stars": 5,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%8F%A4%E6%B8%A0.png",
+    "stats": [
+      "力量",
+      "源石技艺",
+      "残暴"
+    ],
+    "sourceId": "wpn_claym_0014"
+  },
+  {
+    "id": "w_xyjd",
+    "name": "昔日精品",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%98%94%E6%97%A5%E7%B2%BE%E5%93%81.png",
+    "stats": [
+      "意志",
+      "生命",
+      "效益"
+    ],
+    "sourceId": "wpn_claym_0006"
+  },
+  {
+    "id": "w_dhzf",
+    "name": "曜夜的首演",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%9B%9C%E5%A4%9C%E7%9A%84%E9%A6%96%E6%BC%94.png",
+    "stats": [
+      "意志",
+      "治疗效率",
+      "医疗"
+    ],
+    "sourceId": "wpn_lance_0014"
+  },
+  {
+    "id": "w_hxkt",
+    "name": "幻想苦痛",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%B9%BB%E6%83%B3%E8%8B%A6%E7%97%9B.png",
+    "stats": [
+      "力量",
+      "源石技艺",
+      "压制"
+    ],
+    "sourceId": "wpn_claym_0016"
+  },
+  {
+    "id": "w_df",
+    "name": "典范",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%85%B8%E8%8C%83.png",
+    "stats": [
+      "主能力",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_claym_0004"
+  },
+  {
+    "id": "w_dhzf_new",
+    "name": "镀红祝福",
+    "type": "长柄武器",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E9%95%80%E7%BA%A2%E7%A5%9D%E7%A6%8F.png",
+    "stats": [
+      "敏捷",
+      "灼热伤害",
+      "流转"
+    ],
+    "sourceId": "wpn_lance_0015"
+  },
+  {
+    "id": "w_cy",
+    "name": "赤缨",
+    "type": "双手剑",
+    "stars": 6,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%B5%A4%E7%BC%A8.png",
+    "stats": [
+      "力量",
+      "攻击",
+      "巧技"
+    ],
+    "sourceId": "wpn_claym_0017"
+  },
+  {
+    "id": "w_gyly",
+    "name": "工业零点一",
+    "type": "双手剑",
+    "stars": 4,
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%B7%A5%E4%B8%9A%E9%9B%B6%E7%82%B9%E4%B8%80.png",
+    "stats": [
+      "力量",
+      "攻击",
+      "压制"
+    ],
+    "sourceId": "wpn_claym_0003"
+  },
+  {
     "id": "w_5",
     "name": "唤月",
     "type": "单手剑",
@@ -13,114 +1027,6 @@
     "sourceId": "wpn_sword_0025"
   },
   {
-    "id": "w_7",
-    "name": "玉中身",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%8E%89%E4%B8%AD%E8%BA%AB.png",
-    "stats": [
-      "智识",
-      "寒冷伤害",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_6",
-    "name": "悠久传承",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E6%82%A0%E4%B9%85%E4%BC%A0%E6%89%BF.png",
-    "stats": [
-      "智识",
-      "寒冷伤害",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_4",
-    "name": "聚合工业",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%81%9A%E5%90%88%E5%B7%A5%E4%B8%9A.png",
-    "stats": [
-      "意志",
-      "电磁伤害",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_3",
-    "name": "点心时刻",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%82%B9%E5%BF%83%E6%97%B6%E5%88%BB.png",
-    "stats": [
-      "力量",
-      "治疗效率",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_2",
-    "name": "苦难的尽头",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E8%8B%A6%E9%9A%BE%E7%9A%84%E5%B0%BD%E5%A4%B4.png",
-    "stats": [
-      "敏捷",
-      "自然伤害",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_1",
-    "name": "寒夜幽影",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E5%AF%92%E5%A4%9C%E5%B9%BD%E5%BD%B1.png",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_yw",
-    "name": "遥望",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力值",
-      "源石技艺强度",
-      "强攻"
-    ]
-  },
-  {
-    "id": "w_dhzf",
-    "name": "曜夜的首演",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "治疗效率",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_hjsd",
-    "name": "黄金时代",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "治疗效率",
-      "追袭"
-    ]
-  },
-  {
     "id": "w_yaowang",
     "name": "遥望",
     "type": "长柄武器",
@@ -130,438 +1036,6 @@
       "主能力",
       "源石技艺强度",
       "强攻"
-    ]
-  },
-  {
-    "id": "w_42_sz",
-    "name": "四二式·肃阵",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "终结技充能效率",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_ljd",
-    "name": "联结点",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "终结技充能效率",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_dhzf_new",
-    "name": "镀红祝福",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "灼热伤害",
-      "流转"
-    ]
-  },
-  {
-    "id": "w_cy",
-    "name": "赤缨",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "力量",
-      "攻击",
-      "巧技"
-    ]
-  },
-  {
-    "id": "w_hxkt",
-    "name": "幻想苦痛",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "力量",
-      "源石技艺强度",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_dhsm",
-    "name": "灯火使命",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "终结技充能效率",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_gz",
-    "name": "孤舟",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_wzwg",
-    "name": "雾中微光",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "电磁伤害",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_lzf",
-    "name": "狼之绯",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "暴击率",
-      "切骨"
-    ]
-  },
-  {
-    "id": "w_lc",
-    "name": "落草",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_grjy",
-    "name": "光荣记忆",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "暴击率",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_wx",
-    "name": "望乡",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "寒冷伤害",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_ysbj",
-    "name": "艺术暴君",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "暴击率",
-      "切骨"
-    ]
-  },
-  {
-    "id": "w_smbd",
-    "name": "使命必达",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "终结技充能效率",
-      "追袭"
-    ]
-  },
-  {
-    "id": "w_rzhy",
-    "name": "熔铸火焰",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "攻击",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_hy",
-    "name": "宏愿",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_bzg",
-    "name": "不知归",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "攻击",
-      "流转"
-    ]
-  },
-  {
-    "id": "w_ashj",
-    "name": "黯色火炬",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "灼热伤害",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_fy",
-    "name": "扶摇",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "暴击率",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_rrqgq",
-    "name": "热熔切割器",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "攻击",
-      "流转"
-    ]
-  },
-  {
-    "id": "w_xhsm",
-    "name": "显赫声名",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "物理伤害",
-      "残暴"
-    ]
-  },
-  {
-    "id": "w_byxx",
-    "name": "白夜新星",
-    "type": "单手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "源石技艺强度",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_jet",
-    "name": "J.E.T.",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_xy",
-    "name": "骁勇",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "物理伤害",
-      "巧技"
-    ]
-  },
-  {
-    "id": "w_fs",
-    "name": "负山",
-    "type": "长柄武器",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "敏捷",
-      "物理伤害",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_dlb",
-    "name": "大雷斑",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "力量",
-      "生命",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_hlfg",
-    "name": "赫拉芬格",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "力量",
-      "攻击",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_df",
-    "name": "典范",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_xyjd",
-    "name": "昔日精品",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "生命",
-      "效益"
-    ]
-  },
-  {
-    "id": "w_psjw",
-    "name": "破碎君王",
-    "type": "双手剑",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "力量",
-      "暴击率",
-      "粉碎"
-    ]
-  },
-  {
-    "id": "w_tlxh",
-    "name": "同类相食",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "法术",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_xz",
-    "name": "楔子",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "暴击率",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_lhz",
-    "name": "领航者",
-    "type": "手铳",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "寒冷伤害",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_qsjs",
-    "name": "骑士精神",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "意志",
-      "生命",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_yiwang",
-    "name": "遗忘",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "法术",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_bpdy",
-    "name": "爆破单元",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "主能力",
-      "源石技艺强度",
-      "迸发"
     ]
   },
   {
@@ -577,90 +1051,6 @@
     ]
   },
   {
-    "id": "w_cmxm",
-    "name": "沧溟星梦",
-    "type": "施术单元",
-    "stars": 6,
-    "img": "https://via.placeholder.com/80?text=6",
-    "stats": [
-      "智识",
-      "治疗效率",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_yz",
-    "name": "仰止",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "敏捷",
-      "物理",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_obj_lm",
-    "name": "O.B.J.轻芒",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "流转"
-    ]
-  },
-  {
-    "id": "w_sw",
-    "name": "十二问",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_zl3",
-    "name": "逐鳞3.0",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "寒冷伤害",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_jczzz",
-    "name": "坚城铸造者",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "智识",
-      "终结技充能效率",
-      "昂扬"
-    ]
-  },
-  {
-    "id": "w_gtyy",
-    "name": "钢铁余音",
-    "type": "单手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "敏捷",
-      "物理伤害",
-      "巧技"
-    ]
-  },
-  {
     "id": "w_obj_zh",
     "name": "O.B.J重荷",
     "type": "双手剑",
@@ -670,102 +1060,6 @@
       "力量",
       "生命",
       "效益"
-    ]
-  },
-  {
-    "id": "w_zdzs",
-    "name": "终点之声",
-    "type": "双手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "生命",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_gq",
-    "name": "古渠",
-    "type": "双手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "源石技艺强度",
-      "残暴"
-    ]
-  },
-  {
-    "id": "w_tl",
-    "name": "探骊",
-    "type": "双手剑",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "终结技充能效率",
-      "迸发"
-    ]
-  },
-  {
-    "id": "w_xxzy",
-    "name": "向心之引",
-    "type": "长柄武器",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "意志",
-      "电磁伤害",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_obj_jf",
-    "name": "O.B.J.尖峰",
-    "type": "长柄武器",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "意志",
-      "物理伤害",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_qhzy",
-    "name": "嵌合正义",
-    "type": "长柄武器",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "终结技充能效率",
-      "残暴"
-    ]
-  },
-  {
-    "id": "w_lxgf",
-    "name": "理性告别",
-    "type": "手铳",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "力量",
-      "灼热伤害",
-      "追袭"
-    ]
-  },
-  {
-    "id": "w_obj_xj",
-    "name": "O.B.J.迅极",
-    "type": "手铳",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "敏捷",
-      "终结技充能效率",
-      "迸发"
     ]
   },
   {
@@ -781,78 +1075,6 @@
     ]
   },
   {
-    "id": "w_obj_ss",
-    "name": "O.B.J.术识",
-    "type": "施术单元",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "智识",
-      "源石技艺强度",
-      "追袭"
-    ]
-  },
-  {
-    "id": "w_bdzy",
-    "name": "布道自由",
-    "type": "施术单元",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "意志",
-      "治疗效率",
-      "医疗"
-    ]
-  },
-  {
-    "id": "w_mshf",
-    "name": "迷失荒野",
-    "type": "施术单元",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "智识",
-      "电磁伤害",
-      "附术"
-    ]
-  },
-  {
-    "id": "w_mnh",
-    "name": "莫奈何",
-    "type": "施术单元",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "意志",
-      "终结技充能效率",
-      "昂扬"
-    ]
-  },
-  {
-    "id": "w_dws",
-    "name": "悼亡诗",
-    "type": "施术单元",
-    "stars": 5,
-    "img": "https://via.placeholder.com/80?text=5",
-    "stats": [
-      "智识",
-      "攻击",
-      "夜幕"
-    ]
-  },
-  {
-    "id": "w_lc_4",
-    "name": "浪潮",
-    "type": "单手剑",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "智识",
-      "攻击",
-      "追袭"
-    ]
-  },
-  {
     "id": "w_yjsh",
     "name": "应急手段",
     "type": "单手剑",
@@ -862,102 +1084,6 @@
       "敏捷",
       "物理伤害",
       "压制"
-    ]
-  },
-  {
-    "id": "w_qhz",
-    "name": "淬火者",
-    "type": "双手剑",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "意志",
-      "生命",
-      "粉碎"
-    ]
-  },
-  {
-    "id": "w_gyly",
-    "name": "工业零点一",
-    "type": "双手剑",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "力量",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_tssj",
-    "name": "天使杀手",
-    "type": "长柄武器",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "意志",
-      "法术",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_xlzdb",
-    "name": "寻路者道标",
-    "type": "长柄武器",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "敏捷",
-      "攻击",
-      "昂扬"
-    ]
-  },
-  {
-    "id": "w_cl",
-    "name": "长路",
-    "type": "手铳",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "力量",
-      "法术",
-      "追袭"
-    ]
-  },
-  {
-    "id": "w_hxhw",
-    "name": "呼啸守卫",
-    "type": "手铳",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "智识",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_gxly",
-    "name": "荧光雷羽",
-    "type": "施术单元",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "意志",
-      "攻击",
-      "压制"
-    ]
-  },
-  {
-    "id": "w_qzdhxx",
-    "name": "全自动骇新星",
-    "type": "施术单元",
-    "stars": 4,
-    "img": "https://via.placeholder.com/80?text=4",
-    "stats": [
-      "智识",
-      "法术",
-      "昂扬"
     ]
   },
   {

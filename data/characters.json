@@ -1,5 +1,31 @@
 [
   {
+    "mainPower": "",
+    "subPower": "",
+    "sourceId": "chr_0039_mimino",
+    "name": "米米诺",
+    "stars": 5,
+    "class": "辅助",
+    "attr": "物理",
+    "weaponType": "手铳",
+    "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/chr_0039_mimino.png",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/chr_0039_mimino.png",
+    "id": "char_6"
+  },
+  {
+    "mainPower": "",
+    "subPower": "",
+    "sourceId": "chr_0040_sweetpie",
+    "name": "小刻",
+    "stars": 6,
+    "class": "先锋",
+    "attr": "自然",
+    "weaponType": "长柄武器",
+    "avatarImg": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-avatar/chr_0040_sweetpie.png",
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-char/chr_0040_sweetpie.png",
+    "id": "char_5"
+  },
+  {
     "id": "char_3",
     "name": "明河",
     "stars": 6,
