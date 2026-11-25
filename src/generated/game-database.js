@@ -44,8 +44,8 @@ window.gameDatabase = {
       "id": "char_6"
     },
     {
-      "mainPower": "",
-      "subPower": "",
+      "mainPower": "力量",
+      "subPower": "敏捷",
       "sourceId": "chr_0040_sweetpie",
       "name": "小刻",
       "stars": 6,
@@ -461,6 +461,32 @@ window.gameDatabase = {
     }
   ],
   "weapons": [
+    {
+      "sourceId": "wpn_lance_0018",
+      "name": "突击流星",
+      "stars": 6,
+      "type": "长柄武器",
+      "stats": [
+        "力量",
+        "终结技充能效率",
+        "迸发"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%AA%81%E5%87%BB%E6%B5%81%E6%98%9F.png",
+      "id": "w_13"
+    },
+    {
+      "sourceId": "wpn_lance_0017",
+      "name": "甜美交易",
+      "stars": 6,
+      "type": "长柄武器",
+      "stats": [
+        "力量",
+        "自然伤害",
+        "流转"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%94%9C%E7%BE%8E%E4%BA%A4%E6%98%93.png",
+      "id": "w_12"
+    },
     {
       "id": "w_yw",
       "name": "遥望",
@@ -1605,6 +1631,146 @@ window.gameDatabase = {
     }
   ],
   "gears": [
+    {
+      "sourceId": "item_equip_t4_suit_usp02_hand_06",
+      "name": "长息重手甲",
+      "part": "护手",
+      "set": "长息",
+      "stats": [
+        "防御力：+42",
+        "意志：+65/+71/+78/+84",
+        "力量：+43/+47/+51/+55",
+        "终结技充能效率：+20.54%/+22.59%/+24.64%/+26.7%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%95%BF%E6%81%AF%E9%87%8D%E6%89%8B%E7%94%B2.png",
+      "id": "g_256"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_hand_05",
+      "name": "拓荒减重护手",
+      "part": "护手",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+42",
+        "意志：+65/+71/+78/+84",
+        "敏捷：+43/+47/+51/+55",
+        "终结技充能效率：+20.54%/+22.59%/+24.64%/+26.7%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%87%8F%E9%87%8D%E6%8A%A4%E6%89%8B.png",
+      "id": "g_255"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_edc_07",
+      "name": "拓荒多层钢板",
+      "part": "配件",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+32/+35/+38/+41",
+        "力量：+21/+23/+25/+27",
+        "副能力：+20.7%/+22.77%/+24.84%/+26.91%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%A4%9A%E5%B1%82%E9%92%A2%E6%9D%BF.png",
+      "id": "g_254"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_body_07",
+      "name": "拓荒减重护甲",
+      "part": "护甲",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+56",
+        "意志：+87/+95/+104/+113",
+        "敏捷：+58/+63/+69/+75",
+        "终结技充能效率：+12.32%/+13.55%/+14.79%/+16.02%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%87%8F%E9%87%8D%E6%8A%A4%E7%94%B2.png",
+      "id": "g_253"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling00_hand_07",
+      "name": "集成实训重械护手",
+      "part": "护手",
+      "set": "集成实训",
+      "stats": [
+        "防御力：+36",
+        "主能力：+55/+60/+66/+71",
+        "副能力：+37/+40/+44/+48",
+        "暴击率：+7.38%/+8.11%/+8.85%/+9.59%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E9%87%8D%E6%A2%B0%E6%8A%A4%E6%89%8B.png",
+      "id": "g_252"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling00_body_07",
+      "name": "集成实训重械护甲",
+      "part": "护甲",
+      "set": "集成实训",
+      "stats": [
+        "防御力：+48",
+        "主能力：+74/+81/+88/+96",
+        "副能力：+49/+53/+58/+63",
+        "暴击率：+4.42%/+4.87%/+5.31%/+5.75%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E9%87%8D%E6%A2%B0%E6%8A%A4%E7%94%B2.png",
+      "id": "g_251"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_edc_08",
+      "name": "拓荒压合板",
+      "part": "配件",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+21",
+        "意志：+32/+35/+38/+41",
+        "敏捷：+21/+23/+25/+27",
+        "源石技艺强度：+41/+46/+50/+54"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%8E%8B%E5%90%88%E6%9D%BF.png",
+      "id": "g_250"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling00_edc_07",
+      "name": "集成实训重械钢板",
+      "part": "配件",
+      "set": "集成实训",
+      "stats": [
+        "防御力：+18",
+        "主能力：+27/+29/+32/+35",
+        "副能力：+18/+19/+21/+23",
+        "暴击率：+8.85%/+9.74%/+10.62%/+11.51%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E9%9B%86%E6%88%90%E5%AE%9E%E8%AE%AD%E9%87%8D%E6%A2%B0%E9%92%A2%E6%9D%BF.png",
+      "id": "g_249"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_body_06",
+      "name": "拓荒增重钢甲",
+      "part": "护甲",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+56",
+        "敏捷：+87/+95/+104/+113",
+        "力量：+58/+63/+69/+75",
+        "终结技充能效率：+12.32%/+13.55%/+14.79%/+16.02%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%A2%9E%E9%87%8D%E9%92%A2%E7%94%B2.png",
+      "id": "g_248"
+    },
+    {
+      "sourceId": "item_equip_t4_suit_atb01_hand_04",
+      "name": "拓荒增重手甲",
+      "part": "护手",
+      "set": "拓荒",
+      "stats": [
+        "防御力：+42",
+        "敏捷：+65/+71/+78/+84",
+        "力量：+43/+47/+51/+55",
+        "终结技充能效率：+20.54%/+22.59%/+24.64%/+26.7%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%8B%93%E8%8D%92%E5%A2%9E%E9%87%8D%E6%89%8B%E7%94%B2.png",
+      "id": "g_247"
+    },
     {
       "id": "g_106",
       "name": "长息护手·壹型",

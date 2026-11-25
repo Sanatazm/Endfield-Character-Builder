@@ -1,5 +1,31 @@
 [
   {
+    "sourceId": "wpn_lance_0018",
+    "name": "突击流星",
+    "stars": 6,
+    "type": "长柄武器",
+    "stats": [
+      "力量",
+      "终结技充能效率",
+      "迸发"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%AA%81%E5%87%BB%E6%B5%81%E6%98%9F.png",
+    "id": "w_13"
+  },
+  {
+    "sourceId": "wpn_lance_0017",
+    "name": "甜美交易",
+    "stars": 6,
+    "type": "长柄武器",
+    "stats": [
+      "力量",
+      "自然伤害",
+      "流转"
+    ],
+    "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/imag-weapon/%E7%94%9C%E7%BE%8E%E4%BA%A4%E6%98%93.png",
+    "id": "w_12"
+  },
+  {
     "id": "w_yw",
     "name": "遥望",
     "type": "单手剑",

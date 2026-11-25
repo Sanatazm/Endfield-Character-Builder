@@ -13,8 +13,8 @@
     "id": "char_6"
   },
   {
-    "mainPower": "",
-    "subPower": "",
+    "mainPower": "力量",
+    "subPower": "敏捷",
     "sourceId": "chr_0040_sweetpie",
     "name": "小刻",
     "stars": 6,
