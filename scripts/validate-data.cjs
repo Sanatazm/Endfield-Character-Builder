@@ -73,7 +73,7 @@ function main() {
   const validGearParts = new Set(['护甲', '护手', '配件']);
   for (const gear of gears) {
     if (!validGearParts.has(gear.part)) fail(`invalid gear part for ${gear.id}: ${gear.part}`);
-    if (!Object.prototype.hasOwnProperty.call(setEffects, gear.set)) {
+    if (gear.set && !Object.prototype.hasOwnProperty.call(setEffects, gear.set)) {
       fail(`gear set has no effect entry: ${gear.id} ${gear.name} -> ${gear.set}`);
     }
     if (!Array.isArray(gear.stats) || gear.stats.length === 0) {

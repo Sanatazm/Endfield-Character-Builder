@@ -1632,6 +1632,713 @@ window.gameDatabase = {
   ],
   "gears": [
     {
+      "id": "g_186",
+      "name": "涉渊裹手",
+      "part": "护手",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%A3%B9%E6%89%8B.png",
+      "stats": [
+        "防御力：+42",
+        "意志：+86/+94/+103/+111",
+        "寒冷和电磁伤害加成：+20%/+22%/+24%/+26%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_hand_03"
+    },
+    {
+      "id": "g_158",
+      "name": "涉渊手套",
+      "part": "护手",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E6%89%8B%E5%A5%97.png",
+      "stats": [
+        "防御力：+42",
+        "意志：+86/+94/+103/+111",
+        "战技伤害加成：+36%/+39.6%/+43.2%/+46.8%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_hand_02"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_edc_03",
+      "name": "涉渊破岩锥",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+21",
+        "力量：+43/+47/+51/+55",
+        "战技伤害加成：+43.2%/+47.52%/+51.84%/+56.16%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E7%A0%B4%E5%B2%A9%E9%94%A5.png",
+      "id": "g_292"
+    },
+    {
+      "id": "g_190",
+      "name": "涉渊白刃",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E7%99%BD%E5%88%83.png",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+43/+47/+51/+55",
+        "终结技充能效率：+25.71%/+28.29%/+30.86%/+33.43%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_edc_02"
+    },
+    {
+      "id": "g_159",
+      "name": "涉渊护甲板",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E6%8A%A4%E7%94%B2%E6%9D%BF.png",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+43/+47/+51/+55",
+        "副能力：+21.6%/+23.76%/+25.92%/+28.08%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_edc_01"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_body_05",
+      "name": "涉渊重钢甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+56",
+        "力量：+115/+126/+138/+149",
+        "寒冷和电磁伤害加成：+12%/+13.2%/+14.4%/+15.6%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%87%8D%E9%92%A2%E7%94%B2.png",
+      "id": "g_291"
+    },
+    {
+      "id": "g_185",
+      "name": "涉渊防护服",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%98%B2%E6%8A%A4%E6%9C%8D.png",
+      "stats": [
+        "防御力：+56",
+        "智识：+115/+126/+138/+149",
+        "灼热和自然伤害加成：+12%/+13.2%/+14.4%/+15.6%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_body_04"
+    },
+    {
+      "id": "g_184",
+      "name": "涉渊钢甲",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%92%A2%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "敏捷：+115/+126/+138/+149",
+        "连携技伤害加成：+21.6%/+23.76%/+25.92%/+28.08%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_body_03"
+    },
+    {
+      "id": "g_156",
+      "name": "涉渊轻甲",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%BD%BB%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "意志：+115/+126/+138/+149",
+        "治疗效率加成：+10.8%/+11.88%/+12.96%/+14.04%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_body_02"
+    },
+    {
+      "id": "g_155",
+      "name": "涉渊重甲",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%87%8D%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "力量：+115/+126/+138/+149",
+        "源石技艺强度：+22/+24/+26/+28"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_body_01"
+    },
+    {
+      "id": "g_117",
+      "name": "纾难印章·壹型",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E5%8D%B0%E7%AB%A0%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "stats": [
+        "防御力：+21",
+        "意志：+43/+47/+51/+55",
+        "暴击率：+10.8%/+11.88%/+12.96%/+14.04%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_edc_04"
+    },
+    {
+      "id": "g_116",
+      "name": "纾难印章",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E5%8D%B0%E7%AB%A0.png",
+      "stats": [
+        "防御力：+21",
+        "智识：+43/+47/+51/+55",
+        "终结技充能效率：+25.71%/+28.29%/+30.86%/+33.43%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_edc_03"
+    },
+    {
+      "id": "g_114",
+      "name": "纾难识别牌",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E8%AF%86%E5%88%AB%E7%89%8C.png",
+      "stats": [
+        "防御力：+21",
+        "力量：+43/+47/+51/+55",
+        "全伤害减免：+17.76%/+19.2%/+20.58%/+21.92%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_edc_01"
+    },
+    {
+      "id": "g_111",
+      "name": "纾难护甲",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E6%8A%A4%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "智识：+115/+126/+138/+149",
+        "终结技充能效率：+12.86%/+14.14%/+15.43%/+16.71%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_body_02"
+    },
+    {
+      "id": "g_110",
+      "name": "纾难重甲",
+      "part": "护甲",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E9%87%8D%E7%94%B2.png",
+      "stats": [
+        "防御力：+56",
+        "敏捷：+115/+126/+138/+149",
+        "普通攻击伤害加成：+14.4%/+15.84%/+17.28%/+18.72%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_body_01"
+    },
+    {
+      "id": "g_115",
+      "name": "纾难识别牌·壹型",
+      "part": "配件",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E8%AF%86%E5%88%AB%E7%89%8C%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "stats": [
+        "防御力：+21",
+        "敏捷：+43/+47/+51/+55",
+        "连携技伤害加成：+43.2%/+47.52%/+51.84%/+56.16%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_edc_02"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_body_06",
+      "name": "涉渊轻护甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+56",
+        "意志：+115/+126/+138/+149",
+        "终结技伤害加成：+27%/+29.7%/+32.4%/+35.1%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%BD%BB%E6%8A%A4%E7%94%B2.png",
+      "id": "g_290"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_hand_05",
+      "name": "涉渊轻裹手",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+42",
+        "智识：+86/+94/+103/+111",
+        "连携技伤害加成：+36%/+39.6%/+43.2%/+46.8%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%BD%BB%E8%A3%B9%E6%89%8B.png",
+      "id": "g_289"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_hand_04",
+      "name": "涉渊手甲",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+42",
+        "力量：+86/+94/+103/+111",
+        "普通攻击伤害加成：+24%/+26.4%/+28.8%/+31.2%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E6%89%8B%E7%94%B2.png",
+      "id": "g_288"
+    },
+    {
+      "sourceId": "item_equip_t4_parts_wuling02_hand_06",
+      "name": "涉渊重手甲",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+42",
+        "敏捷：+86/+94/+103/+111",
+        "灼热和自然伤害加成：+20%/+22%/+24%/+26%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%87%8D%E6%89%8B%E7%94%B2.png",
+      "id": "g_287"
+    },
+    {
+      "id": "g_157",
+      "name": "涉渊护手",
+      "part": "护手",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E6%8A%A4%E6%89%8B.png",
+      "stats": [
+        "防御力：+42",
+        "智识：+86/+94/+103/+111",
+        "终结技充能效率：+21.43%/+23.57%/+25.71%/+27.86%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling02_hand_01"
+    },
+    {
+      "id": "g_113",
+      "name": "纾难手套",
+      "part": "护手",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E6%89%8B%E5%A5%97.png",
+      "stats": [
+        "防御力：+42",
+        "力量：+86/+94/+103/+111",
+        "所有技能伤害加成：+24%/+26.4%/+28.8%/+31.2%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_hand_02"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_hand_02",
+      "name": "矿场护手·壹型",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+30",
+        "意志：+49",
+        "智识：+32",
+        "终结技充能效率：+15.48%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%8A%A4%E6%89%8B%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_286"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_hand_01",
+      "name": "矿场手套·贰型",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+30",
+        "智识：+49",
+        "敏捷：+32",
+        "攻击力：+13%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%89%8B%E5%A5%97%C2%B7%E8%B4%B0%E5%9E%8B.png",
+      "id": "g_285"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_edc_04",
+      "name": "矿场联络仪·壹型",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+15",
+        "意志：+31",
+        "治疗效率加成：+15.6%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E8%81%94%E7%BB%9C%E4%BB%AA%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_284"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_edc_03",
+      "name": "矿场压缩核·壹型",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+15",
+        "智识：+31",
+        "终结技充能效率：+18.57%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E5%8E%8B%E7%BC%A9%E6%A0%B8%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_283"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_edc_02",
+      "name": "矿场传动轮·壹型",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+15",
+        "敏捷：+31",
+        "连携技伤害加成：+31.2%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E4%BC%A0%E5%8A%A8%E8%BD%AE%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_282"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_edc_01",
+      "name": "矿场增压轮·壹型",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+15",
+        "力量：+31",
+        "全伤害减免：+13.49%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E5%A2%9E%E5%8E%8B%E8%BD%AE%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_281"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_body_02",
+      "name": "矿场防护服·壹型",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+40",
+        "智识：+65",
+        "敏捷：+43",
+        "攻击力：+7.8%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E9%98%B2%E6%8A%A4%E6%9C%8D%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_280"
+    },
+    {
+      "sourceId": "item_equip_t3_parts_tundra01_body_01",
+      "name": "矿场护甲·壹型",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+40",
+        "力量：+65",
+        "意志：+43",
+        "暴击率：+3.9%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%8A%A4%E7%94%B2%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_279"
+    },
+    {
+      "id": "g_112",
+      "name": "纾难护手",
+      "part": "护手",
+      "set": "",
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%BA%BE%E9%9A%BE%E6%8A%A4%E6%89%8B.png",
+      "stats": [
+        "防御力：+42",
+        "敏捷：+86/+94/+103/+111",
+        "终结技伤害加成：+45%/+49.5%/+54%/+58.5%"
+      ],
+      "sourceId": "item_equip_t4_parts_wuling01_hand_01"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_hand_02",
+      "name": "矿场手套·壹型",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "智识：+36",
+        "敏捷：+24",
+        "生命值：+19%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%89%8B%E5%A5%97%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_278"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_hand_01",
+      "name": "矿场手甲·壹型",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "力量：+36",
+        "智识：+24",
+        "攻击力：+9.5%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%89%8B%E7%94%B2%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_277"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_edc_04",
+      "name": "矿场联络仪",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+11",
+        "意志：+22",
+        "生命值：+22.8%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E8%81%94%E7%BB%9C%E4%BB%AA.png",
+      "id": "g_276"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_edc_03",
+      "name": "矿场压缩核",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+11",
+        "智识：+22",
+        "暴击率：+5.7%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E5%8E%8B%E7%BC%A9%E6%A0%B8.png",
+      "id": "g_275"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_edc_02",
+      "name": "矿场传动轮",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+11",
+        "敏捷：+22",
+        "暴击率：+5.7%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E4%BC%A0%E5%8A%A8%E8%BD%AE.png",
+      "id": "g_274"
+    },
+    {
+      "sourceId": "item_equip_t2_parts_tundra01_edc_01",
+      "name": "矿场增压轮",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+11",
+        "力量：+22",
+        "连携技伤害加成：+22.8%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E5%A2%9E%E5%8E%8B%E8%BD%AE.png",
+      "id": "g_273"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_hand_04",
+      "name": "矿场护手",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+17",
+        "意志：+28",
+        "智识：+18",
+        "生命值：+15%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%8A%A4%E6%89%8B.png",
+      "id": "g_272"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_hand_03",
+      "name": "矿场手套",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+12",
+        "智识：+20",
+        "意志：+13",
+        "生命值：+11%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%89%8B%E5%A5%97.png",
+      "id": "g_271"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_hand_02",
+      "name": "矿场护腕",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+17",
+        "敏捷：+28",
+        "力量：+18",
+        "生命值：+15%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%8A%A4%E8%85%95.png",
+      "id": "g_270"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_hand_01",
+      "name": "矿场手甲",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+12",
+        "力量：+20",
+        "敏捷：+13",
+        "生命值：+11%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%89%8B%E7%94%B2.png",
+      "id": "g_269"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_edc_02",
+      "name": "应急压缩核",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+6",
+        "攻击力：+13.2%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E5%BA%94%E6%80%A5%E5%8E%8B%E7%BC%A9%E6%A0%B8.png",
+      "id": "g_268"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_edc_01",
+      "name": "应急联络仪",
+      "part": "配件",
+      "set": "",
+      "stats": [
+        "防御力：+6",
+        "暴击率：+6.6%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E5%BA%94%E6%80%A5%E8%81%94%E7%BB%9C%E4%BB%AA.png",
+      "id": "g_267"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_06",
+      "name": "矿场滤尘衣",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "意志：+37",
+        "敏捷：+25",
+        "生命值：+9%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%BB%A4%E5%B0%98%E8%A1%A3.png",
+      "id": "g_266"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_05",
+      "name": "矿场轻甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "敏捷：+37",
+        "智识：+25",
+        "生命值：+9%"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E8%BD%BB%E7%94%B2.png",
+      "id": "g_265"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_04",
+      "name": "测试型重甲·壹型",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "敏捷：+37",
+        "意志：+25",
+        "攻击力：+12"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B5%8B%E8%AF%95%E5%9E%8B%E9%87%8D%E7%94%B2%C2%B7%E5%A3%B9%E5%9E%8B.png",
+      "id": "g_264"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_03",
+      "name": "测试型重甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+22",
+        "力量：+37",
+        "智识：+25",
+        "攻击力：+12"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B5%8B%E8%AF%95%E5%9E%8B%E9%87%8D%E7%94%B2.png",
+      "id": "g_263"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_02",
+      "name": "矿场防护服",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+16",
+        "智识：+27",
+        "意志：+18",
+        "生命值：+125"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E9%98%B2%E6%8A%A4%E6%9C%8D.png",
+      "id": "g_262"
+    },
+    {
+      "sourceId": "item_equip_t1_parts_tundra01_body_01",
+      "name": "矿场护甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+16",
+        "力量：+27",
+        "敏捷：+18",
+        "生命值：+125"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%9F%BF%E5%9C%BA%E6%8A%A4%E7%94%B2.png",
+      "id": "g_261"
+    },
+    {
+      "sourceId": "item_equip_t0_parts_tundra01_hand_02",
+      "name": "简易护手",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+6",
+        "智识：+11",
+        "意志：+7",
+        "生命值：+77"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%AE%80%E6%98%93%E6%8A%A4%E6%89%8B.png",
+      "id": "g_260"
+    },
+    {
+      "sourceId": "item_equip_t0_parts_tundra01_hand_01",
+      "name": "简易手甲",
+      "part": "护手",
+      "set": "",
+      "stats": [
+        "防御力：+6",
+        "力量：+11",
+        "敏捷：+7",
+        "生命值：+77"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%AE%80%E6%98%93%E6%89%8B%E7%94%B2.png",
+      "id": "g_259"
+    },
+    {
+      "sourceId": "item_equip_t0_parts_tundra01_body_02",
+      "name": "简易护服",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+8",
+        "智识：+15",
+        "意志：+10",
+        "生命值：+46"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%AE%80%E6%98%93%E6%8A%A4%E6%9C%8D.png",
+      "id": "g_258"
+    },
+    {
+      "sourceId": "item_equip_t0_parts_tundra01_body_01",
+      "name": "简易护甲",
+      "part": "护甲",
+      "set": "",
+      "stats": [
+        "防御力：+8",
+        "力量：+15",
+        "敏捷：+10",
+        "生命值：+46"
+      ],
+      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E7%AE%80%E6%98%93%E6%8A%A4%E7%94%B2.png",
+      "id": "g_257"
+    },
+    {
       "sourceId": "item_equip_t4_suit_usp02_hand_06",
       "name": "长息重手甲",
       "part": "护手",
@@ -4938,210 +5645,6 @@ window.gameDatabase = {
         "终结技伤害加成：+51.75%/+56.92%/+62.1%/+67.27%"
       ],
       "sourceId": "item_equip_t4_suit_pulse_cryst01_edc_03"
-    },
-    {
-      "id": "g_190",
-      "name": "涉渊白刃",
-      "part": "配件",
-      "set": "涉渊",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E7%99%BD%E5%88%83.png",
-      "stats": [
-        "防御力：+21",
-        "敏捷：+43/+47/+51/+55",
-        "终结技充能效率：+25.71%/+28.29%/+30.86%/+33.43%"
-      ]
-    },
-    {
-      "id": "g_186",
-      "name": "涉渊裹手",
-      "part": "护手",
-      "set": "涉渊",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E8%A3%B9%E6%89%8B.png",
-      "stats": [
-        "防御力：+42",
-        "意志：+86/+94/+103/+111",
-        "寒冷和电磁伤害加成：+20.00%/+22.00%/+24.00%/+26.00%"
-      ]
-    },
-    {
-      "id": "g_185",
-      "name": "涉渊防护服",
-      "part": "护甲",
-      "set": "涉渊",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%98%B2%E6%8A%A4%E6%9C%8D.png",
-      "stats": [
-        "防御力：+56",
-        "智识：+115/+126/+138/+149",
-        "灼热和自然伤害加成：+12.00%/+13.20%/+14.40%/+15.60%"
-      ]
-    },
-    {
-      "id": "g_184",
-      "name": "涉渊钢甲",
-      "part": "护甲",
-      "set": "涉渊",
-      "img": "https://raw.githubusercontent.com/Sanatazm/Endfield-Character-Builder/main/img-gear/%E6%B6%89%E6%B8%8A%E9%92%A2%E7%94%B2.png",
-      "stats": [
-        "防御力：+56",
-        "敏捷：+115/+126/+138/+149",
-        "连携技伤害加成：+21.60%/+23.76%/+25.92%/+28.08%"
-      ]
-    },
-    {
-      "id": "g_110",
-      "name": "纾难重甲",
-      "part": "护甲",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Armor",
-      "stats": [
-        "防御力：+56",
-        "敏捷：+115/+126/+138/+149",
-        "普通攻击伤害加成：+14.4%/+15.8%/+17.3%/+18.7%"
-      ]
-    },
-    {
-      "id": "g_111",
-      "name": "纾难护甲",
-      "part": "护甲",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Armor",
-      "stats": [
-        "防御力：+56",
-        "智识：+115/+126/+138/+149",
-        "终结技充能效率：+12.9%/+14.1%/+15.4%/+16.7%"
-      ]
-    },
-    {
-      "id": "g_112",
-      "name": "纾难护手",
-      "part": "护手",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Gaunt",
-      "stats": [
-        "防御力：+42",
-        "敏捷：+86/+94/+103/+111",
-        "终结技伤害加成：+45%/+49.5%/+54%/+58.5%"
-      ]
-    },
-    {
-      "id": "g_113",
-      "name": "纾难手套",
-      "part": "护手",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Gaunt",
-      "stats": [
-        "防御力：+42",
-        "力量：+86/+94/+103/+111",
-        "所有技能伤害加成：+24%/+26.4%/+28.8%/+31.2%"
-      ]
-    },
-    {
-      "id": "g_114",
-      "name": "纾难识别牌",
-      "part": "配件",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+21",
-        "力量：+43/+47/+51/+55",
-        "全伤害减免：+17.8%/+19.2%/+20.6%/+21.9%"
-      ]
-    },
-    {
-      "id": "g_115",
-      "name": "纾难识别牌·壹型",
-      "part": "配件",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+21",
-        "敏捷：+43/+47/+51/+55",
-        "连携技伤害加成：+43.2%/+47.5%/+51.8%/+56.2%"
-      ]
-    },
-    {
-      "id": "g_116",
-      "name": "纾难印章",
-      "part": "配件",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+21",
-        "智识：+43/+47/+51/+55",
-        "终结技充能效率：+25.7%/+28.3%/+30.9%/+33.4%"
-      ]
-    },
-    {
-      "id": "g_117",
-      "name": "纾难印章·壹型",
-      "part": "配件",
-      "set": "纾难",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+21",
-        "意志：+43/+47/+51/+55",
-        "暴击率：+10.8%/+11.9%/+13%/+14%"
-      ]
-    },
-    {
-      "id": "g_155",
-      "name": "涉渊重甲",
-      "part": "护甲",
-      "set": "涉渊",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+56",
-        "力量：+115/126/+138/+149",
-        "源石技艺强度：+21/+23/+25/+28"
-      ]
-    },
-    {
-      "id": "g_156",
-      "name": "涉渊轻甲",
-      "part": "护甲",
-      "set": "涉渊",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+56",
-        "意志：+115/+126/+138/+149",
-        "治疗效率加成：+10.8%/+11.9%/+13.0%/+14.0%"
-      ]
-    },
-    {
-      "id": "g_157",
-      "name": "涉渊护手",
-      "part": "护手",
-      "set": "涉渊",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+42",
-        "智识：+86/+94/+103/+111",
-        "终结技充能效率：+21.4%/+23.6%/+25.7%/+27.9%"
-      ]
-    },
-    {
-      "id": "g_158",
-      "name": "涉渊手套",
-      "part": "护手",
-      "set": "涉渊",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+42",
-        "意志：+86/+94/+103/+111",
-        "战技伤害加成：+36.0%/+39.6%/+43.2%/+46.8%"
-      ]
-    },
-    {
-      "id": "g_159",
-      "name": "涉渊护甲板",
-      "part": "配件",
-      "set": "涉渊",
-      "img": "https://via.placeholder.com/80?text=Acc",
-      "stats": [
-        "防御力：+21",
-        "敏捷：+43/+47/+51/+55",
-        "副能力：+21.6%/+23.8%/+25.9%/+28.1%"
-      ]
     }
   ]
 };

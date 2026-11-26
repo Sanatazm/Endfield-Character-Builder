@@ -427,7 +427,6 @@ function validateGear(gear) {
   if (!gear.id) throw new Error('装备 id 必填');
   if (!gear.name) throw new Error('装备名称必填');
   if (!['护甲', '护手', '配件'].includes(gear.part)) throw new Error('装备部位必须是 护甲 / 护手 / 配件');
-  if (!gear.set) throw new Error('套装名称必填');
   if (!Array.isArray(gear.stats) || gear.stats.length === 0) throw new Error('至少填写一条属性');
 }
 

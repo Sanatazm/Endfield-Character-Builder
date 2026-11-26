@@ -129,7 +129,8 @@ async function collect(report = () => {}) {
   for (const [id, equip] of Object.entries(tables.EquipTable)) {
     const item = tables.ItemTable[id];
     const name = text(item?.name);
-    if (!name || !equip.suitID || !suitNames[equip.suitID] || /preset/.test(id)) continue;
+    if (!name || /preset/.test(id)) continue;
+    if (equip.suitID && !suitNames[equip.suitID]) throw new Error(`装备对应的套装无法识别：${name}`);
     const stats = [equip.displayBaseAttrModifier, ...equip.displayAttrModifiers].map(modifier => {
       const config = tables.AttributeShowConfigTable[modifier.attrType]?.list.find(row => row.attributeModifier === modifier.modifierType);
       const filter = filters.find(row => row.attributeType === modifier.attrType && row.attributeModifier === modifier.modifierType && (row.compositeAttr || '') === (modifier.compositeAttr || ''));
@@ -145,7 +146,7 @@ async function collect(report = () => {}) {
     });
     const part = { 0:'护甲', 1:'护手', 2:'配件' }[equip.partType];
     if (!part) throw new Error(`装备部位无法识别：${name}`);
-    result.gears.push({ sourceId:id, name, part, set:suitNames[equip.suitID], stats, img:asset('builder', 'img-gear', `${name}.png`, `${DATA}${SPRITES}itemiconbig/${item.iconId || id}.png`) });
+    result.gears.push({ sourceId:id, name, part, set:equip.suitID ? suitNames[equip.suitID] : '', stats, img:asset('builder', 'img-gear', `${name}.png`, `${DATA}${SPRITES}itemiconbig/${item.iconId || id}.png`) });
   }
   if (result.characters.length < 20 || result.weapons.length < 40 || result.gears.length < 100) throw new Error('本次抓取数量异常，已停止更新');
   result.id = crypto.randomUUID();
@@ -204,6 +205,7 @@ function prepare(collected, projects, options = {}) {
   pending.setEffects = Object.fromEntries(Object.entries(collected.setEffects).filter(([name]) => baseline.setEffects?.[name] !== snapshot.setEffects[name]));
   const localSetEffects = JSON.parse(fs.readFileSync(path.join(projects.builder.root, 'data', 'set-effects.json'), 'utf8'));
   for (const gear of pending.gears) {
+    if (!gear.set) continue;
     if (Object.prototype.hasOwnProperty.call(localSetEffects, gear.set)) continue;
     const effect = collected.setEffects[gear.set];
     if (!effect) throw new Error(`无法更新装备“${gear.name}”：本地及来源网站均缺少“${gear.set}”套装效果`);
